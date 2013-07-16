@@ -9,6 +9,7 @@ habitat.load();
 
 // Generate app variables
 var app = express(),
+    appName = "goggles",
     env = new habitat(),
     nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.join(__dirname + "/views")));
 
@@ -48,10 +49,11 @@ app.get("/src/:filename", function(req, res) {
 // intercept webxray's index.html and use our own
 app.get("/", function(req, res) {
   res.render("index.html", {
-    login: env.get("login"),
+    appName: appName,
     audience: env.get("audience"),
+    csrf: req.session._csrf || "",
     email: req.session.email || "",
-    csrf: req.session._csrf || ""
+    login: env.get("login")
   });
 });
 
