@@ -14,7 +14,8 @@
     "express": "3.2.0",
     "habitat": "0.4.1",
     "nunjucks": "0.1.7",
-    "glob": "~3.2.3"
+    "glob": "~3.2.3",
+    "webmaker-loginapi": "~0.1.8"
   },
   "devDependencies": {
     "grunt": "0.4.1",

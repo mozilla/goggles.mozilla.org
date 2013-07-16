@@ -1,0 +1,43 @@
+html, body {
+  width: 100%;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+#try-goggles {
+  background-color: #f0f0f0;
+  color: black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  width: 40em;
+  margin: 0 auto;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+a:hover {
+  background: yellow;
+}
+
+#bookmarklet-url {
+  border: 1px dotted black;
+  width: 100%;
+}
+
+#bookmarklet-link:hover {
+  color: black;
+}
+
+#bookmarklet-link {
+  text-decoration: none;
+  display: inline-block;
+  background: #FF9900;
+  border-radius: 4px;
+  box-shadow: 2px 2px 1px black;
+  color: white;
+  padding: 6px;
+}
