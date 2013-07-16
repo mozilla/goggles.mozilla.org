@@ -1,0 +1,3 @@
+[submodule "webxray"]
+	path = webxray
+	url = https://github.com/hackasaurus/webxray.git
