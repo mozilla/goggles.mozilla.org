@@ -34,8 +34,9 @@ app.get("/src/:filename", function(req, res) {
 
 // run server
 goggles.build(env, nunjucksEnv, function() {
-  var port = (env.get("node") === "development" ? env.get("PORT") : 80);
+  var node = env.get("node");
+  var port = (node && node === "development" ? env.get("port") : 80);
   app.listen(port, function(){
-    console.log('Express server listening on ' + env.get("HOSTNAME"));
+    console.log('Express server listening on ' + env.get("hostname"));
   });
 });
