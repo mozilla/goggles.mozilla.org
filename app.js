@@ -26,7 +26,7 @@ app.use(express.cookieSession({
   },
   proxy: true
 }));
-app.use(express.csrf());
+//app.use(express.csrf());
 app.use(function(err, req, res, next) {
   console.log("error: ", err);
   res.render(500);
