@@ -14,6 +14,7 @@ var app = express(),
     nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.join(__dirname + "/views")));
 
 // make it small.
+app.use(express.favicon());
 app.use(express.compress());
 app.use(express.bodyParser());
 app.use(express.cookieParser());
@@ -26,7 +27,9 @@ app.use(express.cookieSession({
   },
   proxy: true
 }));
-//app.use(express.csrf());
+app.use(express.csrf());
+
+// universal error handler
 app.use(function(err, req, res, next) {
   console.log("error: ", err);
   res.render(500);
