@@ -1,5 +1,5 @@
 {
-  "name": "xray-on-node",
+  "name": "goggles.webmaker.org",
   "version": "0.0.1",
   "description": "A node version of the X-ray Goggles",
   "private": true,
@@ -14,7 +14,7 @@
     "express": "3.2.0",
     "habitat": "0.4.1",
     "nunjucks": "0.1.7",
-    "glob": "~3.2.3",
+    "glob": "3.2.3",
     "webmaker-loginapi": "https://github.com/mozilla/node-webmaker-loginapi/tarball/v0.1.9"
   },
   "devDependencies": {
