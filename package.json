@@ -15,11 +15,13 @@
     "habitat": "0.4.1",
     "nunjucks": "0.1.7",
     "glob": "3.2.3",
-    "webmaker-loginapi": "https://github.com/mozilla/node-webmaker-loginapi/tarball/v0.1.9"
+    "webmaker-loginapi": "https://github.com/mozilla/node-webmaker-loginapi/tarball/v0.1.9",
+    "sequelize": "~2.0.0-alpha2",
   },
   "devDependencies": {
     "grunt": "0.4.1",
     "grunt-contrib-csslint": "0.1.2",
     "grunt-contrib-jshint": "0.4.3"
+    "sqlite3": "~2.1.14"
   }
 }

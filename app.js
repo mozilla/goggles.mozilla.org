@@ -1,8 +1,9 @@
-var express  = require("express"),
-    goggles  = require("./lib/goggles"),
-    habitat  = require("habitat"),
-    nunjucks = require("nunjucks"),
-    path     = require("path");
+var db = require('./lib/database'),
+    express    = require("express"),
+    goggles    = require("./lib/goggles"),
+    habitat    = require("habitat"),
+    nunjucks   = require("nunjucks"),
+    path       = require("path");
 
 // Load config from ".env"
 habitat.load();
@@ -11,7 +12,13 @@ habitat.load();
 var app = express(),
     appName = "goggles",
     env = new habitat(),
+    middleware = require("./lib/middleware")(env),
+    databaseOptions = env.get('CLEARDB_DATABASE_URL') || env.get('DB'),
+    databaseAPI = db('xraygogglemix', databaseOptions),
     nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.join(__dirname + "/views")));
+
+// Enable template rendering with nunjucks
+nunjucksEnv.express(app);
 
 // make it small.
 app.use(express.favicon());
@@ -27,27 +34,29 @@ app.use(express.cookieSession({
   },
   proxy: true
 }));
-app.use(express.csrf());
+
+// Save an x-ray goggles mix to the DB.
+// FIXME: this happens before CRSF is applied, and will
+//        need some thinking. As a bookmarklet, there will
+//        not be a CSRF token to pass around... will there?
+app.post('/publish',
+  middleware.saveData(databaseAPI, env.get('HOSTNAME')),
+  function(req, res) {
+    res.json({
+      'published-url': req.publishedUrl,
+      'remix-id': req.publishId
+    });
+  }
+);
 
 // universal error handler
 app.use(function(err, req, res, next) {
-  console.log("error: ", err);
-  res.render(500);
+  res.write(500, err);
 });
 
-// Enable template rendering with nunjucks
-nunjucksEnv.express(app);
+// enable CSRF
+app.use(express.csrf());
 
-// used for webxray .js source files
-app.param("filename", function(req, res, next, filename) {
-  req.params.filename = filename;
-  next();
-})
-
-// reroute webxray .js source files when requested
-app.get("/src/:filename", function(req, res) {
-  res.render("./webxray/src/"+req.params.filename);
-})
 
 // intercept webxray's index.html and use our own
 app.get("/", function(req, res) {
@@ -60,9 +69,28 @@ app.get("/", function(req, res) {
   });
 });
 
+
 // serve static content, resolved in this order:
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'webxray/static-files')));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "webxray/static-files")));
+["src", "test", "js"].forEach(function(dir) {
+  app.use("/" + dir, express.static(path.join(__dirname, "webxray/" + dir)));
+});
+
+// viewing goggle hacks
+app.param("hack", function(req, res, next, id) {
+  databaseAPI.find(id, function(err, result) {
+    if (err) { return next( err ); }
+    if (!result) { return next(404, "project not Found"); }
+    res.locals.id = id;
+    res.locals.data = result.data;
+    res.locals.remixedFrom = result.remixedFrom;
+    next();
+  });
+});
+app.get("/remix/:hack", function(req, res) {
+  res.write(res.locals.data);
+});
 
 // login API connections
 require('webmaker-loginapi')(app, {
@@ -70,7 +98,7 @@ require('webmaker-loginapi')(app, {
   audience: env.get('AUDIENCE')
 });
 
-// run server
+// build webxray and then run the app server
 goggles.build(env, nunjucksEnv, function() {
   app.listen(env.get("port"), function(){
     console.log('Express server listening on ' + env.get("hostname"));
