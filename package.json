@@ -1,6 +1,6 @@
 {
-  "name": "xray-on-node",
-  "version": "0.0.1",
+  "name": "goggles.webmaker.org",
+  "version": "0.0.2",
   "description": "A node version of the X-ray Goggles",
   "private": true,
   "scripts": {
@@ -17,11 +17,11 @@
     "glob": "3.2.3",
     "webmaker-loginapi": "https://github.com/mozilla/node-webmaker-loginapi/tarball/v0.1.9",
     "sequelize": "~2.0.0-alpha2",
+    "sqlite3": "~2.1.14"
   },
   "devDependencies": {
     "grunt": "0.4.1",
     "grunt-contrib-csslint": "0.1.2",
     "grunt-contrib-jshint": "0.4.3"
-    "sqlite3": "~2.1.14"
   }
 }
