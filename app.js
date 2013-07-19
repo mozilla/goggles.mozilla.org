@@ -14,14 +14,13 @@ var app = express(),
     env = new habitat(),
     middleware = require("./lib/middleware")(env),
     databaseOptions = env.get('CLEARDB_DATABASE_URL') || env.get('DB'),
-    databaseAPI = db('xraygogglemix', databaseOptions),
+    databaseAPI = db('thimbleproject', databaseOptions),
     nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.join(__dirname + "/views")));
 
 // Enable template rendering with nunjucks
 nunjucksEnv.express(app);
 
-// make it small.
-app.use(express.favicon());
+app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 app.use(express.compress());
 app.use(express.bodyParser());
 app.use(express.cookieParser());
@@ -40,18 +39,26 @@ app.use(express.cookieSession({
 //        need some thinking. As a bookmarklet, there will
 //        not be a CSRF token to pass around... will there?
 app.post('/publish',
+  // temporary function to make publish work
+  function(req, res, next) {
+    req.pageTitle = Date() + " goggle mix";
+    req.body.remixedFrom = "unknown";
+    req.body.sanitizedHTML = req.body.html;
+    next();
+  },
+  // end temporary function to make publish work
   middleware.saveData(databaseAPI, env.get('HOSTNAME')),
   function(req, res) {
     res.json({
-      'published-url': req.publishedUrl,
-      'remix-id': req.publishId
+      'published-url': "/remix/" + req.publishId,
+      'remix-id': req.publishId,
     });
   }
 );
 
 // universal error handler
 app.use(function(err, req, res, next) {
-  res.write(500, err);
+  throw err;
 });
 
 // enable CSRF
@@ -82,14 +89,14 @@ app.param("hack", function(req, res, next, id) {
   databaseAPI.find(id, function(err, result) {
     if (err) { return next( err ); }
     if (!result) { return next(404, "project not Found"); }
-    res.locals.id = id;
-    res.locals.data = result.data;
-    res.locals.remixedFrom = result.remixedFrom;
+console.log(result);
+    res.result = result;
     next();
   });
 });
 app.get("/remix/:hack", function(req, res) {
-  res.write(res.locals.data);
+  res.write(res.result.rawData);
+  res.end();
 });
 
 // login API connections
