@@ -65,10 +65,19 @@ app.use(function(err, req, res, next) {
 app.use(express.csrf());
 
 
-// intercept webxray's index.html and use our own
-app.get("/", function(req, res) {
-  res.render("index.html", {
-    appName: appName,
+// intercept webxray's publication dialog - HTML part
+app.get("/uproot-dialog.html", function(req, res) {
+  res.render("uproot-dialog.html", {
+    audience: env.get("audience"),
+    csrf: req.session._csrf || "",
+    email: req.session.email || "",
+    login: env.get("login")
+  });
+});
+
+// intercept webxray's publication dialog - JS part
+app.get("/publication.js", function(req, res) {
+  res.render("publication.js", {
     audience: env.get("audience"),
     csrf: req.session._csrf || "",
     email: req.session.email || "",

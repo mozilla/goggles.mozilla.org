@@ -3,35 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Web X-Ray Goggles</title>
-    <meta name="persona-email" content="{{ email }}">
-    <meta name="X-CSRF-Token" content="{{ csrf }}">
     <link rel="stylesheet" href="stylesheets/index.css">
     <link rel="stylesheet" href="stylesheets/hackpub-override.css">
   </head>
   <body>
-
-    <!-- Webmaker user bar -->
-    <link rel="stylesheet" href="{{ login }}/css/nav.css" />
-    <div id="webmaker-nav">
-      <!-- the webmaker bar -->
-      <nav class="webmaker-nav-container">
-        <a id="logo" href="https://webmaker.org"><img src="{{ login }}/img/webmaker-logo.png" alt="Mozilla Webmaker" /></a>
-        <ul class="webmaker-nav user-info">
-          <li class="user">
-            Hi <span id="identity" class="user-name-container"></span>
-          </li>
-          <li class="makes"><button>My makes</button></li>
-          <li>
-            <iframe src="{{ audience }}/sso/include.html" class="include-frame"></iframe>
-          </li>
-        </ul>
-      </nav>
-      <div class="my-projects-container">
-        <iframe src="{{ audience }}/myprojects?app={{ appname }}&email={{ email }}"></iframe>
-      </div>
-    </div>
-
-    <!-- X-Ray goggles -->
     <div id="try-goggles">
       <h2>Getting Started</h2>
       <p>If you've never used the goggles before, you should start out with the <a href="http://hackasaurus.org/goggles/">tutorial</a> or the <a href="http://toolness.github.com/hackasaurus-parable/">Parable of The Hackasaurus</a>.</p>
@@ -44,7 +19,6 @@
       <p>Placeholder text.</p>
     </div>
 
-    <!-- X-Ray goggles requirements -->
     <script src="jquery.min.js"></script>
     <script src="src/get-bookmarklet-url.js"></script>
     <script>(function() {
@@ -55,10 +29,5 @@
         $("#bookmarklet-url").val(Webxray.getBookmarkletURL());
       });
     }());</script>
-
-    <!-- Webmaker SSO requirements -->
-    <script src="{{ audience }}/sso/include.js"></script>
-    <script src="{{ login }}/js/sso-ux.js"></script>
-
   </body>
 </html>

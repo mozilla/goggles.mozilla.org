@@ -18,7 +18,7 @@
       }
       return makeAbsoluteURL(this.baseURI, this[name]);
     },
-    language: navigator.language || navigator.userLanguage,
+    language: "en",  // effect english-only for now
     baseURI: "",
     cssURL: "webxray.css",
     preferencesURL: "preferences.html",
