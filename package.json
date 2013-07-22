@@ -20,8 +20,9 @@
     "sqlite3": "~2.1.14"
   },
   "devDependencies": {
-    "grunt": "0.4.1",
-    "grunt-contrib-csslint": "0.1.2",
-    "grunt-contrib-jshint": "0.4.3"
+    "grunt": "~0.4.1",
+    "grunt-contrib-csslint": "~0.1.2",
+    "grunt-recess": "0.3.3",
+    "grunt-contrib-jshint": "~0.4.3"
   }
 }

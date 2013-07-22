@@ -51,7 +51,7 @@ app.post('/publish',
   function(req, res) {
     res.json({
       'published-url': "/remix/" + req.publishId,
-      'remix-id': req.publishId,
+      'remix-id': req.publishId
     });
   }
 );
@@ -98,7 +98,6 @@ app.param("hack", function(req, res, next, id) {
   databaseAPI.find(id, function(err, result) {
     if (err) { return next( err ); }
     if (!result) { return next(404, "project not Found"); }
-console.log(result);
     res.result = result;
     next();
   });
