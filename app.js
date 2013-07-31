@@ -1,9 +1,18 @@
-var db = require('./lib/database'),
+// New Relic Server monitoring support
+if ( process.env.NEW_RELIC_ENABLED ) {
+  require( "newrelic" );
+}
+var bleach = require( "./lib/bleach"),
+    db = require('./lib/database'),
     express    = require("express"),
     goggles    = require("./lib/goggles"),
     habitat    = require("habitat"),
+    helmet = require("helmet"),
+    makeAPI = require('./lib/makeapi'),
     nunjucks   = require("nunjucks"),
-    path       = require("path");
+    path       = require("path"),
+    utils = require('./lib/utils'),
+    version = require('./package').version;
 
 // Load config from ".env"
 habitat.load();
@@ -12,13 +21,24 @@ habitat.load();
 var app = express(),
     appName = "goggles",
     env = new habitat(),
-    middleware = require("./lib/middleware")(env),
-    databaseOptions = env.get('CLEARDB_DATABASE_URL') || env.get('DB'),
+    node_env = env.get('NODE_ENV'),
+    databaseOptions =  env.get('CLEARDB_DATABASE_URL') || env.get('DB'),
     databaseAPI = db('thimbleproject', databaseOptions),
-    nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.join(__dirname + "/views")));
+    middleware = require('./lib/middleware')(env),
+    make = makeAPI(env.get('make')),
+    nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'), {
+      autoescape: true
+    }),
+    parameters = require('./lib/parameters');
 
 // Enable template rendering with nunjucks
 nunjucksEnv.express(app);
+
+// NOTE: currently not used!
+app.locals({
+  GA_ACCOUNT: env.get("GA_ACCOUNT"),
+  GA_DOMAIN: env.get("GA_DOMAIN")
+});
 
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 app.use(express.compress());
@@ -33,6 +53,11 @@ app.use(express.cookieSession({
   },
   proxy: true
 }));
+app.use(function(err, req, res, next) {
+  // universal error handler
+  console.error(err);
+  throw err;
+});
 
 // Save an x-ray goggles mix to the DB.
 // FIXME: this happens before CRSF is applied, and will
@@ -63,10 +88,7 @@ app.post('/publish',
   }
 );
 
-// universal error handler
-app.use(function(err, req, res, next) {
-  throw err;
-});
+
 
 // enable CSRF
 app.use(express.csrf());
