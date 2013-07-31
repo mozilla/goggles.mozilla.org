@@ -39,18 +39,25 @@ app.use(express.cookieSession({
 //        need some thinking. As a bookmarklet, there will
 //        not be a CSRF token to pass around... will there?
 app.post('/publish',
-  // temporary function to make publish work
-  function(req, res, next) {
-    req.pageTitle = Date() + " goggle mix";
-    req.body.remixedFrom = "unknown";
-    req.body.sanitizedHTML = req.body.html;
-    next();
-  },
-  // end temporary function to make publish work
-  middleware.saveData(databaseAPI, env.get('HOSTNAME')),
+         middleware.checkForAuth,
+         middleware.checkForPublishData,
+         middleware.ensureMetaData,
+         middleware.sanitizeMetaData,
+         middleware.checkPageOperation(databaseAPI),
+         bleach.bleachData(env.get("BLEACH_ENDPOINT")),
+         middleware.saveData(databaseAPI, env.get('HOSTNAME')),
+         middleware.rewritePublishId(databaseAPI),
+         middleware.generateUrls(appName, env.get('S3'), env.get('USER_SUBDOMAIN')),
+         middleware.finalizeProject(nunjucksEnv, env),
+         middleware.publishData(env.get('S3')),
+         middleware.rewriteUrl,
+         // update the database now that we have a S3-published URL
+         middleware.saveUrl(databaseAPI, env.get('HOSTNAME')),
+         middleware.getRemixedFrom(databaseAPI, make),
+         middleware.publishMake(make),
   function(req, res) {
     res.json({
-      'published-url': "/remix/" + req.publishId,
+      'published-url': req.publishedUrl,
       'remix-id': req.publishId
     });
   }
