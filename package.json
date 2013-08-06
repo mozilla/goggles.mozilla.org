@@ -3,13 +3,6 @@
   "version": "0.0.5",
   "description": "A node version of the X-ray Goggles",
   "private": true,
-  "scripts": {
-    "test": "grunt"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/pomax/xray-on-node.git"
-  },
   "dependencies": {
     "express": "3.2.0",
     "glob": "3.2.3",
