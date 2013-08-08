@@ -1,0 +1,116 @@
+/* Fonts */
+
+
+/* Global rules */
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  height: 100%;
+  background-color: #DDECEC;
+  color: #41415b;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: "Open Sans Light", sans-serif;
+  font-weight: normal;
+  color: #00293E;
+}
+
+a:focus,
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+.dialog {
+  position: relative;
+}
+
+.dialog .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  padding: 20px;
+  margin: 0;
+  background-color: #fff;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+.dialog .header .button {
+  margin-left: 5px;
+}
+
+.dialog .subheader {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #DDECEC;
+  overflow: hidden;
+}
+
+.dialog .pane {
+  height: 100%;
+}
+
+.dialog .subheader .pane {
+  border-bottom: 8px solid #3FB58E;
+  overflow: hidden;
+}
+
+.dialog .subheader h2 {
+  margin: 0.7em 0 0 1em;
+  font-size: 20px;
+}
+
+.dialog .body {
+  position: fixed;
+  top: 140px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.logo {
+  width: 10em;
+  vertical-align: middle;
+}
+
+.buttons {
+  margin-top: 4px;
+}
+
+.button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.button.primary,
+.ok-button {
+  background-color: #00293E;
+  color: #fff;
+}
+
+.button:hover {
+  background-color: #3FB58E;
+  color: #fff;
+  text-decoration: none;
+}
+

@@ -2,78 +2,121 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Publish Your Remix</title>
-    <link rel="stylesheet" href="dialog-common/stylesheets/base.css">
-    <link rel="stylesheet" href="stylesheets/uproot-dialog.css">
     <meta name="persona-email" content="{{ email }}">
     <meta name="X-CSRF-Token" content="{{ csrf }}">
+    <title>Publish Your Remix</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="stylesheet" href="../stylesheets/dialog.css">
+    <link rel="stylesheet" href="{{ login }}/css/nav.css" />
+    <style>
+
+        h1 {
+          margin: 0.5em 0;
+        }
+
+        .dialog .body {
+          padding: 10%;
+          background-color: #fff;
+          text-align: center;
+        }
+
+        .dialog .body h1 {
+          margin-bottom: 3em;
+        }
+
+        .include-frame {
+          border: none;
+        }
+
+        .publish-enable-overlay {
+          display: none;
+        }
+
+        .webmaker-nav-container {
+          width: auto;
+          background-color: transparent;
+        }
+
+        #logo {
+          display: none;
+        }
+
+        .published-url {
+          word-break: break-all;
+        }
+
+    </style>
   </head>
   <body>
 
-    <!-- Webmaker user bar -->
-    <link rel="stylesheet" href="{{ login }}/css/nav.css" />
-    <div id="webmaker-nav">
-      <!-- the webmaker bar -->
-      <nav class="webmaker-nav-container">
-        <a id="logo" href="https://webmaker.org"><img src="{{ login }}/img/webmaker-logo.png" alt="Mozilla Webmaker" /></a>
-        <ul class="webmaker-nav user-info">
-          <li class="user">
-            Hi <span id="identity" class="user-name-container"></span>
-          </li>
-          <li class="makes"><button>My makes</button></li>
-          <li>
-            <iframe src="" class="include-frame"></iframe>
-          </li>
-        </ul>
-      </nav>
-      <div class="my-projects-container">
-        <iframe src="{{ audience }}/myprojects?app={{ appname }}&email={{ email }}"></iframe>
+    <div class="dialog">
+
+      <div class="header" id="webmaker-nav">
+        <!-- the webmaker bar -->
+          <span class="button close-button fr" id="close" data-l10n="dialog-common:close">Close</span>
+        <nav class="webmaker-nav-container fr">
+          <a id="logo" href="https://webmaker.org"><img src="{{ login }}/img/webmaker-logo.png" alt="Mozilla Webmaker" /></a>
+          <ul class="webmaker-nav user-info">
+            <li class="user">
+              Hi <span id="identity" class="user-name-container"></span>
+            </li>
+            <li class="makes"><a href="{{ audience }}/me?app={{ appname }}" target="_blank">My makes</a></li>
+            <li>
+              <iframe src="{{ audience }}/sso/include.html" class="include-frame"></iframe>
+            </li>
+          </ul>
+        </nav>
+        <img src="../img/goggles-wordmark.png" class="logo" alt="Mozilla X-Ray Goggles">
       </div>
+
+
+      <div class="subheader">
+        <div class="pane">
+          <h2 class="subtitle" data-l10n="header">Publish Your Remix</h2>
+        </div>
+      </div>
+
+      <div class="body">
+
+        <div class="publish-disable-overlay" style="display: none;">
+          <h1>Sign in to publish your remix</h1>
+        </div>
+
+        <div class="publish-enable-overlay" style="display: none;">
+          <div id="choose-publish-method">
+            <h1 data-l10n="to-internet-desc">Instantly publish your remix to a URL that anyone can view.</h1>
+            <div class="publish-option">
+              <div class="big-button to-internet">
+                  <span class="button primary" data-l10n="to-internet">Publish To Internet</span>
+              </div>
+            </div>
+          </div>
+          <div id="to-internet" style="display: none;">
+            <p class="loading" data-l10n="publishing">Publishing...</p>
+            <div class="failure" style="display: none;">
+              <p data-l10n="error">Sorry, an error occurred. Please try again later.</p>
+            </div>
+
+            <div class="finished" style="display: none;">
+              <h1 data-l10n="success">Here is the URL for your remix that anyone can view.</h1>
+              <div class="published-url">
+                <a target="_blank" href="http://foo/bar">http://foo/bar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="container">
-      <div id="buttons">
-        <div class="close-button" id="close"
-         data-l10n="dialog-common:close">Close</div>
-      </div>
-      <div id="header"><h1 class="title"><span data-l10n="dialog-common:product-name">X-Ray Goggles</span> <span class="subtitle" data-l10n="header">Publish Your Remix</span></h1></div>
-      <div id="choose-publish-method">
-        <p data-l10n="intro">There are two ways you can publish your remix and share it with others.</p>
-        <div class="publish-option">
-          <div class="big-button to-internet">
-              <div class="publish-disable-overlay">Sign in to publish!</div>
-              <span  data-l10n="to-internet">Publish To Internet</span>
-          </div>
-          <p data-l10n="to-internet-desc">Instantly publish your remix to a URL that anyone can view.</p>
-        </div>
-        <div class="publish-option">
-          <div class="big-button view-html" data-l10n="view-html">View HTML Source</div>
-          <p data-l10n="view-html-desc">Grab the HTML source of your remix and publish it yourself.</p>
-        </div>
-      </div>
-      <div id="to-internet" style="display: none;">
-        <p class="loading" data-l10n="publishing">Publishing...</p>
-        <div class="failure" style="display: none;">
-          <p data-l10n="error">Sorry, an error occurred. Please try again later.</p>
-        </div>
-        <div class="finished" style="display: none;">
-          <p data-l10n="success">Here is the URL for your remix that anyone can view.</p>
-          <div class="published-url">
-            <a target="_blank" href="http://foo/bar">http://foo/bar</a>
-          </div>
-        </div>
-      </div>
-      <div id="view-html" style="display: none;">
-        <p data-l10n="html-source">Here's the HTML source code of your remix.</p>
-        <textarea></textarea>
-      </div>
-      <div id="sample-html" style="display: none;">
-        <p>I am sample “html”.</p>
-      </div>
-    </div>
+
     <script src="jquery.min.js"></script>
     <script src="yepnope.1.0.2-min.js"></script>
     <script src="src/localization.js"></script>
     <script src="publication.js"></script>
+
+    <script src="{{ audience }}/sso/include.js"></script>
+    <script src="{{ login }}/js/sso-ux.js"></script>
   </body>
 </html>
