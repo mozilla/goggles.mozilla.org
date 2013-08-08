@@ -1,0 +1,66 @@
+@import "mixins";
+@import "webfonts";
+@import "ui";
+// @import "headerfooter";
+// @import "search";
+// @import "me";
+
+/*********************************************************
+ * BODY
+ */
+body {
+  background: #e3eaee;
+  color: #555;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #27aae1;
+  text-decoration: none;
+}
+
+a,
+img {
+  border: none;
+}
+
+.webmaker-outer-wrapper {
+  overflow: hidden; // This is so the box-shadow on the header doesn't look bad with Tabzilla
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.hide {
+  display: none;
+}
+
+
+/*********************************************************
+ * MAIN
+ */
+
+#content {
+  margin-bottom: 40px;
+  position: relative;
+  width: 100%;
+
+  .clone-container   {
+    display: none;
+  }
+
+  > .make-error {
+    padding-top: 15px;
+    display: block;
+    color: black;
+    text-align: center;
+  }
+}

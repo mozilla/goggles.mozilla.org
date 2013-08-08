@@ -1,0 +1,415 @@
+/* Cascading Style Sheet (CSS) for Web X-Ray Goggles */
+
+/* A base class that every goggles element should inherit from, to 
+ * reset any bizarre and unexpected CSS set by the host page, e.g.
+ * div { border: blue; }. */
+
+.webxray-base {
+  background: none;
+  width: auto;
+  height: auto;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+  min-height: 0;
+  min-width: 0;
+  opacity: 1.0;
+  text-shadow: none;
+  outline: none;
+  position: static;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  text-transform: none;
+  word-spacing: normal;
+  text-decoration: none;
+  text-indent: 0;
+  visibility: visible;
+  letter-spacing: normal;
+  font-family: "Open Sans Light", "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  clip: auto;
+
+  /* These make assumptions about our locale. */
+  direction: ltr;
+  text-align: left;
+
+  /* These should really be 'none', but Safari 5.0.5 doesn't seem
+   * to like that value. */
+  max-height: 1000000px;
+  max-width: 1000000px;
+}
+
+/* Style for when you SHIFT + up to inspect parent and grandparent
+ * associations */
+
+.webxray-ancestor {
+    background-color: rgba(0, 0, 0, 0.1);    
+}
+
+/* Style for the message that appears in footer heads-up-display (HUD) */
+
+.webxray-hud-box {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  color: white;
+  background-color: #00293E;
+  z-index: 2147483645;
+  padding: 0.4em 1em 0.3em;
+}
+
+.webxray-help {
+  background-color: #CCCCCC;
+  border: medium none;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  margin-left: 1em;
+  padding: 0 5px;
+  display: none;
+}
+
+div.webxray-help:hover {
+  background-color: yellow;
+  color: black;
+}
+
+.webxray-hud {
+  display: inline;
+  pointer-events: none;
+}
+
+.webxray-hud code {
+  font-family: Monaco, monospace;
+  color: inherit;
+  background: inherit;
+  font-size: 8pt;
+  display: inline;
+}
+
+span.webxray-url, span.webxray-more-info {
+  color: #fff;
+}
+
+span.webxray-more-info {
+  padding-left: 1em;
+}
+
+/* Style for the tag label */
+
+.webxray-overlay-label {
+    position: absolute;
+    font-family: Monaco, monospace;
+    color: white;
+    font-size: 8pt;
+    background-color: #27AAE1;
+    pointer-events: none;
+}
+
+.webxray-overlay-label-top {
+    top: 0px;
+    left: 0px;
+}
+
+.webxray-overlay-label-bottom {
+    bottom: 0px;
+    right: 0px;
+}
+
+.webxray-overlay {
+    position: absolute;
+    pointer-events: none;
+    z-index: 2147483644;
+}
+
+/* A DOM element that has been deleted by the user, but which
+ * we'd like to remember just in case the user decides to undo
+ * the deletion. */
+
+.webxray-deleted {
+    display: none;
+}
+
+/* The backdrop surrounding a dialog box. */
+
+.webxray-dialog-overlay {
+    z-index: 2147483646;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Styles for nested elements of a dialog box, needed to vertically 
+ * center it. */
+
+.webxray-dialog-outer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.webxray-dialog-middle {
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    top: 5%;
+}
+
+div.webxray-dialog-inner {
+    width: 90%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    text-align: left;
+}
+
+div.webxray-dialog-content, .webxray-dialog-inner iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: inherit;
+}
+
+/* Transparent messages */
+
+.webxray-tmsg-overlay {
+  z-index: 2147483646;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  pointer-events: none;
+}
+
+.webxray-tmsg-outer {
+    width: 100%;
+    height: 100%;
+    display: table;
+    position: static;
+    pointer-events: none;
+}
+
+.webxray-tmsg-middle {
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+.webxray-tmsg-inner {
+  margin: 0 auto;
+  pointer-events: none;
+  color: white;
+  padding: 10px 16px;
+  text-align: center;
+  background-color: #00293E;
+}
+
+/* Style used any time we want an element to appear above
+ * everything else on the page, including other goggles elements. */
+ 
+.webxray-topmost {
+    z-index: 2147483647 !important;
+}
+
+/* Style used when we want to hide an element, but still
+ * ensure that it takes up space on the page. */
+
+.webxray-hidden {
+    visibility: hidden !important;
+}
+
+div#webxray-wait-for-css-to-load {
+    content: "CSS is loaded" !important;
+    background-color: rgb(0, 1, 2);
+}
+
+.webxray-style-info.webxray-on-other-side {
+  left: auto;
+  right: 0px;
+}
+
+.webxray-style-info {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: auto;
+  z-index: 2147483646;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1em;
+  font-size: 8pt;
+  pointer-events: none;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  -moz-column-width: 10em;
+  word-wrap: break-word;
+  min-width: 50em;
+}
+
+.webxray-style-info-locked {
+  pointer-events: auto !important;
+}
+
+.webxray-color-block {
+  display: inline-block;
+  vertical-align: baseline;
+  border: 1px solid white;
+  margin-left: 8px;
+  min-width: 6px;
+  min-height: 6px;
+}
+
+.webxray-close-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.webxray-style-info-locked .webxray-instructions {
+  visibility: hidden;
+}
+
+.webxray-instructions {
+  padding-top: 1em;
+}
+
+.webxray-close-button {
+  float: right;
+  padding: 0.5em;
+  border: 1px dotted white;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.webxray-style-info-locked .webxray-close-button {
+  visibility: visible;
+}
+
+.webxray-style-info .webxray-rows {
+}
+
+.webxray-style-info .webxray-rows .webxray-row {
+}
+
+.webxray-style-info .webxray-rows .webxray-row form,
+.webxray-style-info .webxray-rows .webxray-row input {
+  font-family: inherit;
+  font-size: inherit;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  color: yellow;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.webxray-style-info-locked .webxray-row:hover {
+  background: #660066;
+  cursor: pointer;
+}
+
+.webxray-style-info .webxray-rows .webxray-row .webxray-name {
+  padding-right: 1em;
+  color: #d0d0d0;
+}
+
+.webxray-style-info .webxray-rows .webxray-row .webxray-name,
+.webxray-style-info .webxray-rows .webxray-row .webxray-value {
+  display: inline;
+}
+
+.webxray-value-matches-css-rule, .webxray-value-matches-inline-style,
+.webxray-value-different-from-parent {
+  color: yellow;
+}
+
+.webxray-kbd {
+  color: #333;
+  display: inline;
+  border-radius: 2px 2px;
+  background: #CCC;
+  padding: 2px 6px;
+  font-family: inherit;
+  box-shadow: 0px 2px 0 rgba(250,250,250,0.2);
+}
+
+/* The help window. */
+
+.webxray-help-box {
+  display: table;
+}
+
+.webxray-help-row {
+  display: table-row;
+  line-height: 2em;
+}
+
+.webxray-help-key {
+  display: table-cell;
+  text-align: left;
+}
+
+.webxray-help-desc {
+  display: table-cell;
+  text-align: left;
+  padding-left: 10px;
+}
+
+/* The touch-based toolbar for mobile devices, etc. */
+
+.webxray-toolbar {
+  position: fixed;
+  z-index: 2147483644;
+  bottom: 24px;
+  right: 0px;
+  background-color: #00293E;
+  color: white;
+}
+
+.webxray-toolbar-button {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.webxray-toolbar-button:hover {
+  background-color: #3FB58E;
+  color: #fff;
+}
+
+.webxray-toolbar-button-glyph {
+  font-size: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+div.webxray-toolbar-button-glyph-tiny {
+  font-size: 15px;
+}
+
+.webxray-toolbar-button-text {
+  font-size: 10px;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+.webxray-toolbar-button-toggled {
+  background-color: yellow;
+  color: black;
+}

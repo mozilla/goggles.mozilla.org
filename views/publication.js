@@ -43,7 +43,9 @@ function setupUI(html, originalURL, hackpubURL) {
             });
           },
           function onFailure() {
-            $("#to-internet .failure").fadeIn();
+            $("#to-internet .loading").fadeOut(function(){
+              $("#to-internet .failure").fadeIn();
+            });
           }
         );
       });
@@ -84,8 +86,11 @@ function init(html, originalURL, hackpubURL) {
           name: displayName
         };
         $(".publish-disable-overlay").hide();
+        $(".publish-enable-overlay").show();
+        $("#identity > a").attr('target', "_blank");
       },
       onlogout: function() {
+        $(".publish-enable-overlay").hide();
         $(".publish-disable-overlay").show();
         user = false;
       }
