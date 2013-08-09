@@ -94,6 +94,13 @@ app.post('/publish',
 app.use(express.csrf());
 
 
+// intercept webxray's index - HTML part
+app.get(["/", "/index.html"], function(req, res) {
+  res.render("index.html", {
+    host: env.get("hostname")
+  });
+});
+
 // intercept webxray's publication dialog - HTML part
 app.get("/uproot-dialog.html", function(req, res) {
   res.render("uproot-dialog.html", {
