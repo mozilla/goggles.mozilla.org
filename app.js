@@ -130,7 +130,7 @@ app.use(express.static(path.join(__dirname, "webxray/static-files")));
 });
 
 // viewing goggle hacks
-app.param("hack", function(req, res, next, id) {
+app.param("remix", function(req, res, next, id) {
   databaseAPI.find(id, function(err, result) {
     if (err) { return next( err ); }
     if (!result) { return next(404, "project not Found"); }
@@ -138,7 +138,7 @@ app.param("hack", function(req, res, next, id) {
     next();
   });
 });
-app.get("/remix/:hack", function(req, res) {
+app.get("/remix/:remix", function(req, res) {
   res.write(res.result.rawData);
   res.end();
 });
