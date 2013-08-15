@@ -109,7 +109,11 @@ app.use(express.csrf());
 // intercept webxray's index - HTML part
 app.get(["/", "/index.html"], function(req, res) {
   res.render("index.html", {
-    host: env.get("hostname")
+    audience: env.get("audience"),
+    csrf: req.session._csrf || "",
+    email: req.session.email || "",
+    host: env.get("hostname"),
+    login: env.get("login")
   });
 });
 

@@ -2,12 +2,67 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="persona-email" content="{{ email }}">
+    <meta name="X-CSRF-Token" content="{{ csrf }}">
     <title>X-Ray Goggles</title>
     <link rel="stylesheet" href="/resources/font-awesome/css/font-awesome.css">
+    <link href="//www.mozilla.org/tabzilla/media/css/tabzilla.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ login }}/css/nav.css" />
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/index.css">
   </head>
   <body>
+    
+    <div class="webmaker-outer-wrapper">
+      {% block header %}
+      <header id="webmaker-nav">
+        <nav class="webmaker-nav-container">
+          <div class="user-nav-container">
+            <a id="logo" href="{{ audience }}/{{lang}}/"><img src="/img/logo.png" alt="{{ gettext("Mozilla Webmaker") }}"></a>
+            <ul class="webmaker-nav user-info">
+              <li class="user">
+                {{ gettext("Hi") }} <span id="identity" class="user-name-container"></span>
+              </li>
+              <li class="makes"><a href="{{ audience }}/me?app={{ appname }}">{{ gettext("My makes") }}</a></li>
+              <li>
+                <iframe src="{{audience}}/sso/include.html" class="include-frame"></iframe>
+              </li>
+            </ul>
+            <ul class="nav-list">
+              <li>
+                <a {% if page == 'index' %}class="on"{% endif %} id="nav-index" href="/">{{ gettext("Make") }}</a>
+                <div class="makenav-hover">
+                  <a href="{{ audience }}/t/webmaker%3Atemplate" class="makenav-hover-item">
+                    <img src="/img/icon-make-template.png" alt="{{ gettext("From template") }}" />
+                    <span>{{ gettext("From template") }}</span>
+                  </a>
+                  <a href="https://popcorn.webmaker.org/editor/" class="makenav-hover-item">
+                    <img src="/img/icon-make-popcorn.png" alt="{{ gettext("Popcorn Maker") }}" />
+                    <span>{{ gettext("Popcorn Maker") }}</span>
+                  </a>
+                  <a href="https://thimble.webmaker.org/" class="makenav-hover-item">
+                    <img src="/img/icon-make-thimble.png" alt="{{ gettext("Thimble") }}" />
+                    <span>{{ gettext("Thimble") }}</span>
+                  </a>
+                  <div class="help">
+                    <i class="icon-info-sign"></i><span>{{ gettext("Not sure what to make?") }}
+                    <a href="{{ audience }}/{{lang}}/tools">{{ gettext("Let us help.") }}</a></span>
+                  </div>
+                </div>
+              </li>
+              <li><a {% if page == 'teach' %}class="on"{% endif %} id="nav-teach" href="{{ audience }}/{{lang}}/teach">
+                {{ gettext("Teach") }}</a></li>
+              <li><a {% if page == 'events' %}class="on"{% endif %} id="nav-events" href="{{ audience }}/{{lang}}/events">
+                {{ gettext("Events")}}</a></li>
+              <li><a class="search-trigger{% if page == 'search' %} on{% endif %}" id="nav-search" href="{{ audience }}/{{lang}}/search">
+                <span class="icon-search"></span></a></li>
+            </ul>
+          </div>
+          <a href="http://www.mozilla.org/" id="tabzilla">mozilla</a>
+        </nav>
+      </header>
+      {% endblock %}
+    </div>
 
     <div class="ui-wrapper ui-body-nobg">
       <div class="banner">
@@ -78,6 +133,9 @@
 
     <script src="jquery.min.js"></script>
     <script src="src/get-bookmarklet-url.js"></script>
+    <script src="{{ audience }}/sso/include.js"></script>
+    <script src="{{ login }}/js/sso-ux.js"></script>
+    <script src="https://www.mozilla.org/tabzilla/media/js/tabzilla.js"></script>
     <script>(function() {
       "use strict";
       $(window).ready(function() {
