@@ -100,11 +100,16 @@ app.post('/publish',
   }
 );
 
-
+// DEVOPS - Healthcheck
+app.get('/healthcheck', function(req, res) {
+  res.json({
+    http: "okay",
+    version: version
+  });
+});
 
 // enable CSRF
 app.use(express.csrf());
-
 
 // intercept webxray's index - HTML part
 app.get(["/", "/index.html"], function(req, res) {
