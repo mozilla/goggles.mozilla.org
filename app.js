@@ -12,7 +12,8 @@ var bleach = require( "./lib/bleach"),
     nunjucks   = require("nunjucks"),
     path       = require("path"),
     utils = require('./lib/utils'),
-    version = require('./package').version;
+    version = require('./package').version,
+    i18n = require( "i18n-abide" );
 
 // Load config from ".env"
 habitat.load();
@@ -39,6 +40,17 @@ app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),
   GA_DOMAIN: env.get("GA_DOMAIN")
 });
+
+// Setup locales with i18n
+app.use( i18n.abide({
+  supported_languages: [
+    'en-US'
+  ],
+  default_lang: "en-US",
+  translation_type: "key-value-json",
+  translation_directory: "locale",
+  locale_on_url: true
+}));
 
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 app.use(express.compress());
@@ -97,7 +109,11 @@ app.use(express.csrf());
 // intercept webxray's index - HTML part
 app.get(["/", "/index.html"], function(req, res) {
   res.render("index.html", {
-    host: env.get("hostname")
+    audience: env.get("audience"),
+    csrf: req.session._csrf || "",
+    email: req.session.email || "",
+    host: env.get("hostname"),
+    login: env.get("login")
   });
 });
 
