@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Publish Your Remix</title>
+<link rel="stylesheet" href="dialog-common/stylesheets/base.css">
+<style>
+textarea {
+  font-family: Monaco, "Lucida Console", monospace;
+  font-size: 9pt;
+  width: 100%;
+  height: 20em;
+}
+  
+div.big-button {
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f8a339;
+  font-style: italic;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+div.big-button:after {
+  content: ' »';
+}
+
+div.big-button:hover {
+  background-color: #ffc833;
+}
+
+div.publish-option {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+div.publish-option p {
+  display: inline;
+  padding: 10px;
+}
+
+.published-url {
+  padding: 10px;
+  text-align: center;
+}
+
+.published-url a {
+  font-size: 24pt;
+  text-decoration: none;
+  color: steelblue;
+  padding: 10px;
+}
+
+.published-url a:hover {
+  background-color: #f0f0f0;
+}
+</style>
+<div class="container">
+<div id="buttons">
+  <div class="close-button" id="close"
+   data-l10n="dialog-common:close">Close</div>
+</div>
+<div id="header"><h1 class="title"><span data-l10n="dialog-common:product-name">X-Ray Goggles</span> <span class="subtitle" data-l10n="header">Publish Your Remix</span></h1></div>
+<div id="choose-publish-method">
+  <p data-l10n="intro">There are two ways you can publish your remix and share it with others.</p>
+  <div class="publish-option">
+    <div class="big-button to-internet" data-l10n="to-internet">Publish To Internet</div>
+    <p data-l10n="to-internet-desc">Instantly publish your remix to a URL that anyone can view.</p>
+  </div>
+  <div class="publish-option">
+    <div class="big-button view-html" data-l10n="view-html">View HTML Source</div>
+    <p data-l10n="view-html-desc">Grab the HTML source of your remix and publish it yourself.</p>
+  </div>
+</div>
+<div id="to-internet" style="display: none;">
+  <p class="loading" data-l10n="publishing">Publishing...</p>
+  <div class="failure" style="display: none;">
+    <p data-l10n="error">Sorry, an error occurred. Please try again later.</p>
+  </div>
+  <div class="finished" style="display: none;">
+    <p data-l10n="success">Here is the URL for your remix that anyone can view.</p>
+    <div class="published-url">
+      <a target="_blank" href="http://foo/bar">http://foo/bar</a>
+    </div>
+  </div>
+</div>
+<div id="view-html" style="display: none;">
+  <p data-l10n="html-source">Here's the HTML source code of your remix.</p>
+  <textarea></textarea>
+</div>
+<div id="sample-html" style="display: none;">
+  <p>I am sample “html”.</p>
+</div>
+</div>
+<script src="jquery.min.js"></script>
+<script src="yepnope.1.0.2-min.js"></script>
+<script src="src/localization.js"></script>
+<script>
+function DeferredTimeout(ms) {
+  var deferred = jQuery.Deferred();
+  
+  setTimeout(function() { deferred.resolve(); }, ms);
+  return deferred;
+}
+
+function DeferredPublish(html, originalURL, hackpubURL) {
+  return jQuery.ajax({
+    type: 'POST',
+    url: hackpubURL + "publish",
+    data: {
+      'html': html,
+      'original-url': originalURL
+    },
+    crossDomain: true,
+    dataType: 'json'
+  });
+}
+
+function setupUI(html, originalURL, hackpubURL) {
+  $(".to-internet.big-button").click(function() {
+    $("#choose-publish-method").fadeOut(function() {
+      $("#to-internet").fadeIn(function() {
+        var timeout = DeferredTimeout(1000);
+        var publish = DeferredPublish(html, originalURL, hackpubURL);
+        jQuery.when(publish, timeout).then(
+          function onSuccess(publishArgs) {
+            $("#to-internet .loading").fadeOut(function() {
+              var data = publishArgs[0];
+              var url = data['published-url'];
+              $(".published-url a").attr("href", url).text(url);
+              $("#to-internet .finished").fadeIn();
+            });
+          }, 
+          function onFailure() {
+            $("#to-internet .failure").fadeIn();
+          }
+        );
+      });
+    });
+  });
+  $(".view-html.big-button").click(function() {
+    $("#choose-publish-method").fadeOut(function() {
+      $("#view-html textarea").val(html).focus().select();
+      $("#view-html").fadeIn();
+    });
+  });
+}
+
+function init(html, originalURL, hackpubURL) {
+  var ppxURL = "http://toolness.github.com/postmessage-proxied-xhr/";
+
+  yepnope({
+    test: jQuery.support.cors,
+    nope: [ppxURL + 'ppx.min.js', ppxURL + 'ppx.jquery.min.js'],
+    complete: function() {
+      if (!jQuery.support.cors)
+        jQuery.proxyAjaxThroughPostMessage(hackpubURL + 'ppx-server');
+      setupUI(html, originalURL, hackpubURL);
+    }
+  });
+}
+
+function loadLocalization(languages, cb) {
+  jQuery.localization.loadLocale({
+    languages: languages,
+    path: "src/locale/",
+    complete: function(locale) {
+      $(document.body).localize(locale, "uproot-dialog");
+      cb();
+    }
+  });
+}
+
+if (top === self) {
+  // We're not in an iframe, so we're being used for development.
+  $(window).ready(function() {
+    var html = $("#sample-html").html();
+    loadLocalization(["en", "es"], function() {
+      init(html, "http://foo.com/", "http://hackpub.hackasaurus.org/");
+    });
+  });
+} else
+  window.addEventListener("message", function(event) {
+    $("#close").click(function() {
+      window.parent.postMessage("close", "*");
+    });  
+    var data = JSON.parse(event.data);
+    loadLocalization(data.languages, function() {
+      init(data.html, data.originalURL, data.hackpubURL);
+    });
+  }, false);
+</script>

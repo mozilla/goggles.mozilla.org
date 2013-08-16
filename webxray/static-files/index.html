@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Web X-Ray Goggles</title>
+<script src="jquery.min.js"></script>
+<script src="src/get-bookmarklet-url.js"></script>
+<style>
+body {
+  background-color: #f0f0f0;
+  color: black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  width: 40em;
+  margin: 0 auto;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+a:hover {
+  background: yellow;
+}
+
+#bookmarklet-url {
+  border: 1px dotted black;
+  width: 100%;
+}
+
+#bookmarklet-link:hover {
+  color: black;
+}
+
+#bookmarklet-link {
+  text-decoration: none;
+  display: inline-block;
+  background: #FF9900;
+  border-radius: 4px;
+  box-shadow: 2px 2px 1px black;
+  color: white;
+  padding: 6px;
+}
+</style>
+<a href="https://github.com/toolness/webxray/tree/style-info-experiment"><img style="position: absolute; top: 0; right: 0; border: 0;" src="github-ribbon.png" alt="Fork me on GitHub"></a>
+<div id="try-goggles">
+<h2>Getting Started</h2>
+<p>If you've never used the goggles before, you should start out with the <a href="http://hackasaurus.org/goggles/">tutorial</a> or the <a href="http://toolness.github.com/hackasaurus-parable/">Parable of The Hackasaurus</a>.</p>
+<h2>Reference</h2>
+<p>Here's the bookmarklet: <a href="" id="bookmarklet-link">X-Ray Goggles</a>.</p>
+<p>Note that if you're on a mobile browser, you may need to manually create a bookmark to the following URL:</p>
+<input type="text" id="bookmarklet-url">
+<p>Once the goggles are activated, you can press <kbd>H</kbd> for help.</p>
+<h2>Troubleshooting</h2>
+<p>If the goggles don't seem to be working, try running the <a href="test/">test suite</a>. Then <a href="http://hackasaurus.lighthouseapp.com/projects/81472-goggles/overview">report a bug</a> and be sure to mention whether the test suite failed.</p>
+<script>
+"use strict";
+
+$(window).ready(function() {
+  $("#bookmarklet-link").attr("href", Webxray.getBookmarkletURL())
+    .text(window.location.hostname + " " + $("#bookmarklet-link").text());
+  $("#bookmarklet-url").val(Webxray.getBookmarkletURL());
+});
+</script>

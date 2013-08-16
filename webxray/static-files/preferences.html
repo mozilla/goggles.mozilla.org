@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Preferences Frame</title>
+<p>You should never see this window.</p>
+<script>
+if ('webxrayPreferences' in localStorage)
+  window.parent.postMessage(localStorage.webxrayPreferences, "*");
+else
+  window.parent.postMessage("{}", "*");
+</script>

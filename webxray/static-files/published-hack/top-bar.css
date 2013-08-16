@@ -1,0 +1,31 @@
+.hackpub-top-bar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 9pt;
+  z-index: 2147483645;
+}
+
+.hackpub-top-bar a {
+  color: white;
+  text-decoration: underline;
+}
+
+.hackpub-top-bar div.close-button:before {
+  content: 'X';
+}
+
+.hackpub-top-bar div.close-button:hover {
+  color: red;
+}
+
+.hackpub-top-bar div.close-button {
+  float: right;
+  font-weight: bold;
+  cursor: pointer;
+}
