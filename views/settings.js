@@ -6,7 +6,7 @@
       return url;
     return baseURI + url;
   }
-
+ 
   jQuery.webxraySettings = {
     extend: jQuery.extend,
     url: function(name) {
@@ -18,12 +18,11 @@
       }
       return makeAbsoluteURL(this.baseURI, this[name]);
     },
-    language: "en",  // effect english-only for now
     baseURI: "",
     cssURL: "webxray.css",
     preferencesURL: "preferences.html",
-    easyRemixDialogURL: "easy-remix-dialog/index.html",
-    uprootDialogURL: "uproot-dialog.html",
+    easyRemixDialogURL: "{{hostname}}/" + xray.lang + "/easy-remix-dialog/index.html",
+    uprootDialogURL: "{{hostname}}/" + xray.lang + "/uproot-dialog.html",
     bugReportDialogURL: "bug-report-dialog.html",
     hackpubInjectionURL: "published-hack/injector.js",
     pluginURLs: [],

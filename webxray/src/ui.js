@@ -16,7 +16,7 @@
     function beforeUnload(event) {
       if (commandManager.canUndo()) {
         event.preventDefault();
-        return jQuery.locale.get("input:unload-blocked");
+        return Localized.get("unload-blocked");
       }
     }
 

@@ -10,8 +10,7 @@
 
     var hudContainer = $('<div class="webxray-base webxray-hud-box"></div>');
     var hud = $('<div class="webxray-base webxray-hud"></div>');
-    var locale = options.locale || jQuery.locale;
-    var l10n = locale.scope("hud-overlay");
+    var l10n = Localized.get;
 
     hudContainer.append(hud);
     
@@ -58,9 +57,9 @@
           var shortDescKey = "short-element-descriptions:" +
                              element.nodeName.toLowerCase();
 
-          if (locale.has(shortDescKey))
+          if (l10n(shortDescKey))
             span.emit(code(info.tagName),
-                      " (" + locale.get(shortDescKey) + ") ",
+                      " (" + l10n(shortDescKey) + ") ",
                       l10n("element"));
           else
             span.emit(code(info.tagName), " ", l10n("element"));

@@ -10,11 +10,11 @@ var Webxray = (function() {
       a.setAttribute("href", "./");
       return a.href;
     },
-    getBookmarkletURL: function getBookmarkletURL(baseURI) {
+    getBookmarkletURL: function getBookmarkletURL(baseURI, lang) {
       baseURI = baseURI || this._getBaseURI();
 
-      var baseCode = "(function(){var script=document.createElement('script');script.src='http://localhost:8000/webxray.js';script.className='webxray';document.body.appendChild(script);})();";
-      var code = baseCode.replace('http://localhost:8000/', baseURI);
+      var baseCode = "(function(){var script=document.createElement('script');script.src='-baseuri-/"+lang+"/webxray.js';script.className='webxray';script.dataset.lang='"+lang+"';script.dataset.baseuri='-baseuri-/"+lang+"';document.body.appendChild(script);})();";
+      var code = baseCode.replace( /-baseuri-/g, baseURI );
       
       return 'javascript:' + code;
     },

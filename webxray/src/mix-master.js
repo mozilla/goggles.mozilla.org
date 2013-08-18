@@ -40,9 +40,8 @@
   function MixMaster(options) {
     var hud = options.hud;
     var focused = options.focusedOverlay;
-    var locale = options.locale || jQuery.locale;
     var commandManager = options.commandManager;
-    var l10n = locale.scope('mix-master');
+    var l10n = Localized.get;
     var dialogPageMods = null;
     var transitionEffects;
     
@@ -60,7 +59,7 @@
     function runCommand(name, options) {
       focused.unfocus();
       var command = commandManager.run(name, options);
-      updateStatus(locale.get('command-manager:executed'), command);
+      updateStatus(l10n('command-manager:executed'), command);
     }
     
     var self = {
@@ -68,11 +67,11 @@
         if (commandManager.canUndo()) {
           focused.unfocus();
           transitionEffects.enableDuring(function() {
-            updateStatus(locale.get('command-manager:undid'),
+            updateStatus(l10n('command-manager:undid'),
                          commandManager.undo());
           });
         } else {
-          var msg = locale.get('command-manager:cannot-undo-html');
+          var msg = l10n('command-manager:cannot-undo-html');
           $(hud.overlay).html(msg);
         }
       },
@@ -80,11 +79,11 @@
         if (commandManager.canRedo()) {
           focused.unfocus();
           transitionEffects.enableDuring(function() {
-            updateStatus(locale.get('command-manager:redid'),
+            updateStatus(l10n('command-manager:redid'),
                          commandManager.redo());
           });
         } else {
-          var msg = locale.get('command-manager:cannot-redo-html');
+          var msg = l10n('command-manager:cannot-redo-html');
           $(hud.overlay).html(msg);
         }
       },
@@ -189,7 +188,6 @@
             element: focusedElement,
             onLoad: function(dialog) {
               dialog.iframe.postMessage(JSON.stringify({
-                languages: jQuery.locale.languages,
                 startHTML: startHTML,
                 mods: dialogPageMods,
                 baseURI: document.location.href

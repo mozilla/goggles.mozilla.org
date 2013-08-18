@@ -52,7 +52,8 @@
     "word-spacing",
     "word-wrap",
     "z-index"
-  ].sort();
+  ].sort(),
+  l10n = Localized.get;
 
   DEFAULT_PROPERTIES.forEach(function(name) {
     if (name.match(/image$/))
@@ -119,8 +120,7 @@
     });
   }
 
-  function buildPropertyWidget(element, row, style, parentStyle, name,
-                               locale, hud) {
+  function buildPropertyWidget(element, row, style, parentStyle, name, hud) {
     var nameCell = $('<div class="webxray-name"></div>');
     var valueCell = $('<div class="webxray-value"></div>');
 
@@ -186,10 +186,10 @@
     row.data("propertyWidget", self);
     row.mouseover(function() {
       var docKey = "css-property-docs:" + name;
-      if (locale.has(docKey)) {
+      if (l10n(docKey)) {
         var moreInfo = $('<span class="webxray-more-info"></span>')
-          .text(locale.get("style-info:more-info"));
-        $(hud.overlay).html(locale.get(docKey))
+          .text(l10n("more-info"));
+        $(hud.overlay).html(l10n(docKey))
           .append(moreInfo)
           .find("a").css({textDecoration: "none"});
       }
@@ -303,13 +303,11 @@
     styleInfoOverlay: function styleInfoOverlay(options) {
       var focused = options.focused;
       var commandManager = options.commandManager;
-      var locale = options.locale || jQuery.locale;
       var propertyNames = options.propertyNames;
       var mouseMonitor = options.mouseMonitor;
       var hud = options.hud;
       var body = options.body || document.body;
       var isVisible = false;
-      var l10n = locale.scope("style-info");
       var modalOverlay = null;
       
       var overlay = $('<div class="webxray-base webxray-style-info"></div>');
@@ -326,11 +324,11 @@
         overlay.empty();
         
         if (primary) {
-          var info = $(primary).getStyleInfo(propertyNames, locale, hud);
+          var info = $(primary).getStyleInfo(propertyNames, hud);
           var instructions = $('<div class="webxray-instructions"></div>');
           var close = $('<div class="webxray-close-button"></div>');
           instructions.html(l10n("tap-space-html"));
-          close.text(locale.get("dialog-common:ok"));
+          close.text(l10n("dialog-common:ok"));
           overlay.append(info).append(instructions).append(close);
           overlay.show();
         } else {
@@ -427,14 +425,13 @@
   });
   
   jQuery.fn.extend({
-    getStyleInfo: function getStyleInfo(propertyNames, locale, hud) {
+    getStyleInfo: function getStyleInfo(propertyNames, hud) {
       var names = propertyNames || DEFAULT_PROPERTIES;
       var element = this.get(0);
       var window = element.ownerDocument.defaultView;
       var style = window.getComputedStyle(element);
       var parentStyle = null;
 
-      locale = locale || jQuery.locale;
       if (element.nodeName != "HTML")
         parentStyle = window.getComputedStyle(element.parentNode);
 
@@ -444,8 +441,7 @@
       for (var i = 0; i < names.length + (NUM_COLS-1); i += NUM_COLS) {
         var row = $('<div class="webxray-row"></div>');
         for (var j = 0; j < NUM_COLS; j++)
-          buildPropertyWidget(element, row, style, parentStyle, names[i+j],
-                              locale, hud);
+          buildPropertyWidget(element, row, style, parentStyle, names[i+j], hud);
         info.append(row);
       }
 

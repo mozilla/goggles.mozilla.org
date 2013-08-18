@@ -1,37 +1,34 @@
 (function(jQuery) {
   "use strict";
 
-  var $ = jQuery;
+  var $ = jQuery,
+  locale = Localized.get;
 
-  function createLocalizedHelp(keys, locale, platform) {
-    locale = locale || jQuery.locale;
+  function createLocalizedHelp(keys, platform) {
     platform = platform || navigator.platform;
     
-    var descriptions = locale.scope('command-descriptions');
     var localizedKeys = [];
     keys.forEach(function(info) {
       var localizedInfo = {key: null, desc: null};
-      localizedInfo.key = jQuery.nameForKey(info.key, locale, platform);
-      localizedInfo.desc = descriptions(info.cmd);
+      localizedInfo.key = jQuery.nameForKey(info.key, platform);
+      localizedInfo.desc = locale(info.cmd);
       localizedKeys.push(localizedInfo);
     });
     return localizedKeys;
   }
   
   jQuery.extend({
-    nameForKey: function(key, locale, platform) {
-      locale = locale || jQuery.locale;
+    nameForKey: function(key, platform) {
       platform = platform || navigator.platform;
 
       var normalKey = "key-names:" + key;
       var osKey = normalKey + "-" + platform;
-      
-      return locale[osKey] ||
-             locale[normalKey] ||
+      return locale(osKey) ||
+             locale(normalKey) ||
              key;
     },
-    createKeyboardHelpReference: function(keyboardHelp, locale, platform) {
-      var keys = createLocalizedHelp(keyboardHelp, locale, platform);
+    createKeyboardHelpReference: function(keyboardHelp, platform) {
+      var keys = createLocalizedHelp(keyboardHelp, platform);
       var table = $('<div class="webxray-help-box"></div>');
       keys.forEach(function(info) {
         var row = $('<div class="webxray-help-row"></div>');

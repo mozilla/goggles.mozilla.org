@@ -11,8 +11,7 @@
         payload: JSON.stringify({
           buildMetadata: buildMetadata,
           hackpubURL: jQuery.webxraySettings.url("bugReportHackpubURL"),
-          originalURL: window.location.href,
-          languages: jQuery.locale.languages
+          originalURL: window.location.href
         })
       });
     }

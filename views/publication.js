@@ -100,43 +100,17 @@ function init(html, originalURL, hackpubURL) {
 }
 
 /**
- *
- */
-function loadLocalization(languages, cb) {
-  jQuery.localization.loadLocale({
-    languages: languages,
-    path: "src/locale/",
-    complete: function(locale) {
-      $(document.body).localize(locale, "uproot-dialog");
-      cb();
-    }
-  });
-}
-
-/**
  * run immediately
  */
 (function(){
-  if (top === self) {
-    // We're not in an iframe, so we're being used for development.
-    $(window).ready(function() {
-      var html = $("#sample-html").html();
-      loadLocalization(["en", "es"], function() {
-        init(html, "http://foo.com/", "http://hackpub.hackasaurus.org/");
-      });
+  window.addEventListener("message", function(event) {
+    $("#close").click(function() {
+      window.parent.postMessage("close", "*");
     });
-  } else {
-    window.addEventListener("message", function(event) {
-      $("#close").click(function() {
-        window.parent.postMessage("close", "*");
-      });
-      var data = JSON.parse(event.data);
-      // only run this is it's really a hackpub message. Otherwise, don't trigger.
-      if(data.languages && data.html && data.originalURL && data.hackpubURL) {
-        loadLocalization(data.languages, function() {
-          init(data.html, data.originalURL, data.hackpubURL);
-        });
-      }
-    }, false);
-  }
+    var data = JSON.parse(event.data);
+    // only run this is it's really a hackpub message. Otherwise, don't trigger.
+    if(data.html && data.originalURL && data.hackpubURL) {
+      init(data.html, data.originalURL, data.hackpubURL);
+    }
+  }, false);
 }());

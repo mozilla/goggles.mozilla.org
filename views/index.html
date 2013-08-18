@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ lang }}" dir="{{ lang_dir }}">
   <head>
     <meta charset="utf-8">
     <meta name="persona-email" content="{{ email }}">
     <meta name="X-CSRF-Token" content="{{ csrf }}">
-    <title>X-Ray Goggles</title>
+    <title>{{ gettext("X-Ray Goggles") }}</title>
     <link rel="stylesheet" href="/resources/font-awesome/css/font-awesome.css">
     <link href="//www.mozilla.org/tabzilla/media/css/tabzilla.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ login }}/css/nav.css" />
@@ -75,63 +75,63 @@
             <img class="logo" src="img/goggles.png" alt="X-Ray Goggles Logo">
           </div>
           <div>
-            <h1>X-Ray Goggles</h1>
-            <h2>Remix and share webpages instantly</h2>
+            <h1>{{ gettext("X-Ray Goggles") }}</h1>
+            <h2>{{ gettext("Remix and share web pages instantly") }}</h2>
           </div>
         </div>
-        <div class="bookmarklet"><a href="" id="bookmarklet-link" class="ui-btn"><span>Activate X-Ray Goggles</span></a></div>
+        <div class="bookmarklet"><a href="" id="bookmarklet-link" class="ui-btn"><span>{{ gettext("Activate X-Ray Goggles") }}</span></a></div>
       </div>
       <div class="ui-bg-column">
         <div class="ui-row">
           <div class="g-4">
-            <h1>See how Goggles work by swapping a image</h1>
+            <h1>{{ gettext("See how Goggles work by swapping a image") }}</h1>
             <ol>
               <li>
-                <p>Copy this image URL (highlight the text below, right-click, then copy the link)<br>
+                <p>{{ gettext("Copy this image URL") }}<br>
                 <input type="text" autofocus value="{{ host }}/img/goggles-remixed.png"></p>
-                <p>The URL you just copied links to a new image!</p>
+                <p>{{ gettext("The URL you just copied links to a new image!") }}</p>
               </li>
               <li>
-                <p>Next, activate the X-Ray Goggles by clicking the yellow button above.</p>
+                <p>{{ gettext("activate the X-Ray Goggles by") }}</p>
               </li>
               <li>
-                <p>With X-Ray Goggles now activated, mouse around the page. Notice how images and text are highlighted with colors?</p>
+                <p>{{ gettext("With X-Ray Goggles now activated") }}</p>
               </li>
               <li>
-                <p>Find the current X-Ray Goggles image (shown below) and hover over it until it highlights.</p>
+                <p>{{ gettext("Find the current X-Ray Goggles image") }}</p>
                 <p><img class="example" src="img/goggles.png" alt="X-Ray Goggles Logo"></p>
-                <p>Then click on the highlighted image. This will reveal its HTML source code.</p>
+                <p>{{ gettext("Then click on the highlighted image") }}</p>
               </li>
               <li>
-                <p>Replace the image location (or "source", written in HTML as "src") with the URL you copied in Step 1.</p>
-                <p><strong>Here's how:</strong> See where it says <span>https://goggles.webmaker.org/img/goggles.png</span>? That's the URL for the current image. Replace it with the new image URL you copied in Step 1 by highlighting the old URL, right-clicking and pasting in the new link. Press <strong>Commit Changes</strong> You should now see the new image.</p>
+                <p>{{ gettext("Replace the image location") }}</p>
+                <p><strong>{{ gettext("Here's how:") }}</strong> {{ gettext("See where it says") }}</p>
               </li>
               <li>
-                <p>Great! You've successfully swapped images. Now experiment with the rest of the page to see what else you can replace.</p>
+                <p>{{ gettext("Great! You've successfully swapped images") }}</p>
               </li>
             </ol>
           </div>
 
           <div class="g-4">
-            <h1>Share your remix</h1>
-            <p>When you're ready to share your remixed page, click the Publish button or press <kbd>P</kbd> on your keyboard. This makes your changes visible on the web for others to see.</p>
+            <h1>{{ gettext("Share your remix") }}</h1>
+            <p>{{ gettext("When you're ready to share your remixed page") }}</p>
 
-            <h1>Help</h1>
-            <p>If you need help, make sure the X-Ray Goggles are activated, then press <kbd>H</kbd> on your keyboard.</p>
+            <h1>{{ gettext("Help") }}</h1>
+            <p>{{ gettext("If you need help") }}</p>
 
-            <h1>Remix any webpage!</h1>
-            <p>You can take X-Ray Goggles with you anywhere on the web:</p>
+            <h1>{{ gettext("Remix any webpage!") }}</h1>
+            <p>{{ gettext("You can take X-Ray Goggles with you anywhere on the web:") }}</p>
             <ol id="install">
               <li>
-                <p>Make sure your web browser's bookmarks bar is enabled. </p>
+                <p>{{ gettext("Make sure your web browser's bookmarks bar is enabled.") }} </p>
                 <p class="screenshot step1" data-step="1"><img src="img/instructions/firefox1.png"></p>
               </li>
               <li>
-                <p>Drag the yellow "Activate X-Ray Goggles" button into your bookmarks bar, where it will automatically be added as a button that you can click to activate the Goggles on any webpage.</p>
+                <p>{{ gettext("Drag the yellow button into your bookmarks") }}</p>
                 <p class="screenshot step2" data-step="2"><img src="img/instructions/firefox2.png"></p>
               </li>
               <li>
-                <p>Now visit any website on the internet. Activate the Goggles by clicking the new button in your bookmarks toolbar and start remixing!</p>
+                <p>{{ gettext("Now visit any website on the internet") }}</p>
               </li>
             </ol>
           </div>
@@ -155,7 +155,7 @@
       "use strict";
       $(window).ready(function() {
 
-        $("#bookmarklet-link").attr("href", Webxray.getBookmarkletURL());
+        $("#bookmarklet-link").attr("href", Webxray.getBookmarkletURL("{{hostname}}", "{{lang}}"));
         $("#bookmarklet-url").val(Webxray.getBookmarkletURL());
 
         // browser-specific screenshots

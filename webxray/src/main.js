@@ -112,22 +112,19 @@
   
   jQuery.extend({webxrayBuildMetadata: buildMetadata});
 
-  $(window).ready(function() {
-    if (typeof(console) != 'undefined') {
+  Localized.ready({url: xray.url}, function() {
+    if (window.console && console.log) {
       console.log("Initializing Web X-Ray Goggles built on " +
                   buildMetadata.date + " (commit " +
                   buildMetadata.commit + ").");
     }
     
     loadPrerequisites(function() {
-      jQuery.localization.init(["en", jQuery.webxraySettings.language]);
-
       var ui = jQuery.xRayUI({eventSource: document});
-
       window.webxrayUI = ui;
       loadPlugins(function() {
         var welcomeMsg = $("<div></div>");
-        welcomeMsg.html(jQuery.locale.get("hud-overlay:default-html"));
+        welcomeMsg.html(Localized.get("default-html"));
         jQuery.transparentMessage(welcomeMsg);
 
         ui.start();

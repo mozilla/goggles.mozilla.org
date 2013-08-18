@@ -33,13 +33,11 @@
       platform = platform || navigator.platform;
 
       var toolbar = $('<div class="webxray-base webxray-toolbar"></div>');
-      var keyNames = locale.scope('key-names');
-      var shortDescriptions = locale.scope('short-command-descriptions');
 
       input.keyboardHelp.forEach(function(binding) {
         if (binding.execute && (canBeTouched() || binding.alwaysInToolbar))
           makeButton(jQuery.nameForKey(binding.key, locale, platform),
-                     shortDescriptions(binding.cmd), function() {
+                     Localized.get("short-command-descriptions:" + binding.cmd), function() {
                        binding.execute();
                      }).appendTo(toolbar);
       });

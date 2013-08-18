@@ -13,7 +13,7 @@ var bleach = require( "./lib/bleach"),
     path       = require("path"),
     utils = require('./lib/utils'),
     version = require('./package').version,
-    i18n = require( "i18n-abide" );
+    i18n = require( "webmaker-i18n" );
 
 // Load config from ".env"
 habitat.load();
@@ -38,18 +38,16 @@ nunjucksEnv.express(app);
 // NOTE: currently not used!
 app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),
-  GA_DOMAIN: env.get("GA_DOMAIN")
+  GA_DOMAIN: env.get("GA_DOMAIN"),
+  hostname: env.get("hostname")
 });
 
-// Setup locales with i18n
-app.use( i18n.abide({
+app.use(i18n.middleware({
   supported_languages: [
     'en-US'
   ],
-  default_lang: "en-US",
-  translation_type: "key-value-json",
-  translation_directory: "locale",
-  locale_on_url: true
+  default_lang: 'en-US',
+  translation_directory: path.join( __dirname, 'locale' )
 }));
 
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
@@ -67,7 +65,7 @@ app.use(express.cookieSession({
 }));
 app.use(function(err, req, res, next) {
   // universal error handler
-  console.error(err);
+  console.error(err.msg);
   throw err;
 });
 
@@ -145,6 +143,7 @@ app.get("/publication.js", function(req, res) {
 
 // serve static content, resolved in this order:
 app.use(express.static(path.join(__dirname, "public")));
+app.use( "/bower", express.static( path.join(__dirname, "bower_components" )));
 app.use(express.static(path.join(__dirname, "webxray/static-files")));
 ["src", "test", "js"].forEach(function(dir) {
   app.use("/" + dir, express.static(path.join(__dirname, "webxray/" + dir)));
@@ -162,6 +161,17 @@ app.param("remix", function(req, res, next, id) {
 app.get("/remix/:remix", function(req, res) {
   res.write(res.result.rawData);
   res.end();
+});
+
+// Localized Strings
+app.get("/strings/:lang?", function( req, res, next ) {
+  res.header( "Access-Control-Allow-Origin", "*" );
+  res.jsonp(i18n.getStrings(req.params.lang || req.lang || "en-US"));
+});
+
+// override some path
+app.get("/easy-remix-dialog/index.html", function(req, res) {
+  res.render("/easy-remix-dialog/index.html");
 });
 
 // login API connections

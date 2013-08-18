@@ -1,6 +1,6 @@
 (function( originalWindow, undefined ) {
 
-var window = originalWindow;
+	var window = originalWindow;
 
 // Use the correct document accordingly with window argument (sandbox)
 var document = window.document;
@@ -11,6 +11,15 @@ var buildMetadata = __BUILD_METADATA__;
 // We might be monkeypatching JSON later; if we do, ensure it's
 // our own private copy of JSON rather than the page's global one.
 var JSON = {
-  stringify: window.JSON && window.JSON.stringify,
-  parse: window.JSON && window.JSON.parse
+	stringify: window.JSON && window.JSON.stringify,
+	parse: window.JSON && window.JSON.parse
 };
+
+
+var webxrayScript = document.querySelector(".webxray"), 
+	baseURI = webxrayScript.dataset.baseuri,
+	lang = webxrayScript.dataset.lang,
+	xray = {
+		lang: lang,
+		url: baseURI + "/strings/" + lang
+	};

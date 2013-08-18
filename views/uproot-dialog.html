@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ lang }}" dir="{{ lang_dir }}">
   <head>
     <meta charset="utf-8">
     <meta name="persona-email" content="{{ email }}">
     <meta name="X-CSRF-Token" content="{{ csrf }}">
-    <title>Publish Your Remix</title>
+    <title>{{ gettext("Publish Your Remix") }}</title>
     <link rel="stylesheet" href="../stylesheets/style.css">
     <link rel="stylesheet" href="../stylesheets/dialog.css">
     <link rel="stylesheet" href="{{ login }}/css/nav.css" />
@@ -55,14 +55,14 @@
 
       <div class="header" id="webmaker-nav">
         <!-- the webmaker bar -->
-          <span class="button close-button fr" id="close" data-l10n="dialog-common:close">Close</span>
+          <span class="button close-button fr" id="close">{{ gettext("Close") }}</span>
         <nav class="webmaker-nav-container fr">
-          <a id="logo" href="https://webmaker.org"><img src="{{ login }}/img/webmaker-logo.png" alt="Mozilla Webmaker" /></a>
+          <a id="logo" href="https://webmaker.org/{{lang}}"><img src="{{ login }}/img/webmaker-logo.png" alt="Mozilla Webmaker" /></a>
           <ul class="webmaker-nav user-info">
             <li class="user">
               Hi <span id="identity" class="user-name-container"></span>
             </li>
-            <li class="makes"><a href="{{ audience }}/me?app={{ appname }}" target="_blank">My makes</a></li>
+            <li class="makes"><a href="{{ audience }}/me?app={{ appname }}" target="_blank">{{ gettext("My makes") }}</a></li>
             <li>
               <iframe src="{{ audience }}/sso/include.html" class="include-frame"></iframe>
             </li>
@@ -74,33 +74,33 @@
 
       <div class="subheader">
         <div class="pane">
-          <h2 class="subtitle" data-l10n="header">Publish Your Remix</h2>
+          <h2 class="subtitle">{{ gettext("Publish Your Remix") }}</h2>
         </div>
       </div>
 
       <div class="body">
 
         <div class="publish-disable-overlay" style="display: none;">
-          <h1>Sign in to publish your remix</h1>
+          <h1>{{ gettext("Sign in to publish your remix") }}</h1>
         </div>
 
         <div class="publish-enable-overlay" style="display: none;">
           <div id="choose-publish-method">
-            <h1 data-l10n="to-internet-desc">Instantly publish your remix to a URL that anyone can view.</h1>
+            <h1>{{ gettext("Instantly publish your remix to a URL that anyone can view.") }}</h1>
             <div class="publish-option">
               <div class="big-button to-internet">
-                  <span class="button primary" data-l10n="to-internet">Publish To Internet</span>
+                  <span class="button primary">{{ gettext("Publish To Internet") }}</span>
               </div>
             </div>
           </div>
           <div id="to-internet" style="display: none;">
-            <p class="loading" data-l10n="publishing">Publishing...</p>
+            <p class="loading">{{ gettext("Publishing...") }}</p>
             <div class="failure" style="display: none;">
-              <p data-l10n="error">Sorry, an error occurred. Please try again later.</p>
+              <p>{{ gettext("Sorry, an error occurred. Please try again later.") }}</p>
             </div>
 
             <div class="finished" style="display: none;">
-              <h1 data-l10n="success">Here is the URL for your remix that anyone can view.</h1>
+              <h1>{{ gettext("Here is the URL for your remix that anyone can view.") }}</h1>
               <div class="published-url">
                 <a target="_blank" href="http://foo/bar">http://foo/bar</a>
               </div>
@@ -115,7 +115,6 @@
 
     <script src="jquery.min.js"></script>
     <script src="yepnope.1.0.2-min.js"></script>
-    <script src="src/localization.js"></script>
     <script src="publication.js"></script>
 
     <script src="{{ audience }}/sso/include.js"></script>

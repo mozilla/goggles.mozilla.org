@@ -92,7 +92,6 @@ div.publish-option p {
 </div>
 <script src="jquery.min.js"></script>
 <script src="yepnope.1.0.2-min.js"></script>
-<script src="src/localization.js"></script>
 <script>
 function DeferredTimeout(ms) {
   var deferred = jQuery.Deferred();
@@ -169,37 +168,11 @@ function init(buildMetadata, originalURL, hackpubURL) {
   });
 }
 
-function loadLocalization(languages, cb) {
-  jQuery.localization.loadLocale({
-    languages: languages,
-    path: "src/locale/",
-    complete: function(locale) {
-      $(document.body).localize(locale, "bug-report-dialog");
-      cb();
-    }
-  });
-}
-
-if (top === self) {
-  // We're not in an iframe, so we're being used for development.
-  $(window).ready(function() {
-    var buildMetadata = {
-      "date": "Wed Mar 21 10:28:59 2012",
-      "commit": "f677d13c9595d62b0e68f8943c446d8e8adb692a"
-    };
-    loadLocalization(["en", "es"], function() {
-      init(buildMetadata, "http://foo.com/",
-           "http://hackpub.hackasaurus.org/buckets/webxray-bugs/");
-    });
-  });
-} else
-  window.addEventListener("message", function(event) {
-    $("#close").click(function() {
-      window.parent.postMessage("close", "*");
-    });  
-    var data = JSON.parse(event.data);
-    loadLocalization(data.languages, function() {
-      init(data.buildMetadata, data.originalURL, data.hackpubURL);
-    });
-  }, false);
+window.addEventListener("message", function(event) {
+  $("#close").click(function() {
+    window.parent.postMessage("close", "*");
+  });  
+  var data = JSON.parse(event.data);
+  init(data.buildMetadata, data.originalURL, data.hackpubURL);
+}, false);
 </script>
