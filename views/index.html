@@ -32,9 +32,13 @@
               <li>
                 <a {% if page == 'index' %}class="on"{% endif %} id="nav-index" href="/">{{ gettext("Make") }}</a>
                 <div class="makenav-hover">
-                  <a href="{{ audience }}/t/webmaker%3Atemplate" class="makenav-hover-item">
-                    <img src="/img/icon-make-template.png" alt="{{ gettext("From template") }}" />
-                    <span>{{ gettext("From template") }}</span>
+                  <a href="{{ audience }}/starter-makes" class="makenav-hover-item">
+                    <img src="/img/icon-make-template.png" alt="{{ gettext("From starter make") }}" />
+                    <span>{{ gettext("From starter make") }}</span>
+                  </a>
+                  <a href="https://goggles.webmaker.org/" class="makenav-hover-item">
+                    <img src="/img/icon-make-xray.png" alt="{{ gettext("X-Ray Goggles") }}" />
+                    <span>{{ gettext("X-Ray Goggles") }}</span>
                   </a>
                   <a href="https://popcorn.webmaker.org/editor/" class="makenav-hover-item">
                     <img src="/img/icon-make-popcorn.png" alt="{{ gettext("Popcorn Maker") }}" />

@@ -7,7 +7,7 @@
 .webmaker-nav-container {
   border-top: 1px solid @lightgrey;
   position: relative;
-  height: 85px;
+  height: 90px;
   background: #FFF;
   overflow: visible;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
@@ -69,7 +69,7 @@
       left: -1px;
       border: 1px solid #fff;
       border-top: none;
-      width: 265px;
+      width: 365px;
       padding-top: 15px;
       font-size: 13px;
       color: #55575c;
@@ -86,7 +86,7 @@
       .makenav-hover-item {
         cursor: pointer;
         text-align: center;
-        height: 100px;
+        height: 110px;
         display: inline-block;
         padding-left: 15px;
         width: 50px;
@@ -100,6 +100,7 @@
         span {
           float: left;
           margin-right: 15px;
+          width: 100%;
         }
       } // makenav-hover-item
 
@@ -575,7 +576,7 @@ footer {
   bottom: 100%;
   width: 350px;
 
-  button {
+  a {
     cursor: pointer;
     background: @green;
     color: #FFF;
@@ -588,19 +589,19 @@ footer {
     margin-right: 5px;
     text-align: center;
     width: 150px;
+
     &:hover {
       background: lighten(@green, 10%);
     }
   }
 
-  .backToTop {
+  .back-to-top {
     position: absolute;
     bottom: -6px;
     right: 30px;
     height: 0;
     transition: height 0.2s ease-out;
     overflow: hidden;
-
   }
 
   .addMore {
