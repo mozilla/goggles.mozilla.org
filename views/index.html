@@ -103,8 +103,8 @@
                 <p>{{ gettext("Then click on the highlighted image") }}</p>
               </li>
               <li>
-                <p>{{ gettext("Replace the image location") }}</p>
-                <p><strong>{{ gettext("Here's how:") }}</strong> {{ gettext("See where it says") }}</p>
+                <p>{{ gettext("Replace the image location") | safe }}</p>
+                <p><strong>{{ gettext("Here's how:") }}</strong> {{ gettext("See where it says") | safe }}</p>
               </li>
               <li>
                 <p>{{ gettext("Great! You've successfully swapped images") }}</p>
@@ -114,10 +114,10 @@
 
           <div class="g-4">
             <h1>{{ gettext("Share your remix") }}</h1>
-            <p>{{ gettext("When you're ready to share your remixed page") }}</p>
+            <p>{{ gettext("When you're ready to share your remixed page") | safe }}</p>
 
             <h1>{{ gettext("Help") }}</h1>
-            <p>{{ gettext("If you need help") }}</p>
+            <p>{{ gettext("If you need help") | safe }}</p>
 
             <h1>{{ gettext("Remix any webpage!") }}</h1>
             <p>{{ gettext("You can take X-Ray Goggles with you anywhere on the web:") }}</p>
@@ -127,7 +127,7 @@
                 <p class="screenshot step1" data-step="1"><img src="img/instructions/firefox1.png"></p>
               </li>
               <li>
-                <p>{{ gettext("Drag the yellow button into your bookmarks") }}</p>
+                <p>{{ gettext("Drag the yellow button into your bookmarks") | safe }}</p>
                 <p class="screenshot step2" data-step="2"><img src="img/instructions/firefox2.png"></p>
               </li>
               <li>
