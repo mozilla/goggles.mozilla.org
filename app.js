@@ -35,7 +35,6 @@ var app = express(),
 // Enable template rendering with nunjucks
 nunjucksEnv.express(app);
 
-// NOTE: currently not used!
 app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),
   GA_DOMAIN: env.get("GA_DOMAIN"),
