@@ -6,7 +6,7 @@
       return url;
     return baseURI + url;
   }
-  
+
   jQuery.webxraySettings = {
     extend: jQuery.extend,
     url: function(name) {
@@ -24,9 +24,7 @@
     preferencesURL: "preferences.html",
     easyRemixDialogURL: "easy-remix-dialog/index.html",
     uprootDialogURL: "uproot-dialog.html",
-    bugReportDialogURL: "bug-report-dialog.html",
     hackpubURL: "http://hackpub.hackasaurus.org/",
-    bugReportHackpubURL: "http://hackpub.hackasaurus.org/buckets/webxray-bugs/",
     hackpubInjectionURL: "published-hack/injector.js",
     pluginURLs: []
   };
