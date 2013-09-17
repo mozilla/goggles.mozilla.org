@@ -138,9 +138,6 @@ kbd {
   border: 10px solid transparent;
   border-left-color: #fff;
 }
-.popover.bug-report .webxray-dialog-middle {
-  bottom: 80px;
-}
 .popover.publish .webxray-dialog-middle {
   bottom: 20px;
 }

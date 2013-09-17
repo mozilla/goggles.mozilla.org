@@ -6,7 +6,7 @@
       return url;
     return baseURI + url;
   }
- 
+
   jQuery.webxraySettings = {
     extend: jQuery.extend,
     url: function(name) {
@@ -23,11 +23,8 @@
     preferencesURL: "preferences.html",
     easyRemixDialogURL: "{{hostname}}/" + xray.lang + "/easy-remix-dialog/index.html",
     uprootDialogURL: "{{hostname}}/" + xray.lang + "/uproot-dialog.html",
-    bugReportDialogURL: "bug-report-dialog.html",
     hackpubInjectionURL: "published-hack/injector.js",
     pluginURLs: [],
-
-    hackpubURL: "{{hackpubURL}}",
-    bugReportHackpubURL: "{{bugReportHackpubURL}}"
+    hackpubURL: "{{hackpubURL}}"
   };
 })(jQuery);
