@@ -1,3 +1,44 @@
+li.lang-picker:first-child {
+  border-right: none;
+}
+#lang-picker {
+  margin: -7px 15px 0 0;
+  border-color: transparent;
+}
+#lang-picker:hover {
+  border-color: #CCC;
+}
+#lang-picker ul {
+  background: white;
+  display: inline-block;
+}
+#lang-picker ul li {
+  display: block;
+}
+#lang-picker .ui-select-menu {
+  width: auto;
+  border-color: #CCC;
+}
+#lang-picker .ui-select-menu ul {
+  width: auto;
+}
+#lang-picker .ui-selected::before {
+  margin-right: 5px;
+}
+#lang-picker .ui-smedium {
+  width: auto;
+  margin-left: 10px;
+}
+#lang-picker > .icon {
+  background: none;
+  color: #555;
+  padding: 0 10px 0 0;
+}
+#lang-picker > .icon:hover {
+  background: none;
+  color: #555;
+}
+
 .ui-wrapper {
   margin: 40px auto 60px;
 }

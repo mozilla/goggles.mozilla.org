@@ -1,6 +1,9 @@
 {
   "name": "goggles.webmaker.org",
   "dependencies": {
-    "webmaker-i18n": "https://github.com/mozilla/node-webmaker-i18n/archive/v0.1.5.tar.gz"
+    "requirejs": "2.1.8",
+    "text": "2.0.9",
+    "webmaker-i18n": "https://github.com/mozilla/node-webmaker-i18n/archive/v0.1.5.tar.gz",
+    "webmaker-ui": "0.0.7"
   }
 }

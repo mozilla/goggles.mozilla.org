@@ -21,12 +21,19 @@
           <div class="user-nav-container">
             <a id="logo" href="{{ audience }}/{{lang}}/"><img src="/img/logo.png" alt="{{ gettext("Mozilla Webmaker") }}"></a>
             <ul class="webmaker-nav user-info">
+              <li class="lang-picker">
+                <select id="lang-picker">
+                  {% for language in supportedLanguages %}
+                    <option {% if lang == language %} selected="selected" {% endif %} value="{{language}}">{{ languageNameFor(language) }}</option>
+                  {% endfor %}
+                </select>
+              </li>
               <li class="user">
                 {{ gettext("Hi") }} <span id="identity" class="user-name-container"></span>
               </li>
               <li class="makes"><a href="{{ audience }}/me?app={{ appname }}">{{ gettext("My makes") }}</a></li>
               <li>
-                <iframe src="{{audience}}/sso/include.html" class="include-frame"></iframe>
+                <iframe src="{{audience}}/{{lang}}/sso/include.html" class="include-frame"></iframe>
               </li>
             </ul>
             <ul class="nav-list">
@@ -146,7 +153,9 @@
     <div id="try-goggles">
 
     </div>
-
+    <script id="require-js" src="/bower/requirejs/require.js"
+      data-main="{% block require_main %}/js/main.js{% endblock %}">
+    </script>
     <script src="jquery.min.js"></script>
     <script src="src/get-bookmarklet-url.js"></script>
     <script src="{{ audience }}/sso/include.js"></script>
