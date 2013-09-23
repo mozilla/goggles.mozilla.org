@@ -15,7 +15,7 @@ env = new habitat();
     // Database information
 var dbConfig = env.get( "DB" ),
     db = require( "../lib/database" ),
-    dbAPI = db( "ThimbleProject", dbConfig ),
+    dbAPI = db( "thimbleproject", dbConfig ),
     makeEnv = env.get( "make" ),
     makeapi,
     utils = require( "../lib/utils" ),
