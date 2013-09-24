@@ -18,8 +18,10 @@
     "knox": "0.8.5",
     "makeapi-client": "https://github.com/mozilla/makeapi-client/tarball/v0.5.6",
     "less-middleware": "0.1.12",
+    "mox-server": "https://github.com/Pomax/mox-server/archive/master.tar.gz",
     "newrelic": "0.9.20",
     "node-statsd": "0.0.7",
+    "noxmox": "0.2.4",
     "nunjucks": "0.1.10",
     "sequelize": "1.6.0",
     "webmaker-loginapi": "https://github.com/mozilla/node-webmaker-loginapi/tarball/v0.1.9"

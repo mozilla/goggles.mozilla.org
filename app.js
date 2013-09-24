@@ -25,6 +25,7 @@ var app = express(),
     node_env = env.get('NODE_ENV'),
     databaseOptions =  env.get('CLEARDB_DATABASE_URL') || env.get('DB'),
     databaseAPI = db('thimbleproject', databaseOptions),
+    emulate_s3 = env.get('S3_EMULATION') || !env.get('S3_KEY'),
     middleware = require('./lib/middleware')(env),
     make = makeAPI(env.get('make')),
     nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'), {
@@ -185,4 +186,10 @@ goggles.build(env, nunjucksEnv, function() {
   app.listen(env.get("port"), function(){
     console.log('Express server listening on ' + env.get("hostname"));
   });
+
+  // If we're in running in emulated S3 mode, run a mini
+  // server for serving up the "s3" published content.
+  if (emulate_s3) {
+    require("mox-server").runServer(env.get("MOX_PORT", 12319));
+  }
 });
