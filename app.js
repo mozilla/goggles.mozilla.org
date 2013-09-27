@@ -179,7 +179,7 @@ app.get("/remix/:remix", function(req, res) {
 // Localized Strings
 app.get("/strings/:lang?", function( req, res, next ) {
   res.header( "Access-Control-Allow-Origin", "*" );
-  res.jsonp(i18n.getStrings(req.params.lang || req.lang || "en-US"));
+  res.jsonp(i18n.getStrings(req.params.lang || req.localeInfo.lang || "en-US"));
 });
 
 // override some path

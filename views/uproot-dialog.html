@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="{{ lang_dir }}">
+<html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
   <head>
     <meta charset="utf-8">
     <meta name="persona-email" content="{{ email }}">
@@ -57,7 +57,7 @@
         <!-- the webmaker bar -->
           <span class="button close-button fr" id="close">{{ gettext("Close") }}</span>
         <nav class="webmaker-nav-container fr">
-          <a id="logo" href="https://webmaker.org/{{lang}}"><img src="{{ login }}/img/webmaker-logo.png" alt="Mozilla Webmaker" /></a>
+          <a id="logo" href="https://webmaker.org/{{localeInfo.lang}}"><img src="{{ login }}/img/webmaker-logo.png" alt="Mozilla Webmaker" /></a>
           <ul class="webmaker-nav user-info">
             <li class="user">
               Hi <span id="identity" class="user-name-container"></span>

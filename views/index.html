@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="{{ lang_dir }}">
+<html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
   <head>
     <meta charset="utf-8">
     <meta name="persona-email" content="{{ email }}">
@@ -19,12 +19,12 @@
       <header id="webmaker-nav">
         <nav class="webmaker-nav-container">
           <div class="user-nav-container">
-            <a id="logo" href="{{ audience }}/{{lang}}/"><img src="/img/logo.png" alt="{{ gettext("Mozilla Webmaker") }}"></a>
+            <a id="logo" href="{{ audience }}/{{localeInfo.lang}}/"><img src="/img/logo.png" alt="{{ gettext("Mozilla Webmaker") }}"></a>
             <ul class="webmaker-nav user-info">
               <li class="lang-picker">
                 <select id="lang-picker">
                 {% for language in listDropdownLang %}
-                  <option {% if languageNameFor(lang) == languageNameFor(language) %} selected="selected" {% endif %} value="{{language}}">{{ languageNameFor(language) }}</option>
+                  <option {% if languageNameFor(localeInfo.lang) == languageNameFor(language) %} selected="selected" {% endif %} value="{{language}}">{{ languageNameFor(language) }}</option>
                 {% endfor %}
                 </select>
               </li>
@@ -33,7 +33,7 @@
               </li>
               <li class="makes"><a href="{{ audience }}/me?app={{ appname }}">{{ gettext("My makes") }}</a></li>
               <li>
-                <iframe src="{{audience}}/{{lang}}/sso/include.html" class="include-frame"></iframe>
+                <iframe src="{{audience}}/{{localeInfo.lang}}/sso/include.html" class="include-frame"></iframe>
               </li>
             </ul>
             <ul class="nav-list">
@@ -58,15 +58,15 @@
                   </a>
                   <div class="help">
                     <i class="icon-info-sign"></i><span>{{ gettext("Not sure what to make?") }}
-                    <a href="{{ audience }}/{{lang}}/tools">{{ gettext("Let us help.") }}</a></span>
+                    <a href="{{ audience }}/{{localeInfo.lang}}/tools">{{ gettext("Let us help.") }}</a></span>
                   </div>
                 </div>
               </li>
-              <li><a {% if page == 'teach' %}class="on"{% endif %} id="nav-teach" href="{{ audience }}/{{lang}}/teach">
+              <li><a {% if page == 'teach' %}class="on"{% endif %} id="nav-teach" href="{{ audience }}/{{localeInfo.lang}}/teach">
                 {{ gettext("Teach") }}</a></li>
-              <li><a {% if page == 'events' %}class="on"{% endif %} id="nav-events" href="{{ audience }}/{{lang}}/events">
+              <li><a {% if page == 'events' %}class="on"{% endif %} id="nav-events" href="{{ audience }}/{{localeInfo.lang}}/events">
                 {{ gettext("Events")}}</a></li>
-              <li><a class="search-trigger{% if page == 'search' %} on{% endif %}" id="nav-search" href="{{ audience }}/{{lang}}/search">
+              <li><a class="search-trigger{% if page == 'search' %} on{% endif %}" id="nav-search" href="{{ audience }}/{{localeInfo.lang}}/search">
                 <span class="icon-search"></span></a></li>
             </ul>
           </div>
@@ -165,7 +165,7 @@
       "use strict";
       $(window).ready(function() {
 
-        $("#bookmarklet-link").attr("href", Webxray.getBookmarkletURL("{{hostname}}", "{{lang}}"));
+        $("#bookmarklet-link").attr("href", Webxray.getBookmarkletURL("{{hostname}}", "{{localeInfo.lang}}"));
         $("#bookmarklet-url").val(Webxray.getBookmarkletURL());
 
         // browser-specific screenshots
