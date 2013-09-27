@@ -36,19 +36,30 @@ var app = express(),
 // Enable template rendering with nunjucks
 nunjucksEnv.express(app);
 
-var supportedLanguages = ['en-US'];
+// List of supported languages - Please add them here in an alphabetical order
+var listDropdownLang = [ "en-US", "ru-RU", "th-TH" ],
+    // We create another array based on listDropdownLang to use it in the i18n.middleware
+    // supported_language which will be modified from the i18n mapping function
+    supportedLanguages = listDropdownLang.slice(0);
 
 app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),
   GA_DOMAIN: env.get("GA_DOMAIN"),
   hostname: env.get("hostname"),
-  supportedLanguages: supportedLanguages
+  supportedLanguages: supportedLanguages,
+  listDropdownLang: listDropdownLang
 });
 
-app.use(i18n.middleware({
+// Setup locales with i18n
+app.use( i18n.middleware({
   supported_languages: supportedLanguages,
-  default_lang: 'en-US',
-  translation_directory: path.join( __dirname, 'locale' )
+  default_lang: "en-US",
+  mappings: {
+    'en': 'en-US',
+    'ru': 'ru-RU',
+    'th': 'th-TH'
+  },
+  translation_directory: path.resolve( __dirname, "locale" )
 }));
 
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
