@@ -31,28 +31,28 @@
               <li class="user">
                 {{ gettext("Hi") }} <span id="identity" class="user-name-container"></span>
               </li>
-              <li class="makes"><a href="{{ audience }}/me?app={{ appname }}">{{ gettext("My makes") }}</a></li>
+              <li class="makes"><a href="{{ audience }}/{{localeInfo.lang}}/me?app={{ appname }}">{{ gettext("My makes") }}</a></li>
               <li>
                 <iframe src="{{audience}}/{{localeInfo.lang}}/sso/include.html" class="include-frame"></iframe>
               </li>
             </ul>
             <ul class="nav-list">
               <li>
-                <a {% if page == 'index' %}class="on"{% endif %} id="nav-index" href="/">{{ gettext("Make") }}</a>
+                <a {% if page == 'index' %}class="on"{% endif %} id="nav-index" href="/{{localeInfo.lang}}">{{ gettext("Make") }}</a>
                 <div class="makenav-hover">
-                  <a href="{{ audience }}/starter-makes" class="makenav-hover-item">
+                  <a href="{{ audience }}/{{localeInfo.lang}}/starter-makes" class="makenav-hover-item">
                     <img src="/img/icon-make-template.png" alt="{{ gettext("From starter make") }}" />
                     <span>{{ gettext("From starter make") }}</span>
                   </a>
-                  <a href="https://goggles.webmaker.org/" class="makenav-hover-item">
+                  <a href="https://goggles.webmaker.org/{{localeInfo.lang}}" class="makenav-hover-item">
                     <img src="/img/icon-make-xray.png" alt="{{ gettext("X-Ray Goggles") }}" />
                     <span>{{ gettext("X-Ray Goggles") }}</span>
                   </a>
-                  <a href="https://popcorn.webmaker.org/editor/" class="makenav-hover-item">
+                  <a href="https://popcorn.webmaker.org/{{localeInfo.lang}}/editor/" class="makenav-hover-item">
                     <img src="/img/icon-make-popcorn.png" alt="{{ gettext("Popcorn Maker") }}" />
                     <span>{{ gettext("Popcorn Maker") }}</span>
                   </a>
-                  <a href="https://thimble.webmaker.org/" class="makenav-hover-item">
+                  <a href="https://thimble.webmaker.org/{{localeInfo.lang}}" class="makenav-hover-item">
                     <img src="/img/icon-make-thimble.png" alt="{{ gettext("Thimble") }}" />
                     <span>{{ gettext("Thimble") }}</span>
                   </a>
