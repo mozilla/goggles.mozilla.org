@@ -4,6 +4,6 @@
     "requirejs": "2.1.8",
     "text": "2.0.9",
     "webmaker-i18n": "https://github.com/mozilla/node-webmaker-i18n/archive/v0.2.2.tar.gz",
-    "webmaker-ui": "0.0.8"
+    "webmaker-ui": "0.0.10"
   }
 }
