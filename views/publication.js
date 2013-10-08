@@ -76,7 +76,7 @@ function init(html, originalURL, hackpubURL) {
   });
 
   // Set up all the Webmaker SSO stuff:
-  $(".include-frame").attr("src","{{ audience }}/sso/include.html");
+  $(".include-frame").attr("src","{{ audience }}/{{localeInfo.lang}}/sso/include.html");
   $.getScript("{{ audience }}/sso/include.js", function() {
     var user = false;
     navigator.idSSO.app = {
