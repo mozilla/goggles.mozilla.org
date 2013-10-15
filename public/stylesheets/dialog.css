@@ -36,16 +36,11 @@ a:active {
 }
 
 .dialog .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 80px;
   padding: 20px;
   margin: 0;
   background-color: #fff;
   font-size: 20px;
-  overflow: hidden;
 }
 
 .dialog .header .button {
@@ -114,3 +109,15 @@ a:active {
   text-decoration: none;
 }
 
+/*
+
+  new user "claim your webmaker space" rules
+
+*/
+.webmaker-create-user {
+  position: fixed;
+  top: 140px; /* match the ".dialog .body" height */
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
