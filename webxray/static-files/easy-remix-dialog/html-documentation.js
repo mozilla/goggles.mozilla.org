@@ -196,7 +196,7 @@ jQuery.localization.extend("en", "html-attribute-docs", {
   "colgroup.valign": "This attribute specifies the vertical alignment of the text within each cell of the column.",
   "colgroup.width": "This attribute specifies a default width for each column in the current column group.",
   "command.checked": "Indicates whether the command is selected.",
-  "command.disabled": "Iindicates that the command is not available.",
+  "command.disabled": "Indicates that the command is not available.",
   "command.icon": "Gives a picture which represents the command.",
   "command.label": "The name of the command as shown to the user.",
   "command.radiogroup": "This attribute gives the name of the group of commands, with a type of radio, that will be toggled when the command itself is toggled.",
