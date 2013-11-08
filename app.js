@@ -36,27 +36,21 @@ var app = express(),
 // Enable template rendering with nunjucks
 nunjucksEnv.express(app);
 
-// List of supported languages - Add them in the .env file
-var listDropdownLang = env.get("SUPPORTED_LANGS"),
-    // We create another array based on listDropdownLang to use it in the i18n.middleware
-    // supported_language which will be modified from the i18n mapping function
-    supportedLanguages = listDropdownLang.slice(0);
+// Setup locales with i18n
+app.use( i18n.middleware({
+  supported_languages: env.get("SUPPORTED_LANGS"),
+  default_lang: "en-US",
+  mappings: env.get("LANG_MAPPINGS"),
+  translation_directory: path.resolve( __dirname, "locale" )
+}));
 
 app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),
   GA_DOMAIN: env.get("GA_DOMAIN"),
   hostname: env.get("hostname"),
-  supportedLanguages: supportedLanguages,
-  listDropdownLang: listDropdownLang
+  supportedLanguages: i18n.getLanguages(),
+  listDropdownLang: env.get("SUPPORTED_LANGS")
 });
-
-// Setup locales with i18n
-app.use( i18n.middleware({
-  supported_languages: supportedLanguages,
-  default_lang: "en-US",
-  mappings: env.get("LANG_MAPPINGS"),
-  translation_directory: path.resolve( __dirname, "locale" )
-}));
 
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 app.use(express.compress());
