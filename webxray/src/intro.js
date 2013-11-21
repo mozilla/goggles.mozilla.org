@@ -15,10 +15,12 @@ var JSON = {
 	parse: window.JSON && window.JSON.parse
 };
 
+var defaultLang = "en-US",
+	defaultURI = "__HOSTNAME__" + "/" + defaultLang;
 
-var webxrayScript = document.querySelector(".webxray"), 
-	baseURI = webxrayScript.dataset.baseuri,
-	lang = webxrayScript.dataset.lang,
+var webxrayScript = document.querySelector(".webxray"),
+	baseURI = webxrayScript.dataset.baseuri ? webxrayScript.dataset.baseuri : defaultURI,
+	lang = webxrayScript.dataset.lang ? webxrayScript.dataset.lang : defaultLang,
 	xray = {
 		lang: lang,
 		url: baseURI + "/strings/" + lang
