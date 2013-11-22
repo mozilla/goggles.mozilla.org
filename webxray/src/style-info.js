@@ -74,7 +74,7 @@
       open('https://developer.mozilla.org/en/CSS/' + widget.name, 'info');
       return;
     }
-    
+
     if (widget.isBeingEdited())
       return;
 
@@ -96,13 +96,13 @@
       valueCell.text(originalValue);
       widget.clearPreview();
     }
-    
+
     function confirmChange() {
       var newValue = textField.val();
       revertToOriginal();
       widget.changeValue(newValue);
     }
-    
+
     textField.blur(confirmChange);
     textField.keydown(function(event) {
       if (event.keyCode == $.keys.ESC) {
@@ -131,7 +131,7 @@
     row.append(valueCell);
 
     var lastPreviewValue = null;
-    
+
     var self = {
       name: name,
       getValue: function() {
@@ -142,7 +142,7 @@
       },
       refresh: function() {
         var value = $.normalizeStyleProperty(style, name);
-        
+
         // TODO: It might be possible for us to return from this
         // function when in fact we need to change class information.
         // Need to think about this more.
@@ -182,14 +182,13 @@
         }
       }
     };
-    
+
     row.data("propertyWidget", self);
     row.mouseover(function() {
-      var docKey = "css-property-docs:" + name;
-      if (l10n(docKey)) {
+      if (l10n(name)) {
         var moreInfo = $('<span class="webxray-more-info"></span>')
           .text(l10n("more-info"));
-        $(hud.overlay).html(l10n(docKey))
+        $(hud.overlay).html(l10n(name))
           .append(moreInfo)
           .find("a").css({textDecoration: "none"});
       }
@@ -221,7 +220,7 @@
   function ModalOverlay(overlay, primary, input) {
     var startStyle = $(primary).attr("style");
     var translucentOverlay = PrimaryTranslucentOverlay(overlay, primary);
-    
+
     function handleKeyDown(event) {
       if (self.isBeingEdited())
         return;
@@ -231,7 +230,7 @@
         event.stopPropagation();
         self.close();
         break;
-        
+
         case $.keys.LEFT:
         case $.keys.RIGHT:
         input.handleEvent(event);
@@ -250,7 +249,7 @@
         break;
       }
     }
-    
+
     function recordChanges() {
       var endStyle = $(primary).attr("style");
       if (startStyle != endStyle) {
@@ -262,11 +261,11 @@
         self.emit('change-style', endStyle);
       }
     }
-    
+
     overlay.addClass("webxray-style-info-locked");
     overlay.bind('css-property-change', recordChanges);
     overlay.find('.webxray-row').bind('click', makeCssValueEditable);
-    window.addEventListener("keydown", handleKeyDown, true);  
+    window.addEventListener("keydown", handleKeyDown, true);
 
     var self = jQuery.eventEmitter({
       isBeingEdited: function() {
@@ -309,20 +308,20 @@
       var body = options.body || document.body;
       var isVisible = false;
       var modalOverlay = null;
-      
+
       var overlay = $('<div class="webxray-base webxray-style-info"></div>');
       $(body).append(overlay);
       overlay.hide();
-      
+
       focused.on('change', refresh);
-      
+
       function refresh() {
         if (!isVisible || modalOverlay)
           return;
 
         var primary = focused.getPrimaryElement();
         overlay.empty();
-        
+
         if (primary) {
           var info = $(primary).getStyleInfo(propertyNames, hud);
           var instructions = $('<div class="webxray-instructions"></div>');
@@ -360,7 +359,7 @@
           // So, we'll restore the overlay to its original position.
           overlay.toggleClass('webxray-on-other-side');
       }
-      
+
       var self = jQuery.eventEmitter({
         isVisible: function() {
           return isVisible;
@@ -373,7 +372,7 @@
         },
         lock: function(input) {
           var primary = focused.getPrimaryElement();
-          
+
           if (primary) {
             input.deactivate();
             mouseMonitor.removeListener('move', maybeSwitchSides);
@@ -423,7 +422,7 @@
       return self;
     }
   });
-  
+
   jQuery.fn.extend({
     getStyleInfo: function getStyleInfo(propertyNames, hud) {
       var names = propertyNames || DEFAULT_PROPERTIES;
