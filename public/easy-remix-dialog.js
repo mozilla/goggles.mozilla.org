@@ -12,7 +12,7 @@ function startContinuousDynamicScale(selected, parentIframe, maxWidthElem) {
       '-moz-transform-origin': 'top left'
     });
   }
-  
+
   function scaleAndPan(isInstant) {
     var contentWidth = selected.outerWidth(true);
     var frameWidth = parentIframe.width();
@@ -30,7 +30,7 @@ function startContinuousDynamicScale(selected, parentIframe, maxWidthElem) {
     var originalOffset = selected.offset();
     setZoom(zoom);
     var offset = selected.offset();
-    
+
     // Firefox doesn't apply transformations to
     // offset coordinates, so we'll need to do it
     // manually.
@@ -40,24 +40,24 @@ function startContinuousDynamicScale(selected, parentIframe, maxWidthElem) {
     }
 
     var options = {};
-    
+
     if (!isInstant)
       options.duration = 1000;
-    
+
     parentIframe.height(selected.outerHeight(true));
     parentIframe.scrollTo({
       top: offset.top,
       left: offset.left
     }, options);
   }
-  
+
   try {
     scaleAndPan(true);
   } catch (e) {
     if (window.console && window.console.error)
       window.console.error(e);
   }
-  
+
   return setInterval(scaleAndPan, 500);
 }
 
@@ -72,18 +72,17 @@ jQuery.fn.extend({
 function addDocumentation(rendered) {
   var BASE_MDN_HTML_URL = "https://developer.mozilla.org/en/HTML/";
   var BASE_MDN_HTML_ELEM_URL = BASE_MDN_HTML_URL + "Element/";
-  
+
   function getElementDocs() {
     var elementName = $(this).text();
 
     if (elementName.match(/^h[1-6]$/))
       elementName = "h1";
 
-    var keyName = "html-element-docs:" + elementName;
-    return Localized.get(keyName);
+    return Localized.get(elementName);
 
   }
-  
+
   function getAttrInfo(element) {
     var attr = {
       name: $(element).text(),
@@ -105,7 +104,7 @@ function addDocumentation(rendered) {
     }
     return attr;
   }
-  
+
   // Ugh, our CSS styling makes space before and the '=' after
   // an attribute acquire the same hover style as the attribute
   // name itself, which looks nasty, so we'll wrap the attribute
@@ -117,7 +116,7 @@ function addDocumentation(rendered) {
     var wrappedName = $("<span></span>").text(name);
     $(this).empty().append(wrappedName);
   });
-  
+
   rendered.find("ul.attributes > li > .name span").tipsy({
     html: false,
     gravity: 'nw',
@@ -129,7 +128,7 @@ function addDocumentation(rendered) {
     if (url)
       window.open(url, "info");
   }).addClass("mdn-link");
-  
+
   rendered.find(".start > .name").tipsy({
     html: true,
     gravity: 'w',
@@ -141,7 +140,7 @@ function addDocumentation(rendered) {
     gravity: 'e',
     title: getElementDocs
   });
-  
+
   // TODO: These should really be anchor tags, not click handlers.
   rendered.find(".start > .name, .end > .name").click(function() {
     window.open(BASE_MDN_HTML_ELEM_URL + $(this).text(), "info");
@@ -164,7 +163,7 @@ function makeHtmlEditor(container, selected) {
                  '<pre id="html-editor"></pre></div>');
   container.empty().append(widget);
   var html = selected.outerHtml();
-  
+
   // A simple way to check for HTML strings or ID strings
   // (both of which we optimize for)
   var quickExpr = /^(?:[^<]*(<[\w\W]+>)[^>]*$|#([\w\-]+)$)/;
@@ -226,34 +225,34 @@ function createDialog(data) {
 
   function startScaling() {
     if (intervalID !== null)
-      clearTimeout(intervalID);    
+      clearTimeout(intervalID);
     intervalID = startContinuousDynamicScale(selected, $("#preview"),
                                              $("#dom-rendering-column"));
   }
-  
+
   previewDoc.bind('selection-changed', function(event) {
     selected = $(event.target);
     startScaling();
   });
 
   startScaling();
-  
+
   $(".tabs .tab").click(function() {
     var view = $(this).attr("id");
-    
+
     $(".tabs .tab").removeClass("selected");
     $(this).addClass("selected");
     switch (view) {
       case "pretty":
       makeEditableDom(selected, $("#dom-rendering").empty());
       break;
-      
+
       case "raw":
       makeHtmlEditor($("#dom-rendering"), selected);
       break;
     }
   });
-  
+
   $(".tabs .tab#pretty").click();
 
   return {
@@ -268,12 +267,12 @@ Localized.ready(function() {
   var isInIframe = !(top === self);
   var responseSent = false;
   var isStarted = false;
-  
+
   function loadDialog(data) {
     if (isStarted)
       return;
     isStarted = true;
-    
+
     //$(document.body).show();
 
     var dialog = createDialog(data);
@@ -292,9 +291,9 @@ Localized.ready(function() {
     jQuery.loadStylesheets(mods.stylesheets || []);
     jQuery.loadScripts(mods.scripts || []);
 
-    //$(document.body).hide().fadeIn();    
+    //$(document.body).hide().fadeIn();
   }
-  
+
   if (isInIframe) {
     window.addEventListener("message", function(event) {
       if (event.data && event.data.length && event.data[0] == '{') {
@@ -306,7 +305,7 @@ Localized.ready(function() {
       window.parent.postMessage(JSON.stringify(data), "*");
     }
   }
-    
+
   $(".close-button").click(function() {
     if (!responseSent) {
       sendMessage({msg: 'nevermind'});
