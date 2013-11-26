@@ -13,9 +13,9 @@ var Webxray = (function() {
     getBookmarkletURL: function getBookmarkletURL(baseURI, lang) {
       baseURI = baseURI || this._getBaseURI();
 
-      var baseCode = "(function(){var script=document.createElement('script');script.src='-baseuri-/"+lang+"/webxray.js';script.className='webxray';script.dataset.lang='"+lang+"';script.dataset.baseuri='-baseuri-/"+lang+"';document.body.appendChild(script);})();";
+      var baseCode = "(function(){var script=document.createElement('script');script.src='-baseuri-/"+lang+"/webxray.js';script.className='webxray';script.setAttribute('data-lang','"+lang+"');script.setAttribute('data-baseuri','-baseuri-/"+lang+"');document.body.appendChild(script);})();";
       var code = baseCode.replace( /-baseuri-/g, baseURI );
-      
+
       return 'javascript:' + code;
     },
     whenLoaded: function whenLoaded(cb, global) {
