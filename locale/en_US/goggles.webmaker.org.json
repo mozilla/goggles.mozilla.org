@@ -1,6 +1,5 @@
 {
   "activate the X-Ray Goggles by": "Next, activate the X-Ray Goggles by clicking the yellow button above.",
-  "Activate X-Ray Goggles by clicking the yellow button above.": "Activate X-Ray Goggles by clicking the yellow button above.",
   "Activate X-Ray Goggles": "Activate X-Ray Goggles",
   "Advanced": "Advanced",
   "ancestor-intro": "It is inside a",
@@ -53,7 +52,6 @@
   "key-names:RIGHT": "→",
   "key-names:UP": "↑",
   "Let us help.": "Let us help.",
-  "Make sure your browser's bookmarks bar is enabled.": "Make sure your browser's bookmarks bar is enabled.",
   "Make sure your web browser's bookmarks bar is enabled.": "Make sure your web browser's bookmarks bar is enabled.",
   "Make": "Make",
   "Mess around with the rest of the page!": "Mess around with the rest of the page!",
@@ -103,17 +101,14 @@
   "Thimble": "Thimble",
   "too-big-to-change": "That element has too many nested elements inside of it for goggles to work with. Try selecting some of its content instead!",
   "too-big-to-remix-html": "<div>That <code>&lt;${tagName}&gt;</code> element has too many nested elements inside of it for goggles to remix. Try selecting some of its content instead!</div>",
-  "Try it out": "Try it out",
   "undid": "Undid",
   "undo": "Undo",
   "unload-blocked": "You have made unsaved changes to this page.",
   "uproot": "Publish your remix",
   "When you're ready to share your remixed page": "When you're ready to share your remixed page, click the Publish button or press <kbd>P</kbd> on your keyboard. This makes your changes visible on the web for others to see.",
-  "With X-Ray Goggles activated": "With X-Ray Goggles activated, press <kbd>H</kbd> for help.",
   "With X-Ray Goggles now activated": "With X-Ray Goggles now activated, mouse around the page. Notice how images and text are highlighted with colors?",
   "with": "with",
   "X-Ray Goggles Logo": "X-Ray Goggles Logo",
   "X-Ray Goggles": "X-Ray Goggles",
-  "You can take X-Ray Goggles with you anywhere on the web:": "You can take X-Ray Goggles with you anywhere on the web:",
-  "You can take X-Ray Goggles with you anywhere": "You can take X-Ray Goggles with you anywhere on the web! Just install it in two easy steps."
+  "You can take X-Ray Goggles with you anywhere on the web:": "You can take X-Ray Goggles with you anywhere on the web:"
 }
