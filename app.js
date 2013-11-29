@@ -49,7 +49,7 @@ app.locals({
   GA_DOMAIN: env.get("GA_DOMAIN"),
   hostname: env.get("hostname"),
   supportedLanguages: i18n.getLanguages(),
-  listDropdownLang: env.get("SUPPORTED_LANGS")
+  listDropdownLang: i18n.getSupportLanguages()
 });
 
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
