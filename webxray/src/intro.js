@@ -18,7 +18,7 @@ var JSON = {
 var defaultLang = "en-US",
 	defaultURI = "__HOSTNAME__" + "/" + defaultLang;
 
-var webxrayScript = $(".webxray")[0],
+var webxrayScript = document.querySelector(".webxray"),
 	baseURI = baseURI = webxrayScript.getAttribute("data-baseuri") || defaultURI,
 	lang = webxrayScript.getAttribute("data-lang") || defaultLang,
 	xray = {
