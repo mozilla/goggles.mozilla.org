@@ -54,6 +54,8 @@ app.locals({
   listDropdownLang: i18n.getSupportLanguages()
 });
 
+app.use(helmet.iexss());
+app.use(helmet.contentTypeOptions());
 if (!!env.get("FORCE_SSL") ) {
   app.use(helmet.hsts());
   app.enable("trust proxy");
