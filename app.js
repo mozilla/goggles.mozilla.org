@@ -54,6 +54,10 @@ app.locals({
   listDropdownLang: i18n.getSupportLanguages()
 });
 
+if (!!env.get("FORCE_SSL") ) {
+  app.use(helmet.hsts());
+  app.enable("trust proxy");
+}
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 app.use(express.compress());
 app.use(express.json());
