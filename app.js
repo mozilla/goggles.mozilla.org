@@ -36,6 +36,8 @@ var app = express(),
 // Enable template rendering with nunjucks
 nunjucksEnv.express(app);
 
+app.disable("x-powered-by");
+
 // Setup locales with i18n
 app.use( i18n.middleware({
   supported_languages: env.get("SUPPORTED_LANGS"),
