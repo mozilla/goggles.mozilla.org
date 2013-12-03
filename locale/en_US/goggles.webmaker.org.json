@@ -77,7 +77,7 @@
   "Replace the image location": "Replace the image location (or &quot;source&quot;, written in HTML as &quot;src&quot;) with the URL you copied in Step 1.",
   "replacement": "replacement",
   "Save changes": "Save changes",
-  "See how Goggles work by swapping a image": "See how Goggles work by swapping a image",
+  "See how Goggles work by swapping an image": "See how Goggles work by swapping an image",
   "See where it says": "See where it says <span>https://goggles.webmaker.org/img/goggles.png</span>? That's the URL for the current image. Replace it with the new image URL you copied in Step 1 by highlighting the old URL, right-clicking and pasting in the new link. Press <strong>Commit Changes</strong> You should now see the new image.",
   "Share your remix": "Share your remix",
   "short-command-descriptions:bug-report": "report bug",
