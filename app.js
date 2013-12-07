@@ -143,6 +143,7 @@ app.get("/uproot-dialog.html", function(req, res) {
 
 // intercept webxray's publication dialog - JS part
 app.get("/publication.js", function(req, res) {
+  res.set( "Content-Type", "application/javascript; charset=utf-8" );
   res.render("publication.js", {
     audience: env.get("audience"),
     csrf: req.session._csrf || "",
