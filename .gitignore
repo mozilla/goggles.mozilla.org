@@ -3,3 +3,6 @@ goggles.sqlite
 thimble.sqlite
 .env
 bower_components
+locale/
+!locale/en_US/*
+!locale/localeinfo.json
