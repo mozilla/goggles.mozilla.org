@@ -4,7 +4,8 @@
   "description": "A node version of the X-ray Goggles",
   "private": true,
   "scripts": {
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "download-locales":  "webmaker-download-locales goggles"
   },
   "dependencies": {
     "async": "0.2.9",
@@ -24,6 +25,7 @@
     "noxmox": "0.2.4",
     "nunjucks": "0.1.10",
     "sequelize": "1.6.0",
+    "webmaker-download-locales": "0.0.6",
     "webmaker-loginapi": "https://github.com/mozilla/node-webmaker-loginapi/tarball/v0.1.18"
   },
   "optionalDependencies": {
