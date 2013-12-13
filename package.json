@@ -20,7 +20,7 @@
     "makeapi-client": "https://github.com/mozilla/makeapi-client/tarball/v0.5.12",
     "less-middleware": "0.1.12",
     "mox-server": "https://github.com/Pomax/mox-server/archive/master.tar.gz",
-    "newrelic": "1.1.1",
+    "newrelic": "1.2.0",
     "node-statsd": "0.0.7",
     "noxmox": "0.2.4",
     "nunjucks": "0.1.10",
