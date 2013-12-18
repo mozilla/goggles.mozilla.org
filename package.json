@@ -25,7 +25,7 @@
     "noxmox": "0.2.4",
     "nunjucks": "0.1.10",
     "sequelize": "1.6.0",
-    "webmaker-download-locales": "0.0.6",
+    "webmaker-download-locales": "0.1.0",
     "webmaker-locale-mapping": "latest",
     "webmaker-loginapi": "https://github.com/mozilla/node-webmaker-loginapi/tarball/v0.1.18"
   },
