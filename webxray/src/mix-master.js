@@ -168,18 +168,19 @@
         }
 
         if (sendFullDocument) {
+          $(focusedElement).addClass('webxray-hidden');
           $(document).uprootIgnoringWebxray(function (html) {
             begin({
               html: html,
-              selector: $(document.body).pathTo(focused.getPrimaryElement())
+              selector: ".webxray-hidden"
             });
           });
-        } else
+        } else {
           begin(focusedHTML);
+        }
 
         function begin(startHTML) {
           focused.unfocus();
-          $(focusedElement).addClass('webxray-hidden');
 
           jQuery.morphElementIntoDialog({
             input: input,
@@ -203,7 +204,6 @@
                     var newContent = self.replaceElement(focusedElement, html);
 
                     newContent.addClass('webxray-hidden');
-                    $(focusedElement).removeClass('webxray-hidden');
                     jQuery.morphDialogIntoElement({
                       dialog: dialog,
                       input: input,

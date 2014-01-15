@@ -215,10 +215,9 @@ function createDialog(data) {
   previewDoc[0].close();
   previewDoc.find("head").append(stylesheet);
 
-  // The selector has to be relative to the body element;
-  // for some reason, the nth-of-type CSS selector doesn't
-  // work for html and body elements in iframes.
-  var selected = previewDoc.find("body").find(data.startHTML.selector);
+  // Use the webxray-hidden class to find our focused element
+  var selected = previewDoc.find(data.startHTML.selector);
+  selected.reallyRemoveClass("webxray-hidden");
   previewDoc.hideEverythingExcept(selected);
   selected.absolutifyURLs();
   var intervalID = null;
