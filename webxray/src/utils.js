@@ -142,6 +142,12 @@
       jQuery.each(this, function(i, element) {
         var document = element.ownerDocument;
         var replacer = document.createTextNode('');
+        if (!element.parentNode) {
+          // Windows + Blink will have the overlay div outside
+          // the <body>, thus it will not have a .parentNode.
+          // This makes sure we don't throw when that happens.
+          return;
+        }
         element.parentNode.replaceChild(replacer, element);
         undoers.push(function() {
           replacer.parentNode.replaceChild(element, replacer);
