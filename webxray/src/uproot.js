@@ -2,7 +2,7 @@
   "use strict";
 
   var $ = jQuery;
-  
+
   function makeDoctypeTag(doctype) {
     if (!doctype)
       return '';
@@ -13,7 +13,7 @@
       tag += ' "' + doctype.systemId + '"';
     return tag += '>';
   }
-  
+
   jQuery.extend({
     openUprootDialog: function(input) {
       $(document).uprootIgnoringWebxray(function(html) {
@@ -39,7 +39,7 @@
       });
     }
   });
-  
+
   jQuery.fn.extend({
     uprootIgnoringWebxray: function(cb) {
       $(document).uproot({

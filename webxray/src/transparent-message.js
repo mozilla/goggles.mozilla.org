@@ -2,7 +2,7 @@
   "use strict";
 
   var $ = jQuery;
-  
+
   function getContentSize(content) {
     var staged = $('<div class="webxray-base"></div>');
     staged.append(content.clone());
@@ -23,7 +23,7 @@
       events.forEach(function(e) { $(bindTarget).bind(e, onEvent); });
     }, jQuery.USER_ACTIVITY_DELAY);
   }
-  
+
   jQuery.extend({
     USER_ACTIVITY_DELAY: 100,
     transparentMessage: function(content, duration, cb, parent, bindTarget) {

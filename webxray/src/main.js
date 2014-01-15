@@ -3,7 +3,7 @@
 
   var $ = jQuery;
   var removeOnUnload = $();
-  
+
   function getMyScript() {
     return $('script.webxray, script[src$="webxray.js"]');
   }
@@ -21,7 +21,7 @@
     // defined in the stylesheet.
     var div = $('<div id="webxray-wait-for-css-to-load"></div>');
     var deferred = jQuery.Deferred();
-    
+
     div.hide();
     $(document.body).append(div);
 
@@ -47,7 +47,7 @@
 
   function waitForPreferencesToLoad() {
     var deferred = jQuery.Deferred();
-    
+
     var iframe = document.createElement('iframe');
     iframe.src = jQuery.webxraySettings.url('preferencesURL');
     $(document.body).append(iframe);
@@ -69,15 +69,15 @@
     }, false);
     return deferred;
   }
-  
+
   function loadPrerequisites(cb) {
     var script = getMyScript();
-    
+
     if (jQuery.webxraySettings.baseURI.length == 0) {
       var baseURI = script.attr("src").match(/(.*)webxray\.js$/)[1];
       jQuery.webxraySettings.baseURI = baseURI;
     }
-    
+
     var cssURL = jQuery.webxraySettings.url("cssURL");
     var cssLink = $('link[href="' + cssURL + '"]');
     var active = $('<div id="webxray-is-active"></div>');
@@ -97,7 +97,7 @@
 
     var cssLoaded = waitForCSSToLoad();
     var prefsLoaded = waitForPreferencesToLoad();
-    
+
     jQuery.when(prefsLoaded, cssLoaded).done(cb);
   }
 
@@ -109,7 +109,7 @@
     });
     jQuery.when.apply(jQuery.when, pluginsToLoad).done(cb);
   }
-  
+
   jQuery.extend({webxrayBuildMetadata: buildMetadata});
 
   Localized.ready({url: xray.url}, function() {
@@ -118,7 +118,7 @@
                   buildMetadata.date + " (commit " +
                   buildMetadata.commit + ").");
     }
-    
+
     loadPrerequisites(function() {
       var ui = jQuery.xRayUI({eventSource: document});
       window.webxrayUI = ui;

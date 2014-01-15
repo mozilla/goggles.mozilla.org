@@ -44,7 +44,7 @@
         } else
           throw new Error("Couldn't parse " + color);
       }
-      return "rgba(" + 
+      return "rgba(" +
              match[1] + ", " +
              match[2] + ", " +
              match[3] + ", " +
@@ -61,7 +61,7 @@
       }
     }
   });
-  
+
   jQuery.fn.extend({
     // Turns all URLs in src and href attributes into absolute URLs
     // if they're not already.
@@ -122,14 +122,14 @@
             if (/^[A-Za-z0-9_\-]+$/.test(this))
               classNames.push(this);
           });
-        
+
         if (classNames.length)
           selector += "." + classNames.join('.');
-        
+
         selector += ':nth-of-type(' + n + ')';
         parts.push(selector);
       }
-      
+
       parts.reverse();
       return ' > ' + parts.join(' > ');
     },
@@ -156,11 +156,11 @@
         }
       };
     },
-    
+
     // Return the nth ancestor of the first matched element.
     ancestor: function ancestor(generation) {
       var ancestor = this[0];
-      
+
       for (var i = 0; i < generation; i++)
         if (ancestor.parentNode)
           ancestor = ancestor.parentNode;
@@ -242,7 +242,7 @@
         $(this).fadeOut(function() { $(this).remove(); });
       });
     },
-    // Removes the class and, if the class attribute is now empty, 
+    // Removes the class and, if the class attribute is now empty,
     // removes the attribute as well (jQuery remove class does not)..
     reallyRemoveClass: function reallyRemoveClass(classname) {
       this.removeClass(classname).filter('[class=""]').removeAttr('class');

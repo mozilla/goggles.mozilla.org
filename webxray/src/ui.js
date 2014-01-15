@@ -5,7 +5,7 @@
 
   function addHelpButton(hud, input) {
     var help = $('<div class="webxray-base webxray-help">?</div>');
-    help.click(input.showKeyboardHelp);    
+    help.click(input.showKeyboardHelp);
     $(hud.overlayContainer).append(help);
   }
 
@@ -28,7 +28,7 @@
       }
     };
   }
-  
+
   jQuery.extend({
     xRayUI: function xRayUI(options) {
       var isUnloaded = false;
@@ -64,7 +64,7 @@
       var touchToolbar = jQuery.touchToolbar(input);
       var indicator = jQuery.blurIndicator(input, window);
       var modalUnloadBlocker = ModalUnloadBlocker(commandManager);
-      
+
       var self = jQuery.eventEmitter({
         persistence: persistence,
         start: function() {

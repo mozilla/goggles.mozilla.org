@@ -6,7 +6,7 @@
 
   function createLocalizedHelp(keys, platform) {
     platform = platform || navigator.platform;
-    
+
     var localizedKeys = [];
     keys.forEach(function(info) {
       var localizedInfo = {key: null, desc: null};
@@ -16,7 +16,7 @@
     });
     return localizedKeys;
   }
-  
+
   jQuery.extend({
     nameForKey: function(key, platform) {
       platform = platform || navigator.platform;
@@ -34,7 +34,7 @@
         var row = $('<div class="webxray-help-row"></div>');
         var keyCell = $('<div class="webxray-help-key"></div>');
         var keyValue = $('<div class="webxray-help-desc"></div>');
-        
+
         keyCell.append($('<div class="webxray-kbd"></div>').text(info.key));
         keyValue.text(info.desc);
         row.append(keyCell).append(keyValue);

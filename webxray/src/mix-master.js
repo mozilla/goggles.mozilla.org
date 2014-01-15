@@ -8,7 +8,7 @@
       enableDuring: function enableDuring(fn) { fn(); }
     };
   }
-  
+
   function TransitionEffectManager(commandManager) {
     var isEnabled = false;
 
@@ -20,11 +20,11 @@
         cmd.on('after-replace', function after(newContent) {
           cmd.removeListener('after-replace', after);
           overlay.applyTagColor(newContent, 0.25)
-                 .resizeToAndFadeOut(newContent);            
+                 .resizeToAndFadeOut(newContent);
         });
       });
     });
-    
+
     return {
       enableDuring: function enableDuring(fn) {
         if (!isEnabled) {
@@ -44,7 +44,7 @@
     var l10n = Localized.get;
     var dialogPageMods = null;
     var transitionEffects;
-    
+
     if (options.disableTransitionEffects)
       transitionEffects = NullTransitionEffectManager();
     else
@@ -61,7 +61,7 @@
       var command = commandManager.run(name, options);
       updateStatus(l10n('command-manager:executed'), command);
     }
-    
+
     var self = {
       undo: function() {
         if (commandManager.canUndo()) {

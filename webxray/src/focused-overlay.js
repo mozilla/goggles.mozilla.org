@@ -2,11 +2,11 @@
   "use strict";
 
   var $ = jQuery;
-  
+
   jQuery.focusedOverlay = function focusedOverlay(options) {
     if (!options)
       options = {};
-    
+
     var useAnimation = options.useAnimation;
     var ancestorIndex = 0;
     var ancestorOverlay = null;
@@ -15,10 +15,10 @@
 
     function labelOverlay(overlay, target, finalSize) {
       var parts = ["top", "bottom"];
-      
+
       if ($(target).isVoidElement())
         parts = ["top"];
-      
+
       finalSize = finalSize || overlay;
       parts.forEach(function(className) {
         var part = $('<div class="webxray-base webxray-overlay-label">' +
@@ -47,7 +47,7 @@
         } else
           ancestorOverlay = ancestor.overlay();
         ancestorOverlay.addClass("webxray-ancestor");
-        labelOverlay(ancestorOverlay, ancestor[0], ancestor[0]);        
+        labelOverlay(ancestorOverlay, ancestor[0], ancestor[0]);
         instance.ancestor = ancestor[0];
       } else {
         if (useAnimation && instance.ancestor) {
@@ -113,7 +113,7 @@
         this.removeAllListeners('change');
       }
     });
-    
+
     return instance;
   }
 })(jQuery);

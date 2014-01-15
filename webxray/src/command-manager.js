@@ -2,7 +2,7 @@
   "use strict";
 
   var $ = jQuery;
-  
+
   function CommandManager() {
     var undoStack = [];
     var redoStack = [];
@@ -12,7 +12,7 @@
       state.__cmd__ = cmd.registeredName;
       return state;
     }
-    
+
     function createCommand(name, options) {
       var constructor = registry[name];
       var command = constructor(options);
@@ -20,16 +20,16 @@
       self.emit('command-created', command);
       return command;
     }
-    
+
     function deserializeCommand(state) {
       // The fallback here is just for backwards compatibility
       // with old-style serializations.
-      var name = state.__cmd__ || "ReplaceWithCmd";      
+      var name = state.__cmd__ || "ReplaceWithCmd";
       return createCommand(name, {state: state});
     }
-    
+
     var registry = {};
-    
+
     var self = jQuery.eventEmitter({
       register: function(constructor, name) {
         registry[name] = constructor;
@@ -114,10 +114,10 @@
 
     self.register(ReplaceWithCmd, "ReplaceWithCmd");
     self.register(ChangeAttributeCmd, "ChangeAttributeCmd");
-    
+
     return self;
   }
-  
+
   function ChangeAttributeCmd(options) {
     var name = options.name,
         element = options.element,
@@ -130,7 +130,7 @@
       value = state.value;
       element = $(document.documentElement).find(state.selector);
     }
-    
+
     if (options.state)
       deserialize(options.state);
 

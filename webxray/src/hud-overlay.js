@@ -3,7 +3,7 @@
 
   var $ = jQuery;
   var MAX_URL_LENGTH = 35;
-  
+
   jQuery.hudOverlay = function hudOverlay(options) {
     if (options === undefined)
       options = {};
@@ -13,7 +13,7 @@
     var l10n = Localized.get;
 
     hudContainer.append(hud);
-    
+
     function showDefaultContent() {
       hud.html(options.defaultContent || l10n("default-html"));
     }
@@ -42,15 +42,15 @@
             url: element.href || element.src || element.action ||
                  element.currentSrc
           };
-          
+
           if (info.url && info.url.length)
             info.url = $.shortenText(info.url, MAX_URL_LENGTH);
           else
             info.url = null;
-            
+
           return info;
         }
-        
+
         function elementDesc(element) {
           var span = $("<span></span>");
           var info = elementInfo(element);

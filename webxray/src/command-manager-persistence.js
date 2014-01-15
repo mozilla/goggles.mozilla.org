@@ -2,7 +2,7 @@
   "use strict";
 
   var $ = jQuery;
-  
+
   jQuery.extend({
     commandManagerPersistence: function CMPersistence(commandManager) {
       return {

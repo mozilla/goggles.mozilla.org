@@ -2,7 +2,7 @@
   "use strict";
 
   var $ = jQuery;
-  
+
   var TAG_COLORS = [
     "#C60C46",
     "#00AEEF",

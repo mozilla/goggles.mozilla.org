@@ -10,13 +10,13 @@
           handler(data);
         });
     };
-    
+
     object.on = object.addListener = function on(event, handler) {
       if (!(event in handlers))
         handlers[event] = [];
       handlers[event].push(handler);
     };
-    
+
     object.removeListener = function removeListener(event, handler) {
       if (event in handlers) {
         var index = handlers[event].indexOf(handler);
@@ -24,7 +24,7 @@
           handlers[event].splice(index, 1);
       }
     };
-    
+
     object.removeAllListeners = function removeAllListeners(type) {
       if (type in handlers)
         delete handlers[type];

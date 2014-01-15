@@ -1,8 +1,8 @@
 (function(jQuery) {
   "use strict";
-  
+
   var $ = jQuery;
-  
+
   function canBeTouched() {
     return ('ontouchstart' in window);
   }
@@ -26,7 +26,7 @@
     });
     return button;
   }
-    
+
   jQuery.extend({
     touchToolbar: function(input, locale, platform) {
       locale = locale || jQuery.locale;
@@ -41,11 +41,11 @@
                        binding.execute();
                      }).appendTo(toolbar);
       });
-      
+
       toolbar.appendTo(document.body);
       input.on('activate', function() { toolbar.fadeIn(); });
       input.on('deactivate', function() { toolbar.fadeOut(); });
-      
+
       return {
         unload: function() {
           toolbar.remove();

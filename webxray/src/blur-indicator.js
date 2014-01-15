@@ -2,11 +2,11 @@
   "use strict";
 
   var $ = jQuery;
-  
+
   jQuery.extend({
     blurIndicator: function(input, focusable, body) {
       body = body || document.body;
-      
+
       function showBlurIndicator() {
         var blurIndicator = $('<div class="webxray-base ' +
                               'webxray-dialog-overlay"></div>');

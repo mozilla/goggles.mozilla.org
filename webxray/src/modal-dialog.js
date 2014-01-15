@@ -50,7 +50,7 @@
         width: content.outerWidth(),
         height: content.outerHeight()
       };
-      
+
       div.remove();
       return dimensions;
     },
@@ -79,7 +79,7 @@
                   '<iframe class="webxray-base" src="' + url + '"></iframe>' +
                   '</div></div></div></div>');
       var iframe = div.find("iframe");
-      
+
       function onMessage(event) {
         if (event.source == self.iframe.get(0).contentWindow) {
           iframe.trigger("message", [event.data]);
@@ -96,7 +96,7 @@
             window.removeEventListener("message", onMessage, false);
             div.remove();
             div = null;
-            
+
             // Firefox seems to trigger a mouseout/mouseover event
             // when we remove the dialog div, so we'll wait a moment
             // before re-activating input so that we don't distract
@@ -138,7 +138,7 @@
           body: body,
           url: url
         });
-        
+
         backdrop.remove();
 
         dialog.iframe.one("load", function onLoad() {
@@ -146,7 +146,7 @@
             overlay.remove();
             options.onLoad(dialog);
           });
-        });        
+        });
       });
     },
     morphDialogIntoElement: function(options) {
@@ -154,7 +154,7 @@
       var dialog = options.dialog;
       var input = options.input;
       var overlay = dialog.iframe.overlay();
-      
+
       overlay.applyTagColor(element, 1.0);
       overlay.hide();
       overlay.fadeIn(function() {
