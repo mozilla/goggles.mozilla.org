@@ -54,6 +54,12 @@ app.locals({
   listDropdownLang: i18n.getSupportLanguages()
 });
 
+app.use(require("xfo-whitelist")([
+  "/easy-remix-dialog/index.html",
+  "/easy-remix-dialog/blank.html",
+  "/preferences.html",
+  "/uproot-dialog.html"
+]));
 app.use(helmet.iexss());
 app.use(helmet.contentTypeOptions());
 if (!!env.get("FORCE_SSL") ) {
