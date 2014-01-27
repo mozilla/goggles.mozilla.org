@@ -19,6 +19,9 @@ function DeferredPublish(html, originalURL, hackpubURL) {
       'html': html,
       'original-url': originalURL
     },
+    headers: {
+      'X-CSRF-Token': $("meta[name='csrf-token']").attr("content")
+    },
     crossDomain: true,
     dataType: 'json'
   });

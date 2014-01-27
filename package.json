@@ -10,7 +10,7 @@
   "dependencies": {
     "async": "0.2.9",
     "bower": "1.2.3",
-    "express": "3.2.0",
+    "express": "3.4.8",
     "glob": "3.2.3",
     "habitat": "0.4.1",
     "helmet": "0.1.2",

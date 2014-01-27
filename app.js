@@ -80,6 +80,7 @@ app.use(express.cookieSession({
   },
   proxy: true
 }));
+app.use(express.csrf());
 app.use(function(err, req, res, next) {
   // universal error handler
   console.error(err.msg);
@@ -123,14 +124,11 @@ app.get('/healthcheck', function(req, res) {
   });
 });
 
-// enable CSRF
-app.use(express.csrf());
-
 // intercept webxray's index - HTML part
 app.get(["/", "/index.html"], function(req, res) {
   res.render("index.html", {
     audience: env.get("audience"),
-    csrf: req.session._csrf || "",
+    csrf: req.csrfToken(),
     email: req.session.email || "",
     host: env.get("hostname"),
     login: env.get("login")
@@ -141,7 +139,7 @@ app.get(["/", "/index.html"], function(req, res) {
 app.get("/uproot-dialog.html", function(req, res) {
   res.render("uproot-dialog.html", {
     audience: env.get("audience"),
-    csrf: req.session._csrf || "",
+    csrf: req.csrfToken(),
     email: req.session.email || "",
     login: env.get("login")
   });
@@ -152,7 +150,7 @@ app.get("/publication.js", function(req, res) {
   res.set( "Content-Type", "application/javascript; charset=utf-8" );
   res.render("publication.js", {
     audience: env.get("audience"),
-    csrf: req.session._csrf || "",
+    csrf: req.csrfToken(),
     email: req.session.email || "",
     login: env.get("login")
   });
