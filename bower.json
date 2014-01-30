@@ -1,6 +1,7 @@
 {
   "name": "goggles.webmaker.org",
   "dependencies": {
+    "nav-global": "https://github.com/admix/nav-global/archive/v0.1.3.tar.gz",
     "requirejs": "2.1.8",
     "text": "2.0.9",
     "webmaker-i18n": "https://github.com/mozilla/node-webmaker-i18n/archive/v0.3.2.tar.gz",
