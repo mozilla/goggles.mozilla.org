@@ -1,6 +1,6 @@
 {
   "name": "goggles.webmaker.org",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "A node version of the X-ray Goggles",
   "private": true,
   "scripts": {
