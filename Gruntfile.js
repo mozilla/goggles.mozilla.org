@@ -47,11 +47,20 @@ module.exports = function( grunt ) {
         "app.js",
         "lib/**/*.js"
       ]
+    },
+    gettext_finder: {
+      files: ["views/*.html", "views/**/*.html"],
+      options: {
+        pathToJSON: ["locale/en_US/goggles.webmaker.org.json"],
+        ignoreKeys: grunt.file.readJSON("gtf-ignored-keys.json")
+      }
     }
   });
 
   grunt.loadNpmTasks( "grunt-contrib-csslint" );
   grunt.loadNpmTasks( "grunt-contrib-jshint" );
+  grunt.loadNpmTasks("grunt-gettext-finder");
 
   grunt.registerTask( "default", [ "csslint", "jshint" ]);
+  grunt.registerTask( "validate", [ "gettext_finder" ]);
 };

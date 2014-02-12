@@ -71,7 +71,7 @@
                          commandManager.undo());
           });
         } else {
-          var msg = l10n('command-manager:cannot-undo-html');
+          var msg = l10n('cannot-undo-html');
           $(hud.overlay).html(msg);
         }
       },
@@ -83,7 +83,7 @@
                          commandManager.redo());
           });
         } else {
-          var msg = l10n('command-manager:cannot-redo-html');
+          var msg = l10n('cannot-redo-html');
           $(hud.overlay).html(msg);
         }
       },

@@ -35,7 +35,8 @@
     "sqlite3": "2.1.17"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
+    "grunt": "~0.4.2",
+    "grunt-gettext-finder": "0.0.2",
     "grunt-contrib-csslint": "~0.1.2",
     "grunt-recess": "0.3.3",
     "grunt-contrib-jshint": "~0.4.3"
