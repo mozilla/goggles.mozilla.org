@@ -124,8 +124,7 @@ app.get('/healthcheck', function(req, res) {
   });
 });
 
-// intercept webxray's index - HTML part
-app.get(["/", "/index.html"], function(req, res) {
+app.get("/", function(req, res) {
   res.render("index.html", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
@@ -133,6 +132,12 @@ app.get(["/", "/index.html"], function(req, res) {
     host: env.get("hostname"),
     login: env.get("login")
   });
+});
+
+// Redirect this route to "/" to be safe if anyone is still using it.
+// 2014/02/08 we have removed route to /index.html in this #Bug973991
+app.get("/index.html", function(req, res) {
+  res.redirect(301, "/");
 });
 
 // intercept webxray's publication dialog - HTML part
