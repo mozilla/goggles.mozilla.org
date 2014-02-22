@@ -14,6 +14,7 @@
     "glob": "3.2.3",
     "habitat": "0.4.1",
     "helmet": "0.1.2",
+    "hood": "0.2.1",
     "htmlsanitizer": "0.0.2",
     "node-webmaker-i18n": "https://github.com/mozilla/node-webmaker-i18n/archive/v0.3.11.tar.gz",
     "knox": "0.8.5",

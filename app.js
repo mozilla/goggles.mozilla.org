@@ -50,6 +50,11 @@ nunjucksEnv.express(app);
 
 app.disable("x-powered-by");
 
+// adding Content Security Policy (CSP)
+app.use(middleware.addCSP({
+  personaHost: env.get('PERSONA_HOST')
+}));
+
 // log either to GELF or console
 if (env.get("ENABLE_GELF_LOGS")) {
   messina = require("messina");

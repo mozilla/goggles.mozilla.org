@@ -3,11 +3,20 @@
 
   var hostname = document.getElementById("browser-screen").getAttribute("data-hostname");
   var localeInfo = document.getElementById("browser-screen").getAttribute("data-localeInfo");
-  
+
   $(window).ready(function() {
 
     $("#bookmarklet-link").attr("href", Webxray.getBookmarkletURL(hostname, localeInfo));
-    $("#bookmarklet-url").val(Webxray.getBookmarkletURL());
+
+    $("#bookmarklet-link").on("click", function(event) {
+      event.preventDefault();
+      var script = document.createElement('script');
+      script.src = '/webxray.js';
+      script.className = 'webxray';
+      script.setAttribute('data-lang',localeInfo);
+      script.setAttribute('data-baseuri', hostname + "/"+localeInfo);
+      document.body.appendChild(script);
+    });
 
     // browser-specific screenshots
     // http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
@@ -23,7 +32,7 @@
     if (isChrome) {
       browser = "chrome";
     } else if (isSafari) {
-      browser="safari";
+      browser = "safari";
     }
 
     $('#install .screenshot.step1 img').attr('src', 'img/instructions/' + browser + '1.png');
