@@ -3,6 +3,8 @@ X-ray goggles on Node.js
 
 This is a reboot of the xray goggles, so that it is served as a node app.
 
+**NOTE: This README assumes that you have all the required external dependencies installed and have a working dev environment. New to Webmaker? Make sure to read our [developer guide](https://wiki.mozilla.org/Webmaker/Code) for everything you need in order to get started!**
+
 Prequisites
 -----------
 
