@@ -10,7 +10,13 @@
     <link rel="stylesheet" href="/bower/nav-global/nav.css" />
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/index.css">
-    {% include "googleanalytics.html" %}
+    {% if GA_ACCOUNT %}
+    <script id="google-analytics-js" src="/js/google-analytics.js"
+            data-ga-account="{{ GA_ACCOUNT }}"
+            data-ga-domain="{{ GA_DOMAIN }}"
+            async>
+    </script>        
+    {% endif %}
   </head>
   <body>
 
