@@ -54,8 +54,9 @@
     <div class="dialog">
 
       <div class="header" id="webmaker-nav">
+        <link rel="stylesheet" href="stylesheets/userbar-overrides.css">
         <!-- the webmaker bar -->
-          <span class="button close-button fr" id="close">{{ gettext("Close") }}</span>
+        <span class="button close-button fr" id="close">{{ gettext("Close") }}</span>
         <nav class="webmaker-nav-container fr">
           <a id="logo" href="https://webmaker.org/{{localeInfo.lang}}"><img src="{{ login }}/img/webmaker-logo.png" alt="Mozilla Webmaker" /></a>
           <ul class="webmaker-nav user-info">
@@ -63,12 +64,16 @@
               {{ gettext("Hi") }} <span id="identity" class="user-name-container"></span>
             </li>
             <li class="makes"><a href="{{ audience }}/me?app={{ appname }}" target="_blank">{{ gettext("My makes") }}</a></li>
-            <li>
-              <iframe src="{{ audience }}/{{localeInfo.lang}}/sso/include.html" class="include-frame"></iframe>
+            <li class="login">
+              <span class="loginbutton"><span class="icon"></span><span class="label">{{ gettext("Sign in") }}<span class="tip"></span></span></span>
+              <span class="logoutbutton hidden"><span class="icon icon-signout"></span><span class="label">{{ gettext("Sign out" )}}</span></span>
             </li>
           </ul>
         </nav>
         <img src="../img/goggles-wordmark.png" class="logo" alt="Mozilla X-Ray Goggles">
+
+        <script src="{{ personaHost }}/include.js"></script>
+        {% include "webmaker-auth-client.html" %}
       </div>
 
 
@@ -116,8 +121,5 @@
     <script src="jquery.min.js"></script>
     <script src="yepnope.1.0.2-min.js"></script>
     <script src="publication.js"></script>
-
-    <script src="{{ audience }}/sso/include.js"></script>
-    <script src="{{ login }}/js/sso-ux.js"></script>
   </body>
 </html>
