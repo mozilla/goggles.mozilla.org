@@ -8,12 +8,13 @@ var bleach = require( "./lib/bleach"),
     goggles    = require("./lib/goggles"),
     habitat    = require("habitat"),
     helmet = require("helmet"),
+    i18n = require( "webmaker-i18n" ),
     makeAPI = require('./lib/makeapi'),
     nunjucks   = require("nunjucks"),
     path       = require("path"),
     utils = require('./lib/utils'),
     version = require('./package').version,
-    i18n = require( "webmaker-i18n" );
+    WebmakerAuth = require('webmaker-auth');
 
 // Load config from ".env"
 habitat.load();
@@ -31,7 +32,11 @@ var app = express(),
     nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'), {
       autoescape: true
     }),
-    parameters = require('./lib/parameters');
+    parameters = require('./lib/parameters'),
+    webmakerAuth = new WebmakerAuth({
+      loginURL: env.get("LOGINAPI"),
+      secretKey: env.get("SESSION_SECRET")
+    });
 
 // Enable template rendering with nunjucks
 nunjucksEnv.express(app);
@@ -60,6 +65,7 @@ app.use(require("xfo-whitelist")([
   "/preferences.html",
   "/uproot-dialog.html"
 ]));
+
 app.use(helmet.iexss());
 app.use(helmet.contentTypeOptions());
 if (!!env.get("FORCE_SSL") ) {
@@ -70,16 +76,10 @@ app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 app.use(express.compress());
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.cookieParser());
-app.use(express.cookieSession({
-  key: "goggles.sid",
-  secret: env.get("SESSION_SECRET"),
-  cookie: {
-    maxAge: 2678400000, // 31 days. Persona saves session data for 1 month
-    secure: !!env.get("FORCE_SSL")
-  },
-  proxy: true
-}));
+
+app.use(webmakerAuth.cookieParser());
+app.use(webmakerAuth.cookieSession());
+
 app.use(express.csrf());
 app.use(function(err, req, res, next) {
   // universal error handler
@@ -87,10 +87,6 @@ app.use(function(err, req, res, next) {
   throw err;
 });
 
-// Save an x-ray goggles mix to the DB.
-// FIXME: this happens before CRSF is applied, and will
-//        need some thinking. As a bookmarklet, there will
-//        not be a CSRF token to pass around... will there?
 app.post('/publish',
          middleware.checkForAuth,
          middleware.checkForPublishData,
@@ -130,7 +126,8 @@ app.get("/", function(req, res) {
     csrf: req.csrfToken(),
     email: req.session.email || "",
     host: env.get("hostname"),
-    login: env.get("login")
+    login: env.get("login"),
+    personaHost: env.get("PERSONA_HOST")
   });
 });
 
@@ -146,7 +143,8 @@ app.get("/uproot-dialog.html", function(req, res) {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
     email: req.session.email || "",
-    login: env.get("login")
+    login: env.get("login"),
+    personaHost: env.get("PERSONA_HOST")
   });
 });
 
@@ -195,11 +193,12 @@ app.get("/easy-remix-dialog/index.html", function(req, res) {
   res.render("/easy-remix-dialog/index.html");
 });
 
-// login API connections
-require('webmaker-loginapi')(app, {
-  loginURL: env.get('LOGINAPI'),
-  audience: env.get('AUDIENCE')
-});
+// SSO
+app.post('/verify', webmakerAuth.handlers.verify);
+app.post('/authenticate', webmakerAuth.handlers.authenticate);
+app.post('/create', webmakerAuth.handlers.create);
+app.post('/logout', webmakerAuth.handlers.logout);
+app.post('/check-username', webmakerAuth.handlers.exists);
 
 // build webxray and then run the app server
 goggles.build(env, nunjucksEnv, function() {

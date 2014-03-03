@@ -2,8 +2,10 @@
   "name": "goggles.webmaker.org",
   "dependencies": {
     "nav-global": "https://github.com/admix/nav-global/archive/v0.1.3.tar.gz",
+    "persona-btn": "0.0.11",
     "requirejs": "2.1.8",
     "text": "2.0.9",
+    "webmaker-auth-client": "0.0.18",
     "webmaker-i18n": "https://github.com/mozilla/node-webmaker-i18n/archive/v0.3.11.tar.gz",
     "webmaker-ui": "0.0.12"
   }

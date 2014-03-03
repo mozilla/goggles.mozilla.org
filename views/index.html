@@ -2,8 +2,6 @@
 <html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
   <head>
     <meta charset="utf-8">
-    <meta name="persona-email" content="{{ email }}">
-    <meta name="csrf-token" content="{{ csrf }}">
     <title>{{ gettext("X-Ray Goggles") }}</title>
     <link rel="stylesheet" href="/resources/font-awesome/css/font-awesome.css">
     <link href="//mozorg.cdn.mozilla.net/media/css/tabzilla-min.css" rel="stylesheet">
@@ -16,6 +14,7 @@
 
     <div class="webmaker-outer-wrapper">
       {% block header %}
+      <link rel="stylesheet" href="stylesheets/userbar-overrides.css">
       <header id="webmaker-nav">
         <nav class="webmaker-nav-container">
           <div class="user-nav-container">
@@ -32,8 +31,9 @@
                 {{ gettext("Hi") }} <span id="identity" class="user-name-container"></span>
               </li>
               <li class="makes"><a href="{{ audience }}/{{localeInfo.lang}}/me?app={{ appname }}">{{ gettext("My makes") }}</a></li>
-              <li>
-                <iframe src="{{audience}}/{{localeInfo.lang}}/sso/include.html" class="include-frame"></iframe>
+              <li class="login">
+                <span class="loginbutton"><span class="icon"></span><span class="label">{{ gettext("Sign in") }}<span class="tip"></span></span></span>
+                <span class="logoutbutton hidden"><span class="label">{{ gettext("Sign out" )}}</span></span>
               </li>
             </ul>
             <ul class="nav-list">
@@ -74,6 +74,9 @@
         </nav>
       </header>
       {% endblock %}
+
+      <script src="{{ personaHost }}/include.js"></script>
+      {% include "webmaker-auth-client.html" %}
     </div>
 
     <div class="ui-wrapper ui-body-nobg">
@@ -157,9 +160,10 @@
       data-main="{% block require_main %}/js/main.js{% endblock %}">
     </script>
     <script src="jquery.min.js"></script>
+
+    {% include "sso-override.html" %}
+
     <script src="src/get-bookmarklet-url.js"></script>
-    <script src="{{ audience }}/sso/include.js"></script>
-    <script src="{{ login }}/js/sso-ux.js"></script>
     <script src="https://mozorg.cdn.mozilla.net/tabzilla/tabzilla.js"></script>
     <script id="browser-screen" src="js/browser-screen.js"
             data-hostname="{{ hostname }}"

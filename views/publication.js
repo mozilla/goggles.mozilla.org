@@ -78,28 +78,60 @@ function init(html, originalURL, hackpubURL) {
     }
   });
 
-  // Set up all the Webmaker SSO stuff:
-  $(".include-frame").attr("src","{{ audience }}/{{localeInfo.lang}}/sso/include.html");
-  $.getScript("{{ audience }}/sso/include.js", function() {
-    var user = false;
-    navigator.idSSO.app = {
-      onlogin: function(loggedInUser, displayName) {
-        user = {
-          data: loggedInUser,
-          name: displayName
-        };
-        $(".publish-disable-overlay").hide();
-        $(".publish-enable-overlay").show();
-        $("#identity > a").attr('target', "_blank");
-      },
-      onlogout: function() {
-        $(".publish-enable-overlay").hide();
-        $(".publish-disable-overlay").show();
-        user = false;
-      }
-    };
-    $.getScript("{{ login }}/js/sso-ux.js");
+  var html = document.querySelector("html");
+      userElement = $("div.user"),
+      placeHolder = $("#identity"),
+      lang = html && html.lang ? html.lang : "en-US",
+      loginButtonSpan = $("#webmaker-nav .loginbutton"),
+      logoutButtonSpan = $("#webmaker-nav .logoutbutton");
+
+  function displayLogin(userData) {
+    if (userData) {
+      placeHolder.html('<a href="{{ hostname }}/' + lang + '/account">' + userData.displayName + "</a>");
+      placeHolder.before("<img src='https://secure.gravatar.com/avatar/" +
+                          userData.emailHash + "?s=26&d=https%3A%2F%2Fstuff.webmaker.org%2Favatars%2Fwebmaker-avatar-44x44.png'" +
+                          " alt=''>");
+      userElement.show();
+    } else {
+      placeHolder.text("");
+      userElement.hide();
+    }
+  }
+
+  function enable(user) {
+    displayLogin(user);
+    html.classList.add("loggedin");
+    loginButtonSpan.addClass("hidden");
+    logoutButtonSpan.removeClass("hidden");
+    $(".publish-disable-overlay").hide();
+    $(".publish-enable-overlay").show();
+    $("#identity > a").attr('target', "_blank");
+  };
+
+  function disable() {
+    displayLogin();
+    html.classList.remove("loggedin");
+    loginButtonSpan.removeClass("hidden");
+    logoutButtonSpan.addClass("hidden");
+    $(".publish-enable-overlay").hide();
+    $(".publish-disable-overlay").show();
+  }
+
+  // Attach event listeners!
+  gogglesAuth.on('login', function(userData, debuggingInfo) {
+    user =  {
+      data: userData.email,
+      name: userData.displayName
+    }
+    enable(userData);
   });
+
+  gogglesAuth.on('logout', function() {
+    user = false;
+    disable(user);
+  });
+
+  gogglesAuth.verify();
 }
 
 /**
