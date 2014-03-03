@@ -43,6 +43,16 @@ nunjucksEnv.express(app);
 
 app.disable("x-powered-by");
 
+// log either to GELF or console
+if (env.get("ENABLE_GELF_LOGS")) {
+  messina = require("messina");
+  logger = messina("goggles.webmaker.org-" + env.get("NODE_ENV") || "development" );
+  logger.init();
+  app.use(logger.middleware());
+} else {
+  app.use(express.logger("dev"));
+}
+
 // Setup locales with i18n
 app.use( i18n.middleware({
   supported_languages: env.get("SUPPORTED_LANGS"),
