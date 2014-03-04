@@ -35,7 +35,8 @@ var app = express(),
     parameters = require('./lib/parameters'),
     webmakerAuth = new WebmakerAuth({
       loginURL: env.get("LOGINAPI"),
-      secretKey: env.get("SESSION_SECRET")
+      secretKey: env.get("SESSION_SECRET"),
+      domain: env.get("COOKIE_DOMAIN")
     });
 
 // Enable template rendering with nunjucks
