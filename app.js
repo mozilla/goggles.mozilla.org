@@ -36,7 +36,8 @@ var app = express(),
     webmakerAuth = new WebmakerAuth({
       loginURL: env.get("LOGINAPI"),
       secretKey: env.get("SESSION_SECRET"),
-      domain: env.get("COOKIE_DOMAIN")
+      domain: env.get("COOKIE_DOMAIN"),
+      forceSSL: env.get("FORCE_SSL")
     });
 
 // Enable template rendering with nunjucks
