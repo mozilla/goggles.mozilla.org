@@ -2,7 +2,7 @@ node_modules
 goggles.sqlite
 thimble.sqlite
 .env
-bower_components
+/public/bower/
 locale/
 !locale/en_US/*
 !locale/localeinfo.json

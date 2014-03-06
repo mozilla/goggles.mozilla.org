@@ -2,19 +2,21 @@
 if ( process.env.NEW_RELIC_ENABLED ) {
   require( "newrelic" );
 }
-var bleach = require( "./lib/bleach"),
-    db = require('./lib/database'),
+var bleach = require("./lib/bleach"),
+    db = require("./lib/database"),
     express    = require("express"),
     goggles    = require("./lib/goggles"),
     habitat    = require("habitat"),
     helmet = require("helmet"),
-    i18n = require( "webmaker-i18n" ),
-    makeAPI = require('./lib/makeapi'),
+    i18n = require("webmaker-i18n"),
+    lessMiddleWare = require("less-middleware"),
+    makeAPI = require("./lib/makeapi"),
     nunjucks   = require("nunjucks"),
     path       = require("path"),
-    utils = require('./lib/utils'),
-    version = require('./package').version,
-    WebmakerAuth = require('webmaker-auth');
+    utils = require("./lib/utils"),
+    version = require("./package").version,
+    WebmakerAuth = require("webmaker-auth"),
+    WWW_ROOT = path.resolve(__dirname, 'public');
 
 // Load config from ".env"
 habitat.load();
@@ -29,7 +31,10 @@ var app = express(),
     emulate_s3 = env.get('S3_EMULATION') || !env.get('S3_KEY'),
     middleware = require('./lib/middleware')(env),
     make = makeAPI(env.get('make')),
-    nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'), {
+    nunjucksEnv = new nunjucks.Environment([
+      new nunjucks.FileSystemLoader(path.join(__dirname, 'views')),
+      new nunjucks.FileSystemLoader(path.join(__dirname, 'public/bower'))
+    ], {
       autoescape: true
     }),
     parameters = require('./lib/parameters'),
@@ -67,8 +72,7 @@ app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),
   GA_DOMAIN: env.get("GA_DOMAIN"),
   hostname: env.get("hostname"),
-  supportedLanguages: i18n.getLanguages(),
-  listDropdownLang: i18n.getSupportLanguages()
+  languages: i18n.getSupportLanguages()
 });
 
 app.use(require("xfo-whitelist")([
@@ -171,10 +175,22 @@ app.get("/publication.js", function(req, res) {
   });
 });
 
+var optimize = (node_env !== "development"),
+    tmpDir = path.join( require("os").tmpDir(), "mozilla.webmaker.org");
+
+app.use(lessMiddleWare({
+  once: optimize,
+  debug: !optimize,
+  dest: tmpDir,
+  src: WWW_ROOT,
+  compress: true,
+  yuicompress: optimize,
+  optimization: optimize ? 0 : 2
+}));
 
 // serve static content, resolved in this order:
+app.use(express.static(tmpDir));
 app.use(express.static(path.join(__dirname, "public")));
-app.use( "/bower", express.static( path.join(__dirname, "bower_components" )));
 app.use(express.static(path.join(__dirname, "webxray/static-files")));
 ["src", "test", "js"].forEach(function(dir) {
   app.use("/" + dir, express.static(path.join(__dirname, "webxray/" + dir)));

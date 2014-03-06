@@ -13,7 +13,7 @@
             data-ga-account="{{ GA_ACCOUNT }}"
             data-ga-domain="{{ GA_DOMAIN }}"
             async>
-    </script>        
+    </script>
     {% endif %}
   </head>
   <body>
@@ -26,13 +26,9 @@
           <div class="user-nav-container">
             <a id="logo" href="{{ audience }}/{{localeInfo.lang}}/"><img src="/img/logo.png" alt="{{ gettext("Mozilla Webmaker") }}"></a>
             <ul class="webmaker-nav user-info">
-              <li class="lang-picker">
-                <select id="lang-picker" data-supported="{{supportedLanguages}}">
-                {% for language in listDropdownLang %}
-                  <option {% if languageNameFor(localeInfo.lang) == languageNameFor(language) %} selected="selected" {% endif %} value="{{language}}">{{ languageNameFor(language) }}</option>
-                {% endfor %}
-                </select>
-              </li>
+            <li class="langPicker">
+              {% include "webmaker-language-picker/template/partial.html" %}
+            </li>
               <li class="user">
                 {{ gettext("Hi") }} <span id="identity" class="user-name-container"></span>
               </li>

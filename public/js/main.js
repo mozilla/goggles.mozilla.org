@@ -4,16 +4,16 @@ requirejs.config({
   paths: {
     'jquery':           '/bower/jquery/jquery',
     'text':             '/bower/text/text',
-    'localized':        '/bower/webmaker-i18n/localized'
+    'localized':        '/bower/webmaker-i18n/localized',
+    'languages':        '/bower/webmaker-language-picker/js/languages',
+    'list':             '/bower/listjs/dist/list.min',
+    'fuzzySearch':      '/bower/list.fuzzysearch.js/dist/list.fuzzysearch.min'
   }
 });
 
-require(['/bower/webmaker-ui/ui.js'],
-  function (UI) {
+require(['languages'],
+  function (Languages) {
     'use strict';
-
-    var langSelector = document.querySelector('#lang-picker');
-
-    // URL redirector for language picker
-    UI.langPicker(langSelector);
+    // Call this when language picker element is ready.
+    Languages.ready({ position: 'bottom', arrow: 'top' }, true);
 });

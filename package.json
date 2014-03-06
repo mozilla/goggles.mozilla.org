@@ -17,6 +17,7 @@
     "htmlsanitizer": "0.0.2",
     "node-webmaker-i18n": "https://github.com/mozilla/node-webmaker-i18n/archive/v0.3.11.tar.gz",
     "knox": "0.8.5",
+    "less-middleware": "0.1.12",
     "makeapi-client": "https://github.com/mozilla/makeapi-client/tarball/v0.5.16",
     "messina": "0.1.2",
     "mox-server": "https://github.com/Pomax/mox-server/archive/master.tar.gz",
