@@ -142,7 +142,6 @@ app.get("/", function(req, res) {
     csrf: req.csrfToken(),
     email: req.session.email || "",
     host: env.get("hostname"),
-    login: env.get("login"),
     personaHost: env.get("PERSONA_HOST")
   });
 });
@@ -159,7 +158,6 @@ app.get("/uproot-dialog.html", function(req, res) {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
     email: req.session.email || "",
-    login: env.get("login"),
     personaHost: env.get("PERSONA_HOST")
   });
 });
@@ -170,8 +168,7 @@ app.get("/publication.js", function(req, res) {
   res.render("publication.js", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
-    email: req.session.email || "",
-    login: env.get("login")
+    email: req.session.email || ""
   });
 });
 
