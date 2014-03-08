@@ -79,6 +79,8 @@
   "short-command-descriptions:remove": "remove",
   "short-command-descriptions:undo": "undo",
   "short-command-descriptions:uproot": "publish",
+  "Sign in": "Sign in",
+  "Sign out": "Sign out",
   "Sign in to publish your remix": "Sign in to publish your remix",
   "Sorry, an error occurred. Please try again later.": "Sorry, an error occurred. Please try again later.",
   "style-change": "style change",
