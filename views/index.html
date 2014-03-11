@@ -163,7 +163,10 @@
     </script>
     <script src="jquery.min.js"></script>
 
-    {% include "sso-override.html" %}
+    <script id="sso-override" src="/js/sso-override.js"
+            data-hostname="{{ hostname }}"
+            async>
+    </script>
 
     <script src="src/get-bookmarklet-url.js"></script>
     <script src="https://mozorg.cdn.mozilla.net/tabzilla/tabzilla.js"></script>
