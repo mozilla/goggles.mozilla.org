@@ -25,28 +25,42 @@ module.exports = function( grunt ) {
           "zero-units": false
         },
         src: [
-          "public/**/*.css"
+          "public/stylesheets/*.css","!public/bower/**/*","!public/webxray.css"
         ]
-      },
-      recess: {
-        dist: {
-          options: {
-            noOverQualifying: false,
-            noIDs: false,
-            strictPropertyOrder: false
-          },
-          src: [
-            "public/**/*.less"
-          ]
-        }
       }
+    },
+    lesslint: {
+      src: ["public/stylesheets/style.less"],
+        options: {
+          csslint: {
+            "adjoining-classes": false,
+            "box-model": false,
+            "box-sizing": false,
+            "bulletproof-font-face": false,
+            "compatible-vendor-prefixes": false,
+            "duplicate-background-images": false,
+            "ids": false,
+            "important": false,
+            "outline-none": false,
+            "overqualified-elements": false,
+            "qualified-headings": false,
+            "regex-selectors": false,
+            "star-property-hack": false,
+            "underscore-property-hack": false,
+            "universal-selector": false,
+            "unique-headings": false,
+            "unqualified-attributes": false,
+            "vendor-prefix": false,
+            "zero-units": false
+          }
+        }
     },
     jshint: {
       files: [
         "Gruntfile.js",
         "app.js",
         "lib/**/*.js"
-      ]
+     ]
     },
     gettext_finder: {
       files: ["views/*.html", "views/**/*.html"],
@@ -59,8 +73,9 @@ module.exports = function( grunt ) {
 
   grunt.loadNpmTasks( "grunt-contrib-csslint" );
   grunt.loadNpmTasks( "grunt-contrib-jshint" );
-  grunt.loadNpmTasks("grunt-gettext-finder");
+  grunt.loadNpmTasks( "grunt-gettext-finder" );
+  grunt.loadNpmTasks( "grunt-lesslint" );
 
-  grunt.registerTask( "default", [ "csslint", "jshint" ]);
+  grunt.registerTask( "default", [ "csslint", "jshint", "lesslint" ]);
   grunt.registerTask( "validate", [ "gettext_finder" ]);
 };

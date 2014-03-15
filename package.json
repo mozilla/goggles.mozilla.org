@@ -3,10 +3,6 @@
   "version": "1.0.31",
   "description": "A node version of the X-ray Goggles",
   "private": true,
-  "scripts": {
-    "postinstall": "bower install",
-    "download-locales": "webmaker-download-locales goggles"
-  },
   "dependencies": {
     "async": "0.2.9",
     "bower": "1.2.3",
@@ -41,7 +37,12 @@
     "grunt": "~0.4.2",
     "grunt-gettext-finder": "0.0.2",
     "grunt-contrib-csslint": "~0.1.2",
-    "grunt-recess": "0.3.3",
-    "grunt-contrib-jshint": "~0.4.3"
-  }
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-lesslint": "1.1.0"
+  },
+  "scripts": {
+    "test": "grunt",
+    "postinstall": "bower install",
+    "download-locales": "webmaker-download-locales goggles"
+  }  
 }
