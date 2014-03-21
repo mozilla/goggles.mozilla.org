@@ -47,6 +47,10 @@ var app = express(),
 
 // Enable template rendering with nunjucks
 nunjucksEnv.express(app);
+nunjucksEnv.addFilter( "instantiate", function( input ) {
+    var tmpl = new nunjucks.Template( input );
+    return tmpl.render( this.getVariables() );
+});
 
 app.disable("x-powered-by");
 
@@ -72,6 +76,9 @@ app.use( i18n.middleware({
   mappings: require("webmaker-locale-mapping"),
   translation_directory: path.resolve( __dirname, "locale" )
 }));
+i18n.addLocaleObject({
+  "en-US": require("./public/bower/webmaker-auth-client/locale/en_US/create-user-form.json")
+}, function () {});
 
 app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),

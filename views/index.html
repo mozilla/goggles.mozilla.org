@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/bower/nav-global/nav.css" />
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="/bower/webmaker-auth-client/create-user/create-user-form.css">
     {% if GA_ACCOUNT %}
     <script id="google-analytics-js" src="/js/google-analytics.js"
             data-ga-account="{{ GA_ACCOUNT }}"
@@ -17,7 +18,7 @@
     {% endif %}
   </head>
   <body>
-
+    {% include "webmaker-auth-client/create-user/create-user-form.html" %}
     <div class="webmaker-outer-wrapper">
       {% block header %}
       <link rel="stylesheet" href="stylesheets/userbar-overrides.css">
