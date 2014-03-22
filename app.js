@@ -91,7 +91,7 @@ i18n.addLocaleObject({
 app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),
   GA_DOMAIN: env.get("GA_DOMAIN"),
-  hostname: env.get("hostname"),
+  hostname: env.get("APP_HOSTNAME"),
   languages: i18n.getSupportLanguages(),
   newrelic: newrelic
 });
@@ -131,14 +131,14 @@ app.post('/publish',
          middleware.sanitizeMetaData,
          middleware.checkPageOperation(databaseAPI),
          bleach.bleachData(env.get("BLEACH_ENDPOINT")),
-         middleware.saveData(databaseAPI, env.get('HOSTNAME')),
+         middleware.saveData(databaseAPI, env.get('APP_HOSTNAME')),
          middleware.rewritePublishId(databaseAPI),
          middleware.generateUrls(appName, env.get('S3'), env.get('USER_SUBDOMAIN')),
          middleware.finalizeProject(nunjucksEnv, env),
          middleware.publishData(env.get('S3')),
          middleware.rewriteUrl,
          // update the database now that we have a S3-published URL
-         middleware.saveUrl(databaseAPI, env.get('HOSTNAME')),
+         middleware.saveUrl(databaseAPI, env.get('APP_HOSTNAME')),
          middleware.getRemixedFrom(databaseAPI, make),
          middleware.publishMake(make),
   function(req, res) {
@@ -162,7 +162,7 @@ app.get("/", function(req, res) {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
     email: req.session.email || "",
-    host: env.get("hostname"),
+    host: env.get("APP_HOSTNAME"),
     personaHost: env.get("PERSONA_HOST")
   });
 });
@@ -249,7 +249,7 @@ app.post('/check-username', webmakerAuth.handlers.exists);
 // build webxray and then run the app server
 goggles.build(env, nunjucksEnv, function() {
   app.listen(env.get("port"), function(){
-    console.log('Express server listening on ' + env.get("hostname"));
+    console.log('Express server listening on ' + env.get("APP_HOSTNAME"));
   });
 
   // If we're in running in emulated S3 mode, run a mini
