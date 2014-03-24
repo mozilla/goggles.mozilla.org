@@ -2,6 +2,7 @@
 <html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
   <head>
     <meta charset="utf-8">
+    {{ newrelic.getBrowserTimingHeader() | safe }}
     <link rel="stylesheet" href="{{hostname}}/stylesheets/style.css">
     <link rel="stylesheet" href="{{hostname}}/stylesheets/dialog.css">
     <link rel="stylesheet" href="{{hostname}}/stylesheets/hierarchic-source-code.css">
@@ -51,7 +52,7 @@
           <h2 class="preview-pane-header">{{ gettext("Preview") }}</h2>
         </div>
       </div>
-      
+
       <div class="body">
         <div id="dom-rendering-column" class="pane split">
           <div id="dom-rendering"></div>

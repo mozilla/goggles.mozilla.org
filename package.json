@@ -22,7 +22,7 @@
     "makeapi-client": "https://github.com/mozilla/makeapi-client/tarball/v0.5.16",
     "messina": "0.1.2",
     "mox-server": "https://github.com/Pomax/mox-server/archive/master.tar.gz",
-    "newrelic": "1.3.2",
+    "newrelic": "1.4.0",
     "node-statsd": "0.0.7",
     "noxmox": "0.2.4",
     "nunjucks": "0.1.10",

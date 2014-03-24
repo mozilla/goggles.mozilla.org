@@ -2,6 +2,7 @@
 <html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
   <head>
     <meta charset="utf-8">
+    {{ newrelic.getBrowserTimingHeader() | safe }}
     <meta name="persona-email" content="{{ email }}">
     <meta name="csrf-token" content="{{ csrf }}">
     <title>{{ gettext("Publish Your Remix") }}</title>

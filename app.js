@@ -1,7 +1,15 @@
 // New Relic Server monitoring support
+var newrelic;
 if ( process.env.NEW_RELIC_ENABLED ) {
-  require( "newrelic" );
+  newrelic = require( "newrelic" );
+} else {
+  newrelic = {
+    getBrowserTimingHeader: function () {
+      return "<!-- New Relic RUM disabled -->";
+    }
+  };
 }
+
 var bleach = require("./lib/bleach"),
     db = require("./lib/database"),
     express    = require("express"),
@@ -84,7 +92,8 @@ app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),
   GA_DOMAIN: env.get("GA_DOMAIN"),
   hostname: env.get("hostname"),
-  languages: i18n.getSupportLanguages()
+  languages: i18n.getSupportLanguages(),
+  newrelic: newrelic
 });
 
 app.use(require("xfo-whitelist")([
