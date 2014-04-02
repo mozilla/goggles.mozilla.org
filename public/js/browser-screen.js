@@ -10,13 +10,7 @@
       $("#bookmarklet-link").attr("href", Webxray.getBookmarkletURL(hostname, localeInfo));
 
       $("#bookmarklet-link").on("click", function(event) {
-        event.preventDefault();
-        var script = document.createElement('script');
-        script.src = '/webxray.js';
-        script.className = 'webxray';
-        script.setAttribute('data-lang',localeInfo);
-        script.setAttribute('data-baseuri', hostname + "/"+localeInfo);
-        document.body.appendChild(script);
+        //place for GA event
       });
 
       // browser-specific screenshots

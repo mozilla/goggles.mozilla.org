@@ -61,12 +61,11 @@ nunjucksEnv.addFilter( "instantiate", function( input ) {
     return tmpl.render( this.getVariables() );
 });
 
+// Content Security Policy (CSP)
+var csp = middleware.addCSP({personaHost: env.get('PERSONA_HOST')});
+
 app.disable("x-powered-by");
 
-// adding Content Security Policy (CSP)
-app.use(middleware.addCSP({
-  personaHost: env.get('PERSONA_HOST')
-}));
 
 // log either to GELF or console
 if (env.get("ENABLE_GELF_LOGS")) {
@@ -183,7 +182,7 @@ app.get("/index.html", function(req, res) {
 });
 
 // intercept webxray's publication dialog - HTML part
-app.get("/uproot-dialog.html", function(req, res) {
+app.get("/uproot-dialog.html", csp, function(req, res) {
   res.render("uproot-dialog.html", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
@@ -232,7 +231,7 @@ app.param("remix", function(req, res, next, id) {
     next();
   });
 });
-app.get("/remix/:remix", function(req, res) {
+app.get("/remix/:remix", csp, function(req, res) {
   res.write(res.result.rawData);
   res.end();
 });
