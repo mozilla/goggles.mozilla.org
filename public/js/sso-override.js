@@ -1,13 +1,13 @@
 (function() {
   var hostname = document.getElementById("sso-override").getAttribute("data-hostname");
 
-  // we chronicle login status with a "loggedin" class on the <html> tag
   var html = document.getElementsByTagName("html")[0],
       userElement = $( "div.user" ),
       placeHolder = $( "#identity" ),
       lang = html && html.lang ? html.lang : "en-US",
       loginButtonSpan = $("#webmaker-nav .loginbutton"),
-      logoutButtonSpan = $("#webmaker-nav .logoutbutton");
+      logoutButtonSpan = $("#webmaker-nav .logoutbutton"),
+      webmakerNav = $("#webmaker-nav");
 
   function displayLogin(userData) {
 
@@ -27,14 +27,14 @@
 
   function enable(user) {
     displayLogin(user);
-    html.classList.add("loggedin");
+    webmakerNav.addClass("loggedin");
     loginButtonSpan.addClass("hidden");
     logoutButtonSpan.removeClass("hidden");
   };
 
   function disable() {
     displayLogin();
-    html.classList.remove("loggedin");
+    webmakerNav.removeClass("loggedin");
     loginButtonSpan.removeClass("hidden");
     logoutButtonSpan.addClass("hidden");
   }

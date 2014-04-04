@@ -78,12 +78,13 @@ function init(html, originalURL, hackpubURL) {
     }
   });
 
-  var html = document.querySelector("html");
+  var html = document.querySelector("html"),
       userElement = $("div.user"),
       placeHolder = $("#identity"),
       lang = html && html.lang ? html.lang : "en-US",
       loginButtonSpan = $("#webmaker-nav .loginbutton"),
-      logoutButtonSpan = $("#webmaker-nav .logoutbutton");
+      logoutButtonSpan = $("#webmaker-nav .logoutbutton"),
+      webmakerNav = $("#webmaker-nav");
 
   function displayLogin(userData) {
     if (userData) {
@@ -100,7 +101,7 @@ function init(html, originalURL, hackpubURL) {
 
   function enable(user) {
     displayLogin(user);
-    html.classList.add("loggedin");
+    webmakerNav.addClass("loggedin");
     loginButtonSpan.addClass("hidden");
     logoutButtonSpan.removeClass("hidden");
     $(".publish-disable-overlay").hide();
@@ -110,7 +111,7 @@ function init(html, originalURL, hackpubURL) {
 
   function disable() {
     displayLogin();
-    html.classList.remove("loggedin");
+    webmakerNav.removeClass("loggedin");
     loginButtonSpan.removeClass("hidden");
     logoutButtonSpan.addClass("hidden");
     $(".publish-enable-overlay").hide();
