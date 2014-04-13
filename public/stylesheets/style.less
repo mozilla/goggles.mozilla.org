@@ -777,10 +777,10 @@ button i.icon-angle-right {
   margin: 0;
   font-weight: bold;
 }
-/* We're logged in - shows everything and aligned */
-#webmaker-nav.loggedin {
+
+/* On the main page. We're logged in - shows everything and aligned */
+.webmaker-outer-wrapper #webmaker-nav.loggedin {
   .user,
-  .user img,
   .dash,
   .makes,
   .login {
@@ -788,6 +788,24 @@ button i.icon-angle-right {
     display: block;
   }
 }
+/* On the main page. Profile img shape is a right circle */
+.webmaker-outer-wrapper #webmaker-nav.loggedin {
+  .user img{
+    margin-top: 10px;
+  }
+}
+/* On the Dialog window. Navigation aligned */
+.dialog #webmaker-nav.loggedin{
+  .login {
+    margin-top: 0px;
+    padding-top: 10px;
+  }
+}
+/* On the Dialog window. 'Sing In' button aligned with 'Close' */
+.dialog #webmaker-nav .login {
+  margin-top: 0.3em;
+}
+
 .arrow {
   width: 0;
   display: inline-block;
