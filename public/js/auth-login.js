@@ -1,5 +1,5 @@
 (function() {
-  var csrf = document.getElementById("webmaker-auth-client").getAttribute("data-csrf");
+  var csrf = document.getElementById("require-js").getAttribute("data-csrf");
 
   var loginEl = document.querySelector('#webmaker-nav .loginbutton');
   var logoutEl = document.querySelector('#webmaker-nav .logoutbutton');

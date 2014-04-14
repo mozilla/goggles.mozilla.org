@@ -82,9 +82,6 @@
       <script src="{{ personaHost }}/include.js"></script>
       <script src="/bower/eventEmitter/EventEmitter.js"></script>
       <script src="/bower/webmaker-auth-client/webmaker-auth-client.js"></script>
-      <script id="webmaker-auth-client" src="/js/auth-login.js"
-              data-csrf="{{ csrf }}">
-      </script>
     </div>
 
     <div class="ui-wrapper ui-body-nobg">
@@ -158,28 +155,18 @@
       </div>
     </div>
 
-
-
-
     <div id="try-goggles">
 
     </div>
     <script id="require-js" src="/bower/requirejs/require.js"
-      data-main="{% block require_main %}/js/main.js{% endblock %}">
-    </script>
-    <script src="jquery.min.js"></script>
-
-    <script id="sso-override" src="/js/sso-override.js"
-            data-hostname="{{ hostname }}"
-            async>
+      data-main="{% block require_main %}/js/main.js{% endblock %}"
+      data-hostname="{{ hostname }}"
+      data-localeInfo="{{ localeInfo.lang }}"
+      data-csrf="{{ csrf }}">
     </script>
 
-    <script src="src/get-bookmarklet-url.js"></script>
     <script src="https://mozorg.cdn.mozilla.net/tabzilla/tabzilla.js"></script>
-    <script id="browser-screen" src="js/browser-screen.js"
-            data-hostname="{{ hostname }}"
-            data-localeInfo="{{ localeInfo.lang }}"
-            async>
+
     </script>
   </body>
 </html>

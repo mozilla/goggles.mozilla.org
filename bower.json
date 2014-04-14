@@ -1,6 +1,7 @@
 {
   "name": "goggles.webmaker.org",
   "dependencies": {
+    "jquery": "2.0.3",
     "nav-global": "https://github.com/mozilla/nav-global/archive/v0.1.4.tar.gz",
     "persona-btn": "0.0.11",
     "requirejs": "2.1.8",
