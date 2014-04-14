@@ -1,6 +1,7 @@
 @import "../bower/webmaker-language-picker/styles/languages";
 
-@language-bower-path: "../bower";
+@colors-path: "../../../stylesheets"; // used for colors.less from webmaker-language-picker/styles location
+@language-bower-path: "../../";
 
 /***************************************************
 * New Language Picker
@@ -819,8 +820,8 @@ button i.icon-angle-right {
   background-image: -moz-linear-gradient(top, #2293c3 1%, #38afe2 51%);
   background-image: -webkit-linear-gradient(top, #2293c3 1%, #38afe2 51%);
   background-image: -ms-linear-gradient(top, #2293c3 1%, #38afe2 51%);
-  overflow: hidden;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.01, #2293c3), color-stop(0.51, #38afe2));
+  overflow: hidden;
 }
 .make-footer .make-wrapper {
   margin: 0 auto;
@@ -921,7 +922,6 @@ button i.icon-angle-right {
 }
 .partners .social #email-li #email-updates {
   float: left;
-  border: 0;
   height: 30px;
   width: 205px;
   padding: 5px;
@@ -933,7 +933,8 @@ button i.icon-angle-right {
   color: #666;
 }
 .partners .social #email-li #email-updates:focus {
-  outline: none;
+  outline: none; 
+  border: 1px solid rgb(0, 0, 0);
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .partners .social #email-li #email-updates:invalid {
