@@ -24,6 +24,7 @@ var bleach = require("./lib/bleach"),
     utils = require("./lib/utils"),
     version = require("./package").version,
     WebmakerAuth = require("webmaker-auth"),
+    wts = require("webmaker-translation-stats"),
     WWW_ROOT = path.resolve(__dirname, 'public');
 
 // Load config from ".env"
@@ -151,9 +152,17 @@ app.post('/publish',
 
 // DEVOPS - Healthcheck
 app.get('/healthcheck', function(req, res) {
-  res.json({
+  var healthcheckObject = {
     http: "okay",
     version: version
+  };
+  wts(i18n.getSupportLanguages(), path.join(__dirname, "locale"), function(err, data) {
+    if(err) {
+      healthcheckObject.locales = err.toString();
+    } else {
+      healthcheckObject.locales = data;
+    }
+    res.json(healthcheckObject);
   });
 });
 
