@@ -6,8 +6,9 @@
     "persona-btn": "0.0.11",
     "requirejs": "2.1.8",
     "text": "2.0.9",
-    "webmaker-auth-client": "0.0.28",
+    "webmaker-analytics": "0.0.5",
+    "webmaker-auth-client": "0.0.29",
     "webmaker-i18n": "https://github.com/mozilla/node-webmaker-i18n/archive/v0.3.11.tar.gz",
-    "webmaker-language-picker": "0.0.17"
+    "webmaker-language-picker": "0.0.22"
   }
 }

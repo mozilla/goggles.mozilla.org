@@ -77,25 +77,6 @@ if (env.get("ENABLE_GELF_LOGS")) {
   app.use(express.logger("dev"));
 }
 
-// Setup locales with i18n
-app.use( i18n.middleware({
-  supported_languages: env.get("SUPPORTED_LANGS"),
-  default_lang: "en-US",
-  mappings: require("webmaker-locale-mapping"),
-  translation_directory: path.resolve( __dirname, "locale" )
-}));
-i18n.addLocaleObject({
-  "en-US": require("./public/bower/webmaker-auth-client/locale/en_US/create-user-form.json")
-}, function () {});
-
-app.locals({
-  GA_ACCOUNT: env.get("GA_ACCOUNT"),
-  GA_DOMAIN: env.get("GA_DOMAIN"),
-  hostname: env.get("APP_HOSTNAME"),
-  languages: i18n.getSupportLanguages(),
-  newrelic: newrelic
-});
-
 app.use(require("xfo-whitelist")([
   "/easy-remix-dialog/index.html",
   "/easy-remix-dialog/blank.html",
@@ -116,6 +97,31 @@ app.use(express.urlencoded());
 
 app.use(webmakerAuth.cookieParser());
 app.use(webmakerAuth.cookieSession());
+
+// Setup locales with i18n
+app.use( i18n.middleware({
+  supported_languages: env.get("SUPPORTED_LANGS"),
+  default_lang: "en-US",
+  mappings: require("webmaker-locale-mapping"),
+  translation_directory: path.resolve( __dirname, "locale" )
+}));
+
+i18n.addLocaleObject({
+  "en-US": require("./public/bower/webmaker-auth-client/locale/en_US/create-user-form.json")
+}, function (err, res) {
+  if (err) {
+    console.error(err);
+  }
+});
+
+app.locals({
+  GA_ACCOUNT: env.get("GA_ACCOUNT"),
+  GA_DOMAIN: env.get("GA_DOMAIN"),
+  hostname: env.get("APP_HOSTNAME"),
+  languages: i18n.getSupportLanguages(),
+  newrelic: newrelic,
+  bower_path: "public/bower"
+});
 
 app.use(express.csrf());
 app.use(function(err, req, res, next) {
