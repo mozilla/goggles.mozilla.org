@@ -228,20 +228,6 @@ app.use(express.static(path.join(__dirname, "webxray/static-files")));
   app.use("/" + dir, express.static(path.join(__dirname, "webxray/" + dir)));
 });
 
-// viewing goggle hacks
-app.param("remix", function(req, res, next, id) {
-  databaseAPI.find(id, function(err, result) {
-    if (err) { return next( err ); }
-    if (!result) { return next(404, "project not Found"); }
-    res.result = result;
-    next();
-  });
-});
-app.get("/remix/:remix", csp, function(req, res) {
-  res.write(res.result.rawData);
-  res.end();
-});
-
 // Localized Strings
 app.get("/strings/:lang?", function( req, res, next ) {
   res.header( "Access-Control-Allow-Origin", "*" );
