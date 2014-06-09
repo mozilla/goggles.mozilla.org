@@ -18,8 +18,8 @@ requirejs.config({
   }
 });
 
-require(['languages', 'selectize', 'browser-screen', 'auth-login', 'sso-override', 'bookmarklet', 'jquery'],
-  function (Languages, Selectize) {
+require(['languages', 'jquery', 'selectize', 'browser-screen', 'auth-login', 'sso-override', 'bookmarklet'],
+  function (Languages, $) {
     'use strict';
     // Call this when language picker element is ready.
     Languages.ready({ position: 'bottom', arrow: 'top' }, true);
