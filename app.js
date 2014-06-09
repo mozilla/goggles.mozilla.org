@@ -77,13 +77,6 @@ if (env.get("ENABLE_GELF_LOGS")) {
   app.use(express.logger("dev"));
 }
 
-app.use(require("xfo-whitelist")([
-  "/easy-remix-dialog/index.html",
-  "/easy-remix-dialog/blank.html",
-  "/preferences.html",
-  "/uproot-dialog.html"
-]));
-
 app.use(helmet.iexss());
 app.use(helmet.contentTypeOptions());
 if (!!env.get("FORCE_SSL") ) {
@@ -105,6 +98,13 @@ app.use( i18n.middleware({
   mappings: require("webmaker-locale-mapping"),
   translation_directory: path.resolve( __dirname, "locale" )
 }));
+
+app.use(require("xfo-whitelist")([
+  "/easy-remix-dialog/index.html",
+  "/easy-remix-dialog/blank.html",
+  "/preferences.html",
+  "/uproot-dialog.html"
+]));
 
 i18n.addLocaleObject({
   "en-US": require("./public/bower/webmaker-auth-client/locale/en_US/create-user-form.json")
