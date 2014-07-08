@@ -48,7 +48,8 @@ var app = express(),
     }),
     parameters = require('./lib/parameters'),
     webmakerAuth = new WebmakerAuth({
-      loginURL: env.get("LOGINAPI"),
+      loginURL: env.get("LOGIN"),
+      authLoginURL: env.get("LOGINAPI"),
       secretKey: env.get("SESSION_SECRET"),
       domain: env.get("COOKIE_DOMAIN"),
       forceSSL: env.get("FORCE_SSL")
