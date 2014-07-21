@@ -13,5 +13,6 @@
   },
   "resolutions": {
     "webmaker-analytics": "0.1.0"
-  }
+  },
+  "version": "1.1.5"
 }
