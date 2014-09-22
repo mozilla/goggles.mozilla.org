@@ -42,7 +42,7 @@
     "grunt-lesslint": "1.1.0"
   },
   "scripts": {
-    "test": "grunt",
+    "test": "grunt && node test/middleware.ensureMetaData.js",
     "postinstall": "bower install",
     "download-locales": "webmaker-download-locales goggles"
   }
