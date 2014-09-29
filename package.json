@@ -12,7 +12,6 @@
     "helmet": "0.1.2",
     "hood": "0.2.1",
     "htmlsanitizer": "0.0.2",
-    "webmaker-i18n": "0.3.20",
     "knox": "0.8.5",
     "less-middleware": "0.1.12",
     "makeapi-client": "0.5.27",
@@ -25,7 +24,8 @@
     "sequelize": "1.6.0",
     "webmaker-auth": "0.1.4",
     "webmaker-download-locales": "0.1.2",
-    "webmaker-locale-mapping": "latest",
+    "webmaker-i18n": "0.3.20",
+    "webmaker-locale-mapping": "0.0.5",
     "webmaker-loginapi": "https://github.com/mozilla/node-webmaker-loginapi/tarball/v0.1.18",
     "webmaker-translation-stats": "0.0.1",
     "xfo-whitelist": "0.1.0"
