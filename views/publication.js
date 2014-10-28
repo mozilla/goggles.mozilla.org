@@ -77,60 +77,6 @@ function init(html, originalURL, hackpubURL) {
       setupUI(html, originalURL, hackpubURL);
     }
   });
-
-  var html = document.querySelector("html"),
-      userElement = $("div.user"),
-      placeHolder = $("#identity"),
-      lang = html && html.lang ? html.lang : "en-US",
-      loginButtonSpan = $("#webmaker-nav .loginbutton"),
-      logoutButtonSpan = $("#webmaker-nav .logoutbutton"),
-      webmakerNav = $("#webmaker-nav");
-
-  function displayLogin(userData) {
-    if (userData) {
-      placeHolder.html('<a href="{{ hostname}}/' + lang + '/account">' + userData.username + "</a>");
-      placeHolder.parent().children('img').attr('src', userData.avatar);
-      userElement.show();
-    } else {
-      placeHolder.text("");
-      userElement.hide();
-    }
-  }
-
-  function enable(user) {
-    displayLogin(user);
-    webmakerNav.addClass("loggedin");
-    loginButtonSpan.addClass("hidden");
-    logoutButtonSpan.removeClass("hidden");
-    $(".publish-disable-overlay").hide();
-    $(".publish-enable-overlay").show();
-    $("#identity > a").attr('target', "_blank");
-  };
-
-  function disable() {
-    displayLogin();
-    webmakerNav.removeClass("loggedin");
-    loginButtonSpan.removeClass("hidden");
-    logoutButtonSpan.addClass("hidden");
-    $(".publish-enable-overlay").hide();
-    $(".publish-disable-overlay").show();
-  }
-
-  // Attach event listeners!
-  gogglesAuth.on('login', function(userData, debuggingInfo) {
-    user =  {
-      data: userData.email,
-      name: userData.displayName
-    }
-    enable(userData);
-  });
-
-  gogglesAuth.on('logout', function() {
-    user = false;
-    disable(user);
-  });
-
-  gogglesAuth.verify();
 }
 
 /**

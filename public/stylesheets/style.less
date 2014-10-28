@@ -3,6 +3,19 @@
 @colors-path: "../../../stylesheets"; // used for colors.less from webmaker-language-picker/styles location
 @language-bower-path: "../../";
 
+* {
+  box-sizing: content-box;
+}
+
+*:before, *:after {
+  box-sizing: content-box;
+}
+
+body {
+  font-size: 16px;
+  line-height: normal;
+}
+
 /***************************************************
 * New Language Picker
 */
@@ -951,7 +964,7 @@ button i.icon-angle-right {
   color: #666;
 }
 .partners .social #email-li #email-updates:focus {
-  outline: none; 
+  outline: none;
   border: 1px solid rgb(0, 0, 0);
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -1323,4 +1336,238 @@ img {
   display: block;
   color: black;
   text-align: center;
+}
+
+/*********************************************************
+* Webmaker nav
+*/
+#webmaker-nav {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  width: 100%;
+  color: #373737;
+}
+.webmaker-nav-container {
+  overflow: hidden;
+  background: #eaeff2;
+  border-bottom: 1px solid #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.webmaker-nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 1em;
+}
+
+.webmaker-nav > li > a {
+  display: block;
+  height: 100%;
+  padding: 0 10px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.webmaker-nav > li > a:hover {
+  text-decoration: underline;
+}
+
+#logo {
+  line-height: 1;
+  float: left;
+  display: block;
+}
+/*********************************************************
+* User/Login Styles
+*/
+.user-info {
+  float: right;
+  text-align: right;
+}
+
+.user-info > li {
+  float: left;
+  height: 100%;
+  margin: 0.9em 0;
+  border-right: 1px solid #b5b7b8;
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.webmaker-nav .user {
+  position: relative;
+  padding-left: 36px;
+  border-right: none;
+  img {
+    position: absolute;
+    left: 0;
+    top: -0.4em;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+  }
+}
+
+#identity {
+  font-weight: bold;
+  > a {
+    color: inherit;
+  }
+}
+
+.webmaker-create-user {
+  display: none;
+  padding: 2em 1em;
+  background: #F4F5F5;
+  border-bottom: 1px solid #DDD;
+  color: #555;
+  text-align: center;
+}
+
+.webmaker-create-user > form {
+  display: inline-block;
+  text-align: left;
+  width: 500px;
+  .error-message {
+    color: #ff0000;
+    overflow: hidden;
+  }
+}
+/*********************************************************
+* Helpers
+*/
+.webmaker-create-user .row {
+  margin: 1em 0;
+}
+
+.webmaker-create-user .inline {
+  display: inline-block;
+}
+
+.webmaker-create-user .visually-hidden {
+  display: block;
+  height: 1px;
+  overflow: hidden;
+  left: -99999em;
+}
+
+
+/*********************************************************
+* Title
+*/
+.webmaker-create-user legend {
+  font-size: 1.8em;
+  font-weight: 700;
+  margin: 0;
+}
+
+/*********************************************************
+* Display username
+*/
+.display-username-container {
+  font-size: 1.5em;
+}
+.display-username-container,
+.display-username-input {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+}
+.display-username-input {
+  font-size: 1em;
+  padding: 0.5em;
+  width: 16em;
+  border: 1px solid #3FB58E;
+  border-radius: 2px;
+  color: #3FB58E;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.display-username-input:focus {
+  outline: none;
+  box-shadow: 0 2px 3px -3px #3FB58E;
+}
+
+/*********************************************************
+* Buttons, iframe
+*/
+a {
+  color: #27aae1;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+}
+.create-user-submit,
+.access-button {
+  color: #FFF;
+  border: 1px solid #519369;
+  background: #3FB58E;
+  font-size: 1em;
+  border-radius: 2px;
+}
+
+.create-user-submit {
+  padding: 1em;
+  font-size: 1.2em;
+}
+
+.create-user-submit:hover {
+  background: #79b790;
+}
+
+/*********************************************************
+* Login button states - done via a JS class switch
+*/
+/* Initial we don't want anything shown */
+#webmaker-nav {
+  .user,
+  .dash,
+  .makes,
+  #webmaker-logout {
+    display: none;
+  }
+}
+/* We're logged in - show all the things */
+#webmaker-nav.loggedin {
+  .user,
+  .dash,
+  .makes {
+    display: block;
+  }
+}
+/*********************************************************
+* My projects
+*/
+.my-projects-container {
+  display:none;
+}
+.my-projects-container iframe {
+  width: 100%;
+  height: 0;
+  z-index: 0;
+  border-bottom: 1px solid #CCC;
+  border: none;
+}
+
+.my-projects-container.open {
+  z-index: 5;
+  position: relative;
+  display: block;
+}
+
+.my-projects-container.open iframe {
+  height: 300px;
+}
+
+.my-projects-title.hidden {
+  display: none;
 }

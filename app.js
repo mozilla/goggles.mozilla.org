@@ -50,6 +50,7 @@ var app = express(),
     webmakerAuth = new WebmakerAuth({
       loginURL: env.get("LOGIN"),
       authLoginURL: env.get("LOGINAPI"),
+      loginHost: env.get("APP_HOSTNAME"),
       secretKey: env.get("SESSION_SECRET"),
       domain: env.get("COOKIE_DOMAIN"),
       forceSSL: env.get("FORCE_SSL")
@@ -106,14 +107,6 @@ app.use(require("xfo-whitelist")([
   "/preferences.html",
   "/uproot-dialog.html"
 ]));
-
-i18n.addLocaleObject({
-  "en-US": require("./public/bower/webmaker-auth-client/locale/en_US/create-user-form.json")
-}, function (err, res) {
-  if (err) {
-    console.error(err);
-  }
-});
 
 app.locals({
   GA_ACCOUNT: env.get("GA_ACCOUNT"),
@@ -246,6 +239,13 @@ app.post('/authenticate', webmakerAuth.handlers.authenticate);
 app.post('/create', webmakerAuth.handlers.create);
 app.post('/logout', webmakerAuth.handlers.logout);
 app.post('/check-username', webmakerAuth.handlers.exists);
+app.post('/auth/v2/create', webmakerAuth.handlers.createUser);
+app.post('/auth/v2/uid-exists', webmakerAuth.handlers.uidExists);
+app.post('/auth/v2/request', webmakerAuth.handlers.request);
+app.post('/auth/v2/authenticateToken', webmakerAuth.handlers.authenticateToken);
+app.post('/auth/v2/verify-password', webmakerAuth.handlers.verifyPassword);
+app.post('/auth/v2/request-reset-code', webmakerAuth.handlers.requestResetCode);
+app.post('/auth/v2/reset-password', webmakerAuth.handlers.resetPassword);
 
 // build webxray and then run the app server
 goggles.build(env, nunjucksEnv, function() {

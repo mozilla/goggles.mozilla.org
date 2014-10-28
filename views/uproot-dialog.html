@@ -6,10 +6,10 @@
     <meta name="persona-email" content="{{ email }}">
     <meta name="csrf-token" content="{{ csrf }}">
     <title>{{ gettext("Publish Your Remix") }}</title>
+    <link rel="stylesheet" href="/bower/makerstrap/dist/makerstrap.min.css" />
     <link rel="stylesheet" href="../stylesheets/style.css">
     <link rel="stylesheet" href="../stylesheets/dialog.css">
-    <link rel="stylesheet" href="/bower/nav-global/nav.css" />
-    <link rel="stylesheet" href="/bower/webmaker-auth-client/create-user/create-user-form.css">
+    <link rel="stylesheet" href="/bower/webmaker-login-ux/dist/css/webmakerLogin.css">
     <style>
 
         h1 {
@@ -52,7 +52,6 @@
     </style>
   </head>
   <body>
-    {% include "webmaker-auth-client/create-user/create-user-form.html" %}
     <div class="dialog">
 
       <div class="header" id="webmaker-nav">
@@ -68,16 +67,18 @@
             </li>
             <li class="makes"><a href="{{ audience }}/me?app={{ appname }}" target="_blank">{{ gettext("My makes") }}</a></li>
             <li class="login">
-              <span class="loginbutton"><span class="icon"></span><span class="label">{{ gettext("Sign in") }}<span class="tip"></span></span></span>
-              <span class="logoutbutton hidden"><span class="icon icon-signout"></span><span class="label">{{ gettext("Sign out" )}}</span></span>
+              <button class="btn btn-primary join-button">{{ gettext("Join Webmaker") }}</button>
+              <button class="btn btn-secondary-nav signin-button">{{ gettext("Sign in") }}</button>
+              <span class="logoutbutton hidden">{{ gettext("Sign out" )}}</span>
             </li>
           </ul>
         </nav>
         <img src="../img/goggles-wordmark.png" class="logo" alt="Mozilla X-Ray Goggles">
 
         <script src="{{ personaHost }}/include.js"></script>
-        <script src="/bower/webmaker-auth-client/dist/webmaker-auth-client.min.js"></script>
-        <script id="require-js" src="/js/auth-login.js"
+        <script src="/bower/webmaker-login-ux/dist/webmakerLogin.js"></script>
+        <script id="require-js" src="/bower/requirejs/require.js"
+                data-main="/js/auth-login.js"
                 data-csrf="{{ csrf }}">
         </script>
       </div>

@@ -6,10 +6,10 @@
     <title>{{ gettext("X-Ray Goggles") }}</title>
     <link rel="stylesheet" href="/resources/font-awesome/css/font-awesome.css">
     <link href="https://mozorg.cdn.mozilla.net/media/css/tabzilla-min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bower/nav-global/nav.css" />
+    <link rel="stylesheet" href="/bower/makerstrap/dist/makerstrap.min.css" />
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/index.css">
-    <link rel="stylesheet" href="/bower/webmaker-auth-client/create-user/create-user-form.css">
+    <link rel="stylesheet" href="/bower/webmaker-login-ux/dist/css/webmakerLogin.css">
     {% if GA_ACCOUNT %}
     <script id="google-analytics-js" src="/js/google-analytics.js"
             data-ga-account="{{ GA_ACCOUNT }}"
@@ -19,7 +19,6 @@
     {% endif %}
   </head>
   <body>
-    {% include "webmaker-auth-client/create-user/create-user-form.html" %}
     <div class="webmaker-outer-wrapper">
       {% block header %}
       <link rel="stylesheet" href="stylesheets/userbar-overrides.css">
@@ -37,8 +36,9 @@
               </li>
               <li class="makes"><a href="{{ audience }}/{{localeInfo.lang}}/me?app={{ appname }}">{{ gettext("My makes") }}</a></li>
               <li class="login">
-                <span class="loginbutton"><span class="icon"></span><span class="label">{{ gettext("Sign in") }}<span class="tip"></span></span></span>
-                <span class="logoutbutton hidden"><span class="label">{{ gettext("Sign out" )}}</span></span>
+                <button class="btn btn-primary join-button">{{ gettext("Join Webmaker") }}</button>
+                <button class="btn btn-secondary-nav signin-button">{{ gettext("Sign in") }}</button>
+                <span class="logoutbutton hidden">{{ gettext("Sign out" )}}</span>
               </li>
             </ul>
             <ul class="nav-list">
@@ -81,7 +81,7 @@
       {% endblock %}
 
       <script src="{{ personaHost }}/include.js"></script>
-      <script src="/bower/webmaker-auth-client/dist/webmaker-auth-client.min.js"></script>
+      <script src="/bower/webmaker-login-ux/dist/webmakerLogin.js"></script>
     </div>
 
     <div class="ui-wrapper ui-body-nobg">
