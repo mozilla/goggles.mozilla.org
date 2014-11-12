@@ -236,9 +236,7 @@ app.get("/easy-remix-dialog/index.html", function(req, res) {
 // SSO
 app.post('/verify', webmakerAuth.handlers.verify);
 app.post('/authenticate', webmakerAuth.handlers.authenticate);
-app.post('/create', webmakerAuth.handlers.create);
 app.post('/logout', webmakerAuth.handlers.logout);
-app.post('/check-username', webmakerAuth.handlers.exists);
 app.post('/auth/v2/create', webmakerAuth.handlers.createUser);
 app.post('/auth/v2/uid-exists', webmakerAuth.handlers.uidExists);
 app.post('/auth/v2/request', webmakerAuth.handlers.request);
