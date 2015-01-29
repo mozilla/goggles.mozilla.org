@@ -1,6 +1,6 @@
 /* Cascading Style Sheet (CSS) for Web X-Ray Goggles */
 
-/* A base class that every goggles element should inherit from, to 
+/* A base class that every goggles element should inherit from, to
  * reset any bizarre and unexpected CSS set by the host page, e.g.
  * div { border: blue; }. */
 
@@ -49,7 +49,7 @@
  * associations */
 
 .webxray-ancestor {
-    background-color: rgba(0, 0, 0, 0.1);    
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* Style for the message that appears in footer heads-up-display (HUD) */
@@ -149,7 +149,7 @@ span.webxray-more-info {
     background: rgba(0, 0, 0, 0.5);
 }
 
-/* Styles for nested elements of a dialog box, needed to vertically 
+/* Styles for nested elements of a dialog box, needed to vertically
  * center it. */
 
 .webxray-dialog-outer {
@@ -221,7 +221,7 @@ div.webxray-dialog-content, .webxray-dialog-inner iframe {
 
 /* Style used any time we want an element to appear above
  * everything else on the page, including other goggles elements. */
- 
+
 .webxray-topmost {
     z-index: 2147483647 !important;
 }
@@ -413,3 +413,27 @@ div.webxray-toolbar-button-glyph-tiny {
   background-color: yellow;
   color: black;
 }
+
+
+/**
+
+  TOTALLY INTRACTIBLE OVERRIDES
+
+**/
+
+div.webxray-dialog-overlay {
+  background: transparent;
+}
+
+div.webxray-dialog-inner {
+  width: auto;
+  height: auto;
+  margin: auto;
+
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 1em;
+  background: rgba(77,78,83,0.5);
+};

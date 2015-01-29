@@ -207,38 +207,52 @@ jQuery.extend({
 
 function createDialog(data) {
   var previewDoc = $("#preview").contents();
+  var stylesheet = $('<link rel="stylesheet"></link>');
+  stylesheet.attr('href', $("link#webxray").get(0).href);
 
   previewDoc[0].open();
   previewDoc[0].write(data.startHTML.html);
   previewDoc[0].close();
+  previewDoc.find("head").append(stylesheet);
 
   // Use the webxray-hidden class to find our focused element
   var selected = previewDoc.find(data.startHTML.selector);
-//  selected.reallyRemoveClass("webxray-hidden");
-  selected.reallyRemoveClass("webxray-uprootable-element");
+  selected.reallyRemoveClass("webxray-hidden");
+  previewDoc.hideEverythingExcept(selected);
+  selected.absolutifyURLs();
+  var intervalID = null;
+
+  function startScaling() {
+    if (intervalID !== null)
+      clearTimeout(intervalID);
+    intervalID = startContinuousDynamicScale(selected, $("#preview"),
+                                             $("#dom-rendering-column"));
+  }
 
   previewDoc.bind('selection-changed', function(event) {
     selected = $(event.target);
+    startScaling();
   });
 
-  $(".dialog .tab").click(function() {
+  startScaling();
+
+  $(".tabs .tab").click(function() {
     var view = $(this).attr("id");
 
-    $(".dialog .tab").removeClass("selected");
+    $(".tabs .tab").removeClass("selected");
     $(this).addClass("selected");
     switch (view) {
-      case "pretty": {
-        makeEditableDom(selected, $("#dom-rendering").empty());
-        break;
-      }
-      case "raw": {
-        makeHtmlEditor($("#dom-rendering"), selected);
-        break;
-      }
+      case "pretty":
+      makeEditableDom(selected, $("#dom-rendering").empty());
+      break;
+
+      case "raw":
+      makeHtmlEditor($("#dom-rendering"), selected);
+      break;
     }
   });
 
-  $(".dialog .tab#raw").click();
+  $(".tabs .tab#pretty").click();
 
   return {
     getHTML: function getHTML() {
@@ -291,7 +305,7 @@ Localized.ready(function() {
     }
   }
 
-  $("#nevermind").click(function() {
+  $(".close-button").click(function() {
     if (!responseSent) {
       sendMessage({msg: 'nevermind'});
       responseSent = true;

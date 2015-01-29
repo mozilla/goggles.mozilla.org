@@ -168,17 +168,11 @@
         }
 
         if (sendFullDocument) {
-// DISABLED FOR ONBOARDING
-//          $(focusedElement).addClass('webxray-hidden');
-// DISABLED FOR ONBOARDING
-          $(focusedElement).addClass('webxray-uprootable-element');
+          $(focusedElement).addClass('webxray-hidden');
           $(document).uprootIgnoringWebxray(function (html) {
             begin({
               html: html,
-// DISABLED FOR ONBOARDING
-//              selector: ".webxray-hidden"
-// DISABLED FOR ONBOARDING
-              selector: ".webxray-uprootable-element"
+              selector: ".webxray-hidden"
             });
           });
         } else {

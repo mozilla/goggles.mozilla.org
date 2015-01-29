@@ -1,16 +1,19 @@
 .pane.split {
   float: left;
-  width: 50%;
+  width: ~"calc(100% - 14rem)";
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 .tabs {
+/*
   height: 100%;
+*/
   /*float: right;*/
 }
 
 .tab {
+/*
   display: table-cell;
   text-align: center;
   vertical-align: middle;
@@ -20,13 +23,16 @@
   background: #f0f0f0;
   background-color: #00293E;
   border-bottom: 8px solid #3FB58E;
+*/
 }
 
 .tabs .tab.selected {
+/*
   background: white;
   background-color: #3FB58E;
   color: black;
   color: #fff;
+*/
 }
 
 .tabs div.tab:hover {
@@ -34,7 +40,9 @@
 }
 
 .tabs div.tab.selected:hover {
+/*
   cursor: default;
+*/
 }
 
 #dom-rendering-column {
@@ -68,11 +76,10 @@
 
 #html-editor-container {
   position: relative;
-  /*border: 1px dotted gray;*/
 }
 
 #html-editor-container .CodeMirror-scroll {
-  min-height: 300px;
+  min-height: 146px;
   height: auto;
   overflow: hidden;
 }
@@ -148,7 +155,7 @@ span.sample {
 }
 
 @media screen and (max-width: 800px) {
-  
+
   #preview-column,
   #dom-rendering-column {
     float: none;
@@ -156,5 +163,5 @@ span.sample {
     width: 100%;
     margin-left: 0;
   }
-  
+
 }
