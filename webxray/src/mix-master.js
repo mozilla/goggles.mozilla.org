@@ -181,53 +181,6 @@
           begin(focusedHTML);
         }
 
-        var morphOut = function(dialog, input, newContent) {
-          newContent.addClass(uprootableClass);
-          jQuery.morphDialogIntoElement({
-            dialog: dialog,
-            input: input,
-            element: newContent,
-            onDone: function() {
-              newContent.reallyRemoveClass(uprootableClass);
-            }
-          });
-        };
-
-        var messageHandler = function(focusedElement, startHTML, dialog) {
-          return function onMessage(event, data) {
-            if (data && data.length && data[0] == '{') {
-              var data = JSON.parse(data);
-              if (data.msg == "ok") {
-                // The dialog may have decided to replace all our spaces
-                // with non-breaking ones, so we'll undo that.
-                var html = data.endHTML.replace(/\u00a0/g, " ");
-                var newContent = self.replaceElement(focusedElement, html);
-                focusedElement.outerHTML = newContent.outerHTML;
-
-                if(data.finished) {
-                  morphOut(dialog, input, newContent);
-                }
-              } else {
-                // TODO: Re-focus previously focused elements?
-                $(focusedElement).reallyRemoveClass(uprootableClass);
-                dialog.close();
-              }
-            }
-          };
-        };
-
-        var load = function(focusedElement, startHTML) {
-          return function(dialog) {
-            dialog.iframe.postMessage(JSON.stringify({
-              startHTML: startHTML,
-              mods: dialogPageMods,
-              baseURI: document.location.href
-            }), "*");
-            dialog.iframe.fadeIn();
-            dialog.iframe.bind("message", messageHandler(focusedElement, startHTML, dialog));
-          };
-        };
-
         function begin(startHTML) {
           focused.unfocus();
 
@@ -236,7 +189,45 @@
             body: options.body,
             url: dialogURL,
             element: focusedElement,
-            onLoad: load(focusedElement, startHTML)
+            onLoad: function(dialog) {
+              dialog.iframe.postMessage(JSON.stringify({
+                startHTML: startHTML,
+                mods: dialogPageMods,
+                baseURI: document.location.href
+              }), "*");
+              dialog.iframe.fadeIn();
+              dialog.iframe.bind("message", function onMessage(event, data) {
+                try {
+                  var data = JSON.parse(data);
+
+                  if (data.msg == "ok") {
+                    // The dialog may have decided to replace all our spaces
+                    // with non-breaking ones, so we'll undo that.
+                    var html = data.endHTML.replace(/\u00a0/g, " ");
+                    var newContent = self.replaceElement(focusedElement, html);
+                    focusedElement = newContent[0];
+
+                    if(data.finished) {
+                      newContent.addClass(uprootableClass);
+                      jQuery.morphDialogIntoElement({
+                        dialog: dialog,
+                        input: input,
+                        element: newContent,
+                        onDone: function() {
+                          newContent.reallyRemoveClass(uprootableClass);
+                        }
+                      });
+                    }
+                  } else {
+                    // TODO: Re-focus previously focused elements?
+                    $(focusedElement).reallyRemoveClass(uprootableClass);
+                    dialog.close();
+                  }
+                } catch (e) {
+                  console.error("postmessage was not valid JSON");
+                }
+              });
+            }
           });
         }
       }

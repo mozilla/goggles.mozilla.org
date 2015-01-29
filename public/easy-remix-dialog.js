@@ -212,10 +212,11 @@ function createDialog(data, sendMessage) {
   previewDoc[0].write(data.startHTML.html);
   previewDoc[0].close();
 
+  // Use the webxray-hidden class to find our focused element
   var selected = previewDoc.find(data.startHTML.selector);
   selected.reallyRemoveClass("webxray-uprootable-element");
 
-  var thisDialog = {
+  var thisDialog =  {
     getHTML: function getHTML() {
       return selected.outerHtml();
     }
@@ -262,24 +263,40 @@ Localized.ready(function() {
   var responseSent = false;
   var isStarted = false;
 
+
   function loadDialog(data) {
-    if (isStarted) {
+    if (isStarted)
       return;
-    }
     isStarted = true;
 
+    //$(document.body).show();
+
     var dialog = createDialog(data, sendMessage);
+    var originalHTLM = dialog.getHTML();
 
     $("#ok").click(function() {
       if (!responseSent) {
+        responseSent = true;
         sendMessage({
           msg: 'ok',
           finished: true,
           endHTML: dialog.getHTML()
         });
+      }
+    });
+
+    $("#nevermind").click(function() {
+      if (!responseSent) {
+        sendMessage({
+          msg: 'ok',
+          finished: true,
+          endHTML: originalHTLM
+        });
+//      sendMessage({msg: 'nevermind'});
         responseSent = true;
       }
     });
+
 
     var mods = data.mods || {};
     jQuery.loadStylesheets(mods.stylesheets || []);
@@ -296,10 +313,4 @@ Localized.ready(function() {
     }, false);
   }
 
-  $("#nevermind").click(function() {
-    if (!responseSent) {
-      sendMessage({msg: 'nevermind'});
-      responseSent = true;
-    }
-  });
 });
