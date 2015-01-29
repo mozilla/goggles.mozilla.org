@@ -127,6 +127,8 @@
       var backdrop = $('<div class="webxray-base webxray-dialog-overlay">' +
                        '</div>');
 
+      document.body.classList.add("webxray-padded");
+
       // Closing the dialog we make later will re-activate this for us.
       input.deactivate();
 
@@ -154,6 +156,8 @@
       var dialog = options.dialog;
       var input = options.input;
       var overlay = dialog.iframe.overlay();
+
+      document.body.classList.remove("webxray-padded");
 
       overlay.applyTagColor(element, 1.0);
       overlay.hide();

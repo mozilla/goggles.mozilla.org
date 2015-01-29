@@ -205,20 +205,29 @@ jQuery.extend({
   }
 });
 
-function createDialog(data) {
+function createDialog(data, sendMessage) {
   var previewDoc = $("#preview").contents();
 
   previewDoc[0].open();
   previewDoc[0].write(data.startHTML.html);
   previewDoc[0].close();
 
-  // Use the webxray-hidden class to find our focused element
   var selected = previewDoc.find(data.startHTML.selector);
-//  selected.reallyRemoveClass("webxray-hidden");
   selected.reallyRemoveClass("webxray-uprootable-element");
+
+  var thisDialog = {
+    getHTML: function getHTML() {
+      return selected.outerHtml();
+    }
+  };
 
   previewDoc.bind('selection-changed', function(event) {
     selected = $(event.target);
+    sendMessage({
+      msg: 'ok',
+      finished: false,
+      endHTML: thisDialog.getHTML()
+    });
   });
 
   $(".dialog .tab").click(function() {
@@ -240,32 +249,32 @@ function createDialog(data) {
 
   $(".dialog .tab#raw").click();
 
-  return {
-    getHTML: function getHTML() {
-      return selected.outerHtml();
-    }
-  };
+  return thisDialog;
 }
 
 Localized.ready(function() {
+
+  function sendMessage(data) {
+    window.parent.postMessage(JSON.stringify(data), "*");
+  }
 
   var isInIframe = !(top === self);
   var responseSent = false;
   var isStarted = false;
 
   function loadDialog(data) {
-    if (isStarted)
+    if (isStarted) {
       return;
+    }
     isStarted = true;
 
-    //$(document.body).show();
-
-    var dialog = createDialog(data);
+    var dialog = createDialog(data, sendMessage);
 
     $("#ok").click(function() {
       if (!responseSent) {
         sendMessage({
           msg: 'ok',
+          finished: true,
           endHTML: dialog.getHTML()
         });
         responseSent = true;
@@ -285,10 +294,6 @@ Localized.ready(function() {
         loadDialog(JSON.parse(event.data));
       }
     }, false);
-
-    var sendMessage = function sendMessageViaPostMessage(data) {
-      window.parent.postMessage(JSON.stringify(data), "*");
-    }
   }
 
   $("#nevermind").click(function() {
