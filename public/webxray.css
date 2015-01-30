@@ -433,7 +433,7 @@ div.webxray-toolbar-button-glyph-tiny {
   font-size: 150%;
   position: absolute;
   top: 0;
-  right: 8em;
+  right: 6em;
   background: #00293E;
   width: 20em;
   height: 6em;
@@ -455,15 +455,16 @@ div.webxray-toolbar-button-glyph-tiny {
 }
 
 .webxray-base .webxray-toolbar-hint-dismiss {
-  position: absolute;
   font-size: 100%;
+  position: absolute;
   top: 2em;
   right: 1em;
   border: 1px solid grey;
   background: inherit;
-  width: 3em;
-  height: 1em;
   line-height: 1em;
+  color: white;
+  padding: 10px;
+  height: 1em;
 }
 
 
