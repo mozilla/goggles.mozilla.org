@@ -57,7 +57,8 @@
     simpleModalDialog: function(options) {
       var dialog = jQuery.modalDialog({
         input: options.input,
-        url: options.url
+        url: options.url,
+        classes: options.classes
       });
       dialog.iframe.one("load", function() {
         $(this).postMessage(options.payload, "*");
@@ -72,11 +73,12 @@
       var input = options.input;
       var body = options.body || document.body;
       var url = options.url;
+      var classes = options.classes ? " " + options.classes : '';
       var div = $('<div class="webxray-base webxray-dialog-overlay">' +
                   '<div class="webxray-base webxray-dialog-outer">' +
                   '<div class="webxray-base webxray-dialog-middle">' +
                   '<div class="webxray-base webxray-dialog-inner">' +
-                  '<iframe class="webxray-base" src="' + url + '"></iframe>' +
+                  '<iframe class="webxray-base'+classes+'" src="' + url + '"></iframe>' +
                   '</div></div></div></div>');
       var iframe = div.find("iframe");
 

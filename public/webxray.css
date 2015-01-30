@@ -465,6 +465,7 @@ div.webxray-toolbar-button-glyph-tiny {
   color: white;
   padding: 10px;
   height: 1em;
+  box-sizing: content-box;
 }
 
 
@@ -482,5 +483,8 @@ div.webxray-dialog-inner {
   left: 0;
   padding: 1em;
   background: rgba(77,78,83,0.5);
-};
+}
 
+.webxray-publish-dialog {
+  height: calc(100vh - 2rem) !important;
+}
