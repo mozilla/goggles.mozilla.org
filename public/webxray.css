@@ -1,5 +1,9 @@
 /* Cascading Style Sheet (CSS) for Web X-Ray Goggles */
 
+body.webxray-padded {
+  padding-bottom: 146px; /* must match easy-dialog-remix.less CodeMirror-scroll height */
+}
+
 /* A base class that every goggles element should inherit from, to
  * reset any bizarre and unexpected CSS set by the host page, e.g.
  * div { border: blue; }. */
@@ -44,6 +48,8 @@
   max-height: 1000000px;
   max-width: 1000000px;
 }
+
+
 
 /* Style for when you SHIFT + up to inspect parent and grandparent
  * associations */
@@ -415,11 +421,51 @@ div.webxray-toolbar-button-glyph-tiny {
 }
 
 
+
 /**
 
   TOTALLY INTRACTIBLE OVERRIDES
 
 **/
+
+
+.webxray-base .webxray-toolbar-hint {
+  font-size: 150%;
+  position: absolute;
+  top: 0;
+  right: 8em;
+  background: #00293E;
+  width: 20em;
+  height: 6em;
+}
+
+.webxray-base .webxray-toolbar-hint-ra {
+  position: absolute;
+  width: 0;
+  height: 0px;
+  border: 25px solid transparent;
+  border-left-color: #00293E;
+  right: -49px;
+  top: 25px;
+}
+
+.webxray-base .webxray-toolbar-hint-text {
+  font-size: 100%;
+  padding: 1.5em;
+}
+
+.webxray-base .webxray-toolbar-hint-dismiss {
+  position: absolute;
+  font-size: 100%;
+  top: 2em;
+  right: 1em;
+  border: 1px solid grey;
+  background: inherit;
+  width: 3em;
+  height: 1em;
+  line-height: 1em;
+}
+
 
 div.webxray-dialog-overlay {
   background: transparent;
@@ -429,7 +475,6 @@ div.webxray-dialog-inner {
   width: auto;
   height: auto;
   margin: auto;
-
   position: fixed;
   bottom: 0;
   right: 0;
@@ -437,3 +482,4 @@ div.webxray-dialog-inner {
   padding: 1em;
   background: rgba(77,78,83,0.5);
 };
+

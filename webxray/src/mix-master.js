@@ -213,6 +213,8 @@
                         dialog: dialog,
                         input: input,
                         element: newContent,
+                        finished: data.finished,
+                        canceled: data.canceled,
                         onDone: function() {
                           newContent.reallyRemoveClass(uprootableClass);
                         }

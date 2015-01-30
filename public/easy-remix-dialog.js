@@ -290,19 +290,16 @@ Localized.ready(function() {
         sendMessage({
           msg: 'ok',
           finished: true,
+          canceled: true,
           endHTML: originalHTLM
         });
-//      sendMessage({msg: 'nevermind'});
         responseSent = true;
       }
     });
 
-
     var mods = data.mods || {};
     jQuery.loadStylesheets(mods.stylesheets || []);
     jQuery.loadScripts(mods.scripts || []);
-
-    //$(document.body).hide().fadeIn();
   }
 
   if (isInIframe) {

@@ -155,6 +155,8 @@
       var element = options.element;
       var dialog = options.dialog;
       var input = options.input;
+      var finished = options.finished;
+      var canceled = options.canceled;
       var overlay = dialog.iframe.overlay();
 
       document.body.classList.remove("webxray-padded");
@@ -171,6 +173,9 @@
             $(this).fadeOut(function() {
               $(this).remove();
               input.activate();
+              if(finished && !canceled) {
+                document.dispatchEvent(new CustomEvent("webxray-element-modified"))
+              }
             });
             options.onDone();
           });
@@ -179,3 +184,4 @@
     }
   });
 })(jQuery);
+
