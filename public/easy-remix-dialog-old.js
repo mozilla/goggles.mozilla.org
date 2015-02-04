@@ -205,64 +205,67 @@ jQuery.extend({
   }
 });
 
-function createDialog(data, sendMessage) {
+function createDialog(data) {
   var previewDoc = $("#preview").contents();
+  var stylesheet = $('<link rel="stylesheet"></link>');
+  stylesheet.attr('href', $("link#webxray").get(0).href);
 
   previewDoc[0].open();
   previewDoc[0].write(data.startHTML.html);
   previewDoc[0].close();
+  previewDoc.find("head").append(stylesheet);
 
   // Use the webxray-hidden class to find our focused element
   var selected = previewDoc.find(data.startHTML.selector);
-  selected.reallyRemoveClass("webxray-uprootable-element");
+  selected.reallyRemoveClass("webxray-hidden");
+  previewDoc.hideEverythingExcept(selected);
+  selected.absolutifyURLs();
+  var intervalID = null;
 
-  var thisDialog =  {
+  function startScaling() {
+    if (intervalID !== null)
+      clearTimeout(intervalID);
+    intervalID = startContinuousDynamicScale(selected, $("#preview"),
+                                             $("#dom-rendering-column"));
+  }
+
+  previewDoc.bind('selection-changed', function(event) {
+    selected = $(event.target);
+    startScaling();
+  });
+
+  startScaling();
+
+  $(".tabs .tab").click(function() {
+    var view = $(this).attr("id");
+
+    $(".tabs .tab").removeClass("selected");
+    $(this).addClass("selected");
+    switch (view) {
+      case "pretty":
+      makeEditableDom(selected, $("#dom-rendering").empty());
+      break;
+
+      case "raw":
+      makeHtmlEditor($("#dom-rendering"), selected);
+      break;
+    }
+  });
+
+  $(".tabs .tab#pretty").click();
+
+  return {
     getHTML: function getHTML() {
       return selected.outerHtml();
     }
   };
-
-  previewDoc.bind('selection-changed', function(event) {
-    selected = $(event.target);
-    sendMessage({
-      msg: 'ok',
-      finished: false,
-      endHTML: thisDialog.getHTML()
-    });
-  });
-
-  $(".dialog .tab").click(function() {
-    var view = $(this).attr("id");
-
-    $(".dialog .tab").removeClass("selected");
-    $(this).addClass("selected");
-    switch (view) {
-      case "pretty": {
-        makeEditableDom(selected, $("#dom-rendering").empty());
-        break;
-      }
-      case "raw": {
-        makeHtmlEditor($("#dom-rendering"), selected);
-        break;
-      }
-    }
-  });
-
-  $(".dialog .tab#raw").click();
-
-  return thisDialog;
 }
 
 Localized.ready(function() {
 
-  function sendMessage(data) {
-    window.parent.postMessage(JSON.stringify(data), "*");
-  }
-
   var isInIframe = !(top === self);
   var responseSent = false;
   var isStarted = false;
-
 
   function loadDialog(data) {
     if (isStarted)
@@ -271,27 +274,13 @@ Localized.ready(function() {
 
     //$(document.body).show();
 
-    var dialog = createDialog(data, sendMessage);
-    var originalHTLM = dialog.getHTML();
+    var dialog = createDialog(data);
 
     $("#ok").click(function() {
       if (!responseSent) {
-        responseSent = true;
         sendMessage({
           msg: 'ok',
-          finished: true,
           endHTML: dialog.getHTML()
-        });
-      }
-    });
-
-    $("#nevermind").click(function() {
-      if (!responseSent) {
-        sendMessage({
-          msg: 'ok',
-          finished: true,
-          canceled: true,
-          endHTML: originalHTLM
         });
         responseSent = true;
       }
@@ -300,6 +289,8 @@ Localized.ready(function() {
     var mods = data.mods || {};
     jQuery.loadStylesheets(mods.stylesheets || []);
     jQuery.loadScripts(mods.scripts || []);
+
+    //$(document.body).hide().fadeIn();
   }
 
   if (isInIframe) {
@@ -308,6 +299,16 @@ Localized.ready(function() {
         loadDialog(JSON.parse(event.data));
       }
     }, false);
+
+    var sendMessage = function sendMessageViaPostMessage(data) {
+      window.parent.postMessage(JSON.stringify(data), "*");
+    }
   }
 
+  $(".close-button").click(function() {
+    if (!responseSent) {
+      sendMessage({msg: 'nevermind'});
+      responseSent = true;
+    }
+  });
 });

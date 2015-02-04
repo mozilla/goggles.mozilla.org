@@ -1,4 +1,6 @@
 {
+  "first use hint": "Tap text or images to edit.<br>Tap ESC or Quit to exit.",
+  "first publish hint":"Tap 'P' or Publish to save<br>and share your creation.",
   "activate the X-Ray Goggles by": "Next, activate the X-Ray Goggles by clicking the yellow button above.",
   "Activate X-Ray Goggles": "Activate X-Ray Goggles",
   "Advanced": "Advanced",
@@ -48,6 +50,7 @@
   "My makes": "My makes",
   "Not sure what to make?": "Not sure what to make?",
   "Now visit any website on the internet": "Now visit any website on the internet. Activate the Goggles by clicking the new button in your bookmarks toolbar and start remixing!",
+  "OK": "OK",
   "pointing-at": "pointing at",
   "Popcorn Maker": "Popcorn Maker",
   "Preview": "Preview",

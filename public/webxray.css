@@ -1,6 +1,10 @@
 /* Cascading Style Sheet (CSS) for Web X-Ray Goggles */
 
-/* A base class that every goggles element should inherit from, to 
+body.webxray-padded {
+  padding-bottom: 146px; /* must match easy-dialog-remix.less CodeMirror-scroll height */
+}
+
+/* A base class that every goggles element should inherit from, to
  * reset any bizarre and unexpected CSS set by the host page, e.g.
  * div { border: blue; }. */
 
@@ -45,11 +49,13 @@
   max-width: 1000000px;
 }
 
+
+
 /* Style for when you SHIFT + up to inspect parent and grandparent
  * associations */
 
 .webxray-ancestor {
-    background-color: rgba(0, 0, 0, 0.1);    
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* Style for the message that appears in footer heads-up-display (HUD) */
@@ -149,7 +155,7 @@ span.webxray-more-info {
     background: rgba(0, 0, 0, 0.5);
 }
 
-/* Styles for nested elements of a dialog box, needed to vertically 
+/* Styles for nested elements of a dialog box, needed to vertically
  * center it. */
 
 .webxray-dialog-outer {
@@ -221,7 +227,7 @@ div.webxray-dialog-content, .webxray-dialog-inner iframe {
 
 /* Style used any time we want an element to appear above
  * everything else on the page, including other goggles elements. */
- 
+
 .webxray-topmost {
     z-index: 2147483647 !important;
 }
@@ -412,4 +418,73 @@ div.webxray-toolbar-button-glyph-tiny {
 .webxray-toolbar-button-toggled {
   background-color: yellow;
   color: black;
+}
+
+
+
+/**
+
+  TOTALLY INTRACTIBLE OVERRIDES
+
+**/
+
+
+.webxray-base .webxray-toolbar-hint {
+  font-size: 150%;
+  position: absolute;
+  top: 0;
+  right: 6em;
+  background: #00293E;
+  width: 20em;
+  height: 6em;
+}
+
+.webxray-base .webxray-toolbar-hint-ra {
+  position: absolute;
+  width: 0;
+  height: 0px;
+  border: 25px solid transparent;
+  border-left-color: #00293E;
+  right: -49px;
+  top: 25px;
+}
+
+.webxray-base .webxray-toolbar-hint-text {
+  font-size: 100%;
+  padding: 1.5em;
+}
+
+.webxray-base .webxray-toolbar-hint-dismiss {
+  font-size: 100%;
+  position: absolute;
+  top: 2em;
+  right: 1em;
+  border: 1px solid grey;
+  background: inherit;
+  line-height: 1em;
+  color: white;
+  padding: 10px;
+  height: 1em;
+  box-sizing: content-box;
+}
+
+
+div.webxray-dialog-overlay {
+  background: transparent;
+}
+
+div.webxray-dialog-inner {
+  width: auto;
+  height: auto;
+  margin: auto;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 1em;
+  background: rgba(77,78,83,0.5);
+}
+
+.webxray-publish-dialog {
+  height: calc(100vh - 2rem) !important;
 }

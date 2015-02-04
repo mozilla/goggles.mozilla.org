@@ -57,7 +57,8 @@
     simpleModalDialog: function(options) {
       var dialog = jQuery.modalDialog({
         input: options.input,
-        url: options.url
+        url: options.url,
+        classes: options.classes
       });
       dialog.iframe.one("load", function() {
         $(this).postMessage(options.payload, "*");
@@ -72,11 +73,12 @@
       var input = options.input;
       var body = options.body || document.body;
       var url = options.url;
+      var classes = options.classes ? " " + options.classes : '';
       var div = $('<div class="webxray-base webxray-dialog-overlay">' +
                   '<div class="webxray-base webxray-dialog-outer">' +
                   '<div class="webxray-base webxray-dialog-middle">' +
                   '<div class="webxray-base webxray-dialog-inner">' +
-                  '<iframe class="webxray-base" src="' + url + '"></iframe>' +
+                  '<iframe class="webxray-base'+classes+'" src="' + url + '"></iframe>' +
                   '</div></div></div></div>');
       var iframe = div.find("iframe");
 
@@ -127,6 +129,8 @@
       var backdrop = $('<div class="webxray-base webxray-dialog-overlay">' +
                        '</div>');
 
+      document.body.classList.add("webxray-padded");
+
       // Closing the dialog we make later will re-activate this for us.
       input.deactivate();
 
@@ -153,7 +157,11 @@
       var element = options.element;
       var dialog = options.dialog;
       var input = options.input;
+      var finished = options.finished;
+      var canceled = options.canceled;
       var overlay = dialog.iframe.overlay();
+
+      document.body.classList.remove("webxray-padded");
 
       overlay.applyTagColor(element, 1.0);
       overlay.hide();
@@ -167,6 +175,9 @@
             $(this).fadeOut(function() {
               $(this).remove();
               input.activate();
+              if(finished && !canceled) {
+                document.dispatchEvent(new CustomEvent("webxray-element-modified"))
+              }
             });
             options.onDone();
           });
@@ -175,3 +186,4 @@
     }
   });
 })(jQuery);
+

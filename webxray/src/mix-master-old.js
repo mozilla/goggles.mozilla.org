@@ -3,8 +3,6 @@
 
   var $ = jQuery;
 
-  var uprootableClass = "webxray-uprootable-element";
-
   function NullTransitionEffectManager() {
     return {
       enableDuring: function enableDuring(fn) { fn(); }
@@ -170,11 +168,11 @@
         }
 
         if (sendFullDocument) {
-          $(focusedElement).addClass(uprootableClass);
+          $(focusedElement).addClass('webxray-hidden');
           $(document).uprootIgnoringWebxray(function (html) {
             begin({
               html: html,
-              selector: "."+uprootableClass
+              selector: ".webxray-hidden"
             });
           });
         } else {
@@ -197,36 +195,28 @@
               }), "*");
               dialog.iframe.fadeIn();
               dialog.iframe.bind("message", function onMessage(event, data) {
-                try {
+                if (data && data.length && data[0] == '{') {
                   var data = JSON.parse(data);
-
                   if (data.msg == "ok") {
                     // The dialog may have decided to replace all our spaces
                     // with non-breaking ones, so we'll undo that.
                     var html = data.endHTML.replace(/\u00a0/g, " ");
                     var newContent = self.replaceElement(focusedElement, html);
-                    focusedElement = newContent[0];
 
-                    if(data.finished) {
-                      newContent.addClass(uprootableClass);
-                      jQuery.morphDialogIntoElement({
-                        dialog: dialog,
-                        input: input,
-                        element: newContent,
-                        finished: data.finished,
-                        canceled: data.canceled,
-                        onDone: function() {
-                          newContent.reallyRemoveClass(uprootableClass);
-                        }
-                      });
-                    }
+                    newContent.addClass('webxray-hidden');
+                    jQuery.morphDialogIntoElement({
+                      dialog: dialog,
+                      input: input,
+                      element: newContent,
+                      onDone: function() {
+                        newContent.reallyRemoveClass('webxray-hidden');
+                      }
+                    });
                   } else {
                     // TODO: Re-focus previously focused elements?
-                    $(focusedElement).reallyRemoveClass(uprootableClass);
+                    $(focusedElement).reallyRemoveClass('webxray-hidden');
                     dialog.close();
                   }
-                } catch (e) {
-                  console.error("postmessage was not valid JSON");
                 }
               });
             }
