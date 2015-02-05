@@ -1,6 +1,11 @@
-(function(){
-  if ('webxrayPreferences' in localStorage)
-    window.parent.postMessage(localStorage.webxrayPreferences, "*");
-  else
+(function() {
+  var fallback = function() {
     window.parent.postMessage("{}", "*");
+  };
+  try {
+    if (!!localStorage["webxrayPreferences"])
+      window.parent.postMessage(localStorage.webxrayPreferences, "*");
+    else
+      fallback();
+  } catch (e) { fallback(); }
 }());
