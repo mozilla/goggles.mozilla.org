@@ -1,5 +1,6 @@
 (function() {
-  require(['jquery'], function ($) {
+
+  var setupLogin = function ($) {
     var csrf = document.getElementById("require-js").getAttribute("data-csrf");
 
     var joinEl = $('#webmaker-nav .join-button'),
@@ -75,5 +76,11 @@
     });
 
     disable();
-  });
+  }
+
+  if(typeof require !== "undefined") {
+    require(['jquery'], setupLogin);
+  } else if(window.jQuery) {
+    setupLogin(window.jQuery);
+  }
 }());
