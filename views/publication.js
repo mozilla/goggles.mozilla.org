@@ -12,6 +12,9 @@ function DeferredTimeout(ms) {
  *
  */
 function DeferredPublish(html, originalURL, hackpubURL) {
+
+  var csrf = $("#require-js").data("csrf");
+
   return jQuery.ajax({
     type: 'POST',
     url: hackpubURL + "publish",
@@ -20,7 +23,7 @@ function DeferredPublish(html, originalURL, hackpubURL) {
       'original-url': originalURL
     },
     headers: {
-      'X-CSRF-Token': $("meta[name='csrf-token']").attr("content")
+      'X-CSRF-Token': csrf
     },
     crossDomain: true,
     dataType: 'json'
