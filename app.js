@@ -171,7 +171,7 @@ app.get("/", function(req, res) {
   res.render("index.html", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
-    email: req.session.email || "",
+    email: req.session.user.email || "",
     host: env.get("APP_HOSTNAME"),
     personaHost: env.get("PERSONA_HOST")
   });
@@ -188,7 +188,7 @@ app.get("/uproot-dialog.html", csp, function(req, res) {
   res.render("uproot-dialog.html", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
-    email: req.session.email || "",
+    email: req.session.user.email || "",
     personaHost: env.get("PERSONA_HOST")
   });
 });
@@ -199,7 +199,7 @@ app.get("/publication.js", function(req, res) {
   res.render("publication.js", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
-    email: req.session.email || ""
+    email: req.session.user.email || ""
   });
 });
 
