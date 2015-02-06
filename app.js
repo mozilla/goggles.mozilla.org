@@ -120,10 +120,9 @@ app.locals({
 });
 
 app.use(express.csrf());
-
-// universal error handler
 app.use(function(err, req, res, next) {
-  console.error(JSON.stringify(err,false,2));
+  // universal error handler
+  console.error(err.msg);
   throw err;
 });
 
