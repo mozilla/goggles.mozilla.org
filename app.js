@@ -167,14 +167,11 @@ app.get('/healthcheck', function(req, res) {
   });
 });
 
+if (!env.get('WEBMAKER_REDIRECT_URL')) {
+  throw "WEBMAKER_REDIRECT_URL enrivonment variable required. Check .env file.";
+}
 app.get("/", function(req, res) {
-  res.render("index.html", {
-    audience: env.get("audience"),
-    csrf: req.csrfToken(),
-    email: req.session.user.email || "",
-    host: env.get("APP_HOSTNAME"),
-    personaHost: env.get("PERSONA_HOST")
-  });
+  res.redirect(301, env.get('WEBMAKER_REDIRECT_URL'));
 });
 
 // Redirect this route to "/" to be safe if anyone is still using it.
