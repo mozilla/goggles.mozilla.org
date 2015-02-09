@@ -185,7 +185,7 @@ app.get("/uproot-dialog.html", csp, function(req, res) {
   res.render("uproot-dialog.html", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
-    email: req.session.user.email || "",
+    email: (req.session.user && req.session.user.email) || "",
     personaHost: env.get("PERSONA_HOST")
   });
 });
@@ -196,7 +196,7 @@ app.get("/publication.js", function(req, res) {
   res.render("publication.js", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
-    email: req.session.user.email || ""
+    email: (req.session.user && req.session.user.email) || ""
   });
 });
 
