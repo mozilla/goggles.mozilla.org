@@ -167,11 +167,11 @@ app.get('/healthcheck', function(req, res) {
   });
 });
 
-if (!env.get('WEBMAKER_REDIRECT_URL')) {
-  throw "WEBMAKER_REDIRECT_URL enrivonment variable required. Check .env file.";
-}
+// Redirect / to a place on webmaker.org (namely webmaker.org/goggles),
+// since corresponding activities and learning materials are there.
+var webmakerGogglesLanding = env.get("audience") + "/goggles";
 app.get("/", function(req, res) {
-  res.redirect(301, env.get('WEBMAKER_REDIRECT_URL'));
+  res.redirect(301, webmakerGogglesLanding);
 });
 
 // Redirect this route to "/" to be safe if anyone is still using it.
