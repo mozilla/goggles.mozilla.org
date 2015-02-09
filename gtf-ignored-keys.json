@@ -7,5 +7,5 @@
   "short-command-descriptions:quit", "short-command-descriptions:redo", "short-command-descriptions:remix",
   "short-command-descriptions:remove", "short-command-descriptions:undo", "short-command-descriptions:uproot",
   "style-change", "tap-space-html", "too-big-to-change", "too-big-to-remix-html", "undid", "undo", "unload-blocked",
-  "uproot", "with"
+  "uproot", "with", "first publish hint", "first use hint"
 ]

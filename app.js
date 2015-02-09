@@ -167,14 +167,11 @@ app.get('/healthcheck', function(req, res) {
   });
 });
 
+// Redirect / to a place on webmaker.org (namely webmaker.org/goggles),
+// since corresponding activities and learning materials are there.
+var webmakerGogglesLanding = env.get("audience") + "/goggles";
 app.get("/", function(req, res) {
-  res.render("index.html", {
-    audience: env.get("audience"),
-    csrf: req.csrfToken(),
-    email: req.session.user.email || "",
-    host: env.get("APP_HOSTNAME"),
-    personaHost: env.get("PERSONA_HOST")
-  });
+  res.redirect(301, webmakerGogglesLanding);
 });
 
 // Redirect this route to "/" to be safe if anyone is still using it.
@@ -188,7 +185,7 @@ app.get("/uproot-dialog.html", csp, function(req, res) {
   res.render("uproot-dialog.html", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
-    email: req.session.user.email || "",
+    email: (req.session.user && req.session.user.email) || "",
     personaHost: env.get("PERSONA_HOST")
   });
 });
@@ -199,7 +196,7 @@ app.get("/publication.js", function(req, res) {
   res.render("publication.js", {
     audience: env.get("audience"),
     csrf: req.csrfToken(),
-    email: req.session.user.email || ""
+    email: (req.session.user && req.session.user.email) || ""
   });
 });
 
