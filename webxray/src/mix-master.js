@@ -127,13 +127,26 @@
           open(url, 'info');
         }
       },
-      replaceElement: function(elementToReplace, html) {
+      replaceElement: function(originalElement, elementToReplace, html, saveState) {
         var newContent = self.htmlToJQuery(html);
-        runCommand("ReplaceWithCmd", {
-          name: l10n('replacement'),
-          elementToReplace: elementToReplace,
-          newContent: newContent
-        });
+
+        // Use saveState to determine whether or not this action should be put on the
+        // undo/redo stack.
+        if (saveState) {
+
+          // To avoid tapping too far down the Command rabbit-hole, just put the
+          // original element back, and apply new changes on top of it.
+          $(elementToReplace).replaceWith(originalElement);
+
+          runCommand("ReplaceWithCmd", {
+            name: l10n('replacement'),
+            elementToReplace: originalElement,
+            newContent: newContent
+          });
+        }
+        else {
+          $(elementToReplace).replaceWith(newContent);
+        }
         return newContent;
       },
       setDialogPageMods: function(mods) {
@@ -184,6 +197,8 @@
         function begin(startHTML) {
           focused.unfocus();
 
+          var originalElement = focusedElement;
+
           jQuery.morphElementIntoDialog({
             input: input,
             body: options.body,
@@ -204,7 +219,7 @@
                     // The dialog may have decided to replace all our spaces
                     // with non-breaking ones, so we'll undo that.
                     var html = data.endHTML.replace(/\u00a0/g, " ");
-                    var newContent = self.replaceElement(focusedElement, html);
+                    var newContent = self.replaceElement(originalElement, focusedElement, html, data.finished);
                     focusedElement = newContent[0];
 
                     if(data.finished) {
