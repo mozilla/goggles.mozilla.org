@@ -37,9 +37,9 @@
     var hint = $(
       '<div class="webxray-toolbar-hint">' +
       '<div class="webxray-toolbar-hint-text"></div>' +
-      '<div class="webxray-toolbar-button webxray-toolbar-hint-dismiss">'+
+      '<div class="webxray-toolbar-button webxray-toolbar-hint-dismiss">' +
       Localized.get("OK") +
-      '</div>'+
+      '</div>' +
       '<div class="webxray-toolbar-hint-ra"></div>' +
       '</div>'
     );
