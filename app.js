@@ -1,33 +1,14 @@
-process.env.NEW_RELIC_BROWSER_MONITOR_ENABLE = false;
-
-// New Relic Server monitoring support
-var newrelic;
-if ( process.env.NEW_RELIC_ENABLED ) {
-  newrelic = require( "newrelic" );
-} else {
-  newrelic = {
-    getBrowserTimingHeader: function () {
-      return "<!-- New Relic RUM disabled -->";
-    }
-  };
-}
-
-var bleach = require("./lib/bleach"),
-    db = require("./lib/database"),
-    express    = require("express"),
+var express    = require("express"),
     goggles    = require("./lib/goggles"),
     habitat    = require("habitat"),
-    helmet = require("helmet"),
-    i18n = require("webmaker-i18n"),
+    helmet     = require("helmet"),
+    i18n       = require("webmaker-i18n"),
     lessMiddleWare = require("less-middleware"),
-    makeAPI = require("./lib/makeapi"),
     nunjucks   = require("nunjucks"),
     path       = require("path"),
-    utils = require("./lib/utils"),
-    version = require("./package").version,
-    WebmakerAuth = require("webmaker-auth"),
-    wts = require("webmaker-translation-stats"),
-    WWW_ROOT = path.resolve(__dirname, 'public');
+    version    = require("./package").version,
+    wts        = require("webmaker-translation-stats"),
+    WWW_ROOT   = path.resolve(__dirname, 'public');
 
 // Load config from ".env"
 habitat.load();
@@ -37,26 +18,15 @@ var app = express(),
     appName = "goggles",
     env = new habitat(),
     node_env = env.get('NODE_ENV'),
-    databaseOptions =  env.get('CLEARDB_DATABASE_URL') || env.get('DB'),
-    databaseAPI = db('thimbleproject', databaseOptions),
-    emulate_s3 = env.get('S3_EMULATION') || !env.get('S3_KEY'),
-    middleware = require('./lib/middleware')(env),
-    make = makeAPI(env.get('make')),
     nunjucksEnv = new nunjucks.Environment([
       new nunjucks.FileSystemLoader(path.join(__dirname, 'views')),
       new nunjucks.FileSystemLoader(path.join(__dirname, 'public/bower'))
     ], {
       autoescape: true
-    }),
-    parameters = require('./lib/parameters'),
-    webmakerAuth = new WebmakerAuth({
-      loginURL: env.get("LOGIN"),
-      authLoginURL: env.get("LOGINAPI"),
-      loginHost: env.get("APP_HOSTNAME"),
-      secretKey: env.get("SESSION_SECRET"),
-      domain: env.get("COOKIE_DOMAIN"),
-      forceSSL: env.get("FORCE_SSL")
     });
+
+// No need to tell the world this:
+app.disable("x-powered-by");
 
 // Enable template rendering with nunjucks
 nunjucksEnv.express(app);
@@ -64,22 +34,6 @@ nunjucksEnv.addFilter( "instantiate", function( input ) {
     var tmpl = new nunjucks.Template( input );
     return tmpl.render( this.getVariables() );
 });
-
-// Content Security Policy (CSP)
-var csp = middleware.addCSP({personaHost: env.get('PERSONA_HOST')});
-
-app.disable("x-powered-by");
-
-
-// log either to GELF or console
-if (env.get("ENABLE_GELF_LOGS")) {
-  messina = require("messina");
-  logger = messina("goggles.webmaker.org-" + env.get("NODE_ENV") || "development" );
-  logger.init();
-  app.use(logger.middleware());
-} else {
-  app.use(express.logger("dev"));
-}
 
 app.use(helmet.iexss());
 app.use(helmet.contentTypeOptions());
@@ -91,9 +45,6 @@ app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 app.use(express.compress());
 app.use(express.json());
 app.use(express.urlencoded());
-
-app.use(webmakerAuth.cookieParser());
-app.use(webmakerAuth.cookieSession());
 
 // Setup locales with i18n
 app.use( i18n.middleware({
@@ -115,41 +66,14 @@ app.locals({
   GA_DOMAIN: env.get("GA_DOMAIN"),
   hostname: env.get("APP_HOSTNAME"),
   languages: i18n.getSupportLanguages(),
-  newrelic: newrelic,
   bower_path: "public/bower"
 });
 
-app.use(express.csrf());
+// universal error handling
 app.use(function(err, req, res, next) {
-  // universal error handler
   console.error(err.msg);
   throw err;
 });
-
-app.post('/publish',
-         middleware.checkForAuth,
-         middleware.checkForPublishData,
-         middleware.ensureMetaData,
-         middleware.sanitizeMetaData,
-         middleware.checkPageOperation(databaseAPI),
-         bleach.bleachData(env.get("BLEACH_ENDPOINT")),
-         middleware.saveData(databaseAPI, env.get('APP_HOSTNAME')),
-         middleware.rewritePublishId(databaseAPI),
-         middleware.generateUrls(appName, env.get('S3'), env.get('USER_SUBDOMAIN')),
-         middleware.finalizeProject(nunjucksEnv, env),
-         middleware.publishData(env.get('S3')),
-         middleware.rewriteUrl,
-         // update the database now that we have a S3-published URL
-         middleware.saveUrl(databaseAPI, env.get('APP_HOSTNAME')),
-         middleware.getRemixedFrom(databaseAPI, make),
-         middleware.publishMake(make),
-  function(req, res) {
-    res.json({
-      'published-url': req.publishedUrl,
-      'remix-id': req.publishId
-    });
-  }
-);
 
 // DEVOPS - Healthcheck
 app.get('/healthcheck', function(req, res) {
@@ -167,26 +91,15 @@ app.get('/healthcheck', function(req, res) {
   });
 });
 
-// Redirect / to a place on webmaker.org (namely webmaker.org/goggles),
-// since corresponding activities and learning materials are there.
-var webmakerGogglesLanding = env.get("audience") + "/goggles";
-app.get("/", function(req, res) {
-  res.redirect(301, webmakerGogglesLanding);
-});
-
-// Redirect this route to "/" to be safe if anyone is still using it.
-// 2014/02/08 we have removed route to /index.html in this #Bug973991
-app.get("/index.html", function(req, res) {
-  res.redirect(301, "/");
+// oauth login confirmation page
+app.get("/login-confirmation.html", function(req, res) {
+  res.render("login-confirmation.html");
 });
 
 // intercept webxray's publication dialog - HTML part
-app.get("/uproot-dialog.html", csp, function(req, res) {
+app.get("/uproot-dialog.html", function(req, res) {
   res.render("uproot-dialog.html", {
-    audience: env.get("audience"),
-    csrf: req.csrfToken(),
-    email: (req.session.user && req.session.user.email) || "",
-    personaHost: env.get("PERSONA_HOST")
+    hostname: env.get("APP_HOSTNAME")
   });
 });
 
@@ -194,9 +107,16 @@ app.get("/uproot-dialog.html", csp, function(req, res) {
 app.get("/publication.js", function(req, res) {
   res.set( "Content-Type", "application/javascript; charset=utf-8" );
   res.render("publication.js", {
-    audience: env.get("audience"),
-    csrf: req.csrfToken(),
-    email: (req.session.user && req.session.user.email) || ""
+    idwmoURL: env.get("ID_WMO_URL"),
+    clientId: env.get("ID_WMO_CLIENT_ID"),
+    publishwmoURL: env.get("PUBLISH_WMO_URL")
+  });
+});
+
+// intercept webxray's publication dialog - HTML part
+app.get("/gogglesnotice.js", function(req, res) {
+  res.render("gogglesnotice.js", {
+    hostname: env.get("APP_HOSTNAME")
   });
 });
 
@@ -232,27 +152,15 @@ app.get("/easy-remix-dialog/index.html", function(req, res) {
   res.render("/easy-remix-dialog/index.html");
 });
 
-// SSO
-app.post('/verify', webmakerAuth.handlers.verify);
-app.post('/authenticate', webmakerAuth.handlers.authenticate);
-app.post('/logout', webmakerAuth.handlers.logout);
-app.post('/auth/v2/create', webmakerAuth.handlers.createUser);
-app.post('/auth/v2/uid-exists', webmakerAuth.handlers.uidExists);
-app.post('/auth/v2/request', webmakerAuth.handlers.request);
-app.post('/auth/v2/authenticateToken', webmakerAuth.handlers.authenticateToken);
-app.post('/auth/v2/verify-password', webmakerAuth.handlers.verifyPassword);
-app.post('/auth/v2/request-reset-code', webmakerAuth.handlers.requestResetCode);
-app.post('/auth/v2/reset-password', webmakerAuth.handlers.resetPassword);
-
 // build webxray and then run the app server
 goggles.build(env, nunjucksEnv, function() {
   app.listen(env.get("port"), function(){
     console.log('Express server listening on ' + env.get("APP_HOSTNAME"));
   });
-
-  // If we're in running in emulated S3 mode, run a mini
-  // server for serving up the "s3" published content.
-  if (emulate_s3) {
-    require("mox-server").runServer(env.get("MOX_PORT", 12319));
-  }
 });
+
+// If we're in running in emulated S3 mode, run a mini
+// server for serving up the "s3" published content.
+if (env.get("node_env") !== "production") {
+  require("mox-server").runServer(env.get("MOX_PORT", 12319));
+}

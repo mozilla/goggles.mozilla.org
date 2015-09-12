@@ -25,6 +25,8 @@
     uprootDialogURL: "{{hostname}}/" + xray.lang + "/uproot-dialog.html",
     hackpubInjectionURL: "published-hack/injector.js",
     pluginURLs: [],
-    hackpubURL: "{{hackpubURL}}"
+    hackpubURL: "{{hackpubURL}}",
+    idwmoURL: "{{idwmoURL}}",
+    publishwmoURL: "{{publishwmoURL}}"
   };
 })(jQuery);

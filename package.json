@@ -1,8 +1,9 @@
 {
   "name": "goggles.webmaker.org",
-  "version": "1.1.34",
-  "description": "A node version of the X-ray Goggles",
+  "version": "2.0.0",
+  "description": "Mozilla's X-Ray Goggles",
   "private": true,
+  "main": "app.js",
   "dependencies": {
     "async": "0.2.9",
     "bower": "1.3.8",
@@ -12,27 +13,16 @@
     "helmet": "0.1.2",
     "hood": "0.2.1",
     "htmlsanitizer": "0.0.2",
-    "knox": "0.8.5",
     "less-middleware": "0.1.12",
-    "makeapi-client": "0.5.27",
-    "messina": "0.1.2",
-    "mox-server": "https://github.com/Pomax/mox-server/archive/master.tar.gz",
-    "newrelic": "1.7.2",
+    "mox-server": "git://github.com/Pomax/mox-server",
     "node-statsd": "0.0.7",
     "noxmox": "0.2.4",
     "nunjucks": "0.1.10",
-    "sequelize": "1.6.0",
-    "webmaker-auth": "1.0.2",
-    "webmaker-download-locales": "0.1.2",
+    "webmaker-download-locales": "^0.2.5",
     "webmaker-i18n": "0.3.20",
     "webmaker-locale-mapping": "0.0.5",
-    "webmaker-loginapi": "https://github.com/mozilla/node-webmaker-loginapi/tarball/v0.1.18",
     "webmaker-translation-stats": "0.0.1",
     "xfo-whitelist": "0.1.0"
-  },
-  "optionalDependencies": {
-    "mysql": "2.0.0-alpha7",
-    "sqlite3": "2.1.17"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
@@ -42,8 +32,9 @@
     "grunt-lesslint": "1.1.0"
   },
   "scripts": {
-    "test": "grunt && node test/middleware.ensureMetaData.js",
+    "test": "grunt",
     "postinstall": "bower install",
-    "download-locales": "webmaker-download-locales goggles"
+    "download-locales": "webmaker-download-locales goggles",
+    "start": "node app"
   }
 }
