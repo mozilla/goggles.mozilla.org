@@ -1,24 +1,35 @@
-X-ray goggles on Node.js
-========================
+Mozilla X-Ray goggles
+=====================
 
-This is a reboot of the xray goggles, so that it is served as a node app.
+This is a client-side (with small server component) application that hosts the Mozilla X-Ray Goggles library. It is dependent on having an [id.wmo] and [publish.wmo] end point to talk to for its user authentication and data publication functionality, respectively. The end point URLs can be set in the `.env` file used.
 
-**NOTE: This README assumes that you have all the required external dependencies installed and have a working dev environment. New to Webmaker? Make sure to read our [developer guide](https://wiki.mozilla.org/Webmaker/Code) for everything you need in order to get started!**
+Getting up and running
+----------------------
 
-Prequisites
------------
+In your Git directory (or whichever directory you want to place the goggles in), type:
 
-* [make-valet](https://github.com/mozilla/make-valet)
+```
+$> git clone https://github.com/mozilla/goggles.webmaker.org
+$> cd goggles.webmaker.org
+$> npm install
+$> cp env.dist .env
+```
 
-Migration
----------
+Then any time you wish to (re)compile the library and run the Goggles server, type:
+```
+$> npm start
+```
 
-Various scripts are present that will assist in migrating old data sets along with Node.js scripts to update old records.
+Environment variables
+---------------------
 
-* `migrations/09052013-add-makeid-column.sql`
-    * Used to add the `makeid` to the `ThimbleProject` data model. Using the script will depend on your SQL managing environment, but here's an example of using it in a commandline prompt:
-        * `mysql < migrations/09052013-add-makeid-column.sql` - Assumes you have already done `use <DB_NAME>`
+The following environment variables are important to change, if you want to use the goggles in an atypical enviroment (i.e. one where any of the services used or relied upon does not use the default supplied `.env` file)
 
-* `migrations/ThimbleProjectMigration.js`
-    * Used to retrieve the `makeid` for any `ThimbleProject` that has already been published to the **MakeAPI**. This only needs to be run once.
-        * `node migrations/ThimbleProjectMakeIDMigration.js` will execute this script, assuming proper `.env` variables have already been setup (instructions above).
+```
+PORT: the port the service will run on, by edef
+APP_HOSTNAME: the domain the service will be running on, port included
+HACKPUBURL: the domain the service will be running on, port included
+ID_WMO_URL: the URL for the id.webmaker.org service, port included
+ID_WMO_CLIENT_ID: the client identifier assigned to goggles by thje id.webmaker.org instance pointed to
+PUBLISH_WMO_URL: the URL for the publish.webmaker.org service, port included
+```
