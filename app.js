@@ -35,8 +35,6 @@ nunjucksEnv.addFilter( "instantiate", function( input ) {
     return tmpl.render( this.getVariables() );
 });
 
-app.use(helmet.iexss());
-app.use(helmet.contentTypeOptions());
 if (!!env.get("FORCE_SSL") ) {
   app.use(helmet.hsts());
   app.enable("trust proxy");
