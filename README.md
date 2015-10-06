@@ -26,10 +26,10 @@ Environment variables
 The following environment variables are important to change, if you want to use the goggles in an atypical enviroment (i.e. one where any of the services used or relied upon does not use the default supplied `.env` file)
 
 ```
-PORT: the port the service will run on, by edef
-APP_HOSTNAME: the domain the service will be running on, port included
-HACKPUBURL: the domain the service will be running on, port included
-ID_WMO_URL: the URL for the id.webmaker.org service, port included
-ID_WMO_CLIENT_ID: the client identifier assigned to goggles by thje id.webmaker.org instance pointed to
-PUBLISH_WMO_URL: the URL for the publish.webmaker.org service, port included
+PORT: the port the service will run on.
+APP_HOSTNAME: the domain the service will be running on, port included.
+HACKPUBURL: the domain the service will be running on, port included.
+ID_WMO_URL: the URL for the id.webmaker.org service, port included.
+ID_WMO_CLIENT_ID: the client identifier assigned to goggles by thje id.webmaker.org instance pointed to.
+PUBLISH_WMO_URL: the URL for the publish.webmaker.org service, port included.
 ```
