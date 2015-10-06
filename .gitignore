@@ -1,6 +1,4 @@
 node_modules
-goggles.sqlite
-thimble.sqlite
 .env
 /public/bower/
 locale/
