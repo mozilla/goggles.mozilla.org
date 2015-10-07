@@ -37,5 +37,5 @@
     "text-align: center"
   ].join("; "));
 
-  doc.body.appendChild(notice);
+  document.body.appendChild(notice);
 }());
