@@ -24,6 +24,11 @@
    * @return {[type]} [description]
    */
   function checkForUser() {
+    // do not recheck the user if we're currently publishing.
+    if (publishAPI.publishing) {
+      return false;
+    }
+
     if (!checked) {
       checked = true;
       var authToken = localStorage[gogglesAuthLabel];
@@ -32,6 +37,7 @@
         return true;
       }
     }
+
     return false;
   }
 
@@ -175,7 +181,10 @@
     },
 
     publish: function(authToken) {
-      publishAPI.createProject(authToken);
+      if (!publishAPI.publishing) {
+        this.publishing = true;
+        publishAPI.createProject(authToken);
+      }
     },
 
     createProject: function(authToken) {
@@ -257,6 +266,7 @@
         try {
           var result = JSON.parse(publish.response);
           var url = result["publish_url"];
+          publishAPI.publishing = false;
           showPublishResult(url);
         } catch(e) {
           console.error("Error parsing XHR response in publishAPI.publishProject", publish.response, e);
