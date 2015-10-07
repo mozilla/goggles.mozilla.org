@@ -6,6 +6,7 @@
   var idwmo = "{{ idwmoURL }}";
   var publishwmo = "{{ publishwmoURL }}";
 
+  var gogglesFile = "/index.html";
   var gogglesClientId = "{{ clientId }}";
   var gogglesDataLabel = "goggles-publish-data";
   var gogglesAuthLabel = "goggles-auth-token";
@@ -238,7 +239,7 @@
         "content": project_id
       }], {
         "name": "goggles remix",
-        "filename": "/remix.html",
+        "filename": gogglesFile,
         "contentType": "text/html",
         "content": html
       });
