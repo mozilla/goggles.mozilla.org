@@ -24,11 +24,6 @@
    * @return {[type]} [description]
    */
   function checkForUser() {
-    // do not recheck the user if we're currently publishing.
-    if (publishAPI.publishing) {
-      return false;
-    }
-
     if (!checked) {
       checked = true;
       var authToken = localStorage[gogglesAuthLabel];
@@ -300,13 +295,6 @@
    * @return {[type]}   [description]
    */
   document.addEventListener("focus", checkForUser);
-
-  /**
-   * [description]
-   * @param  {[type]} ) {            checked [description]
-   * @return {[type]}   [description]
-   */
-  document.addEventListener("blur", function() { checked = false; });
 
   /**
    * [description]
