@@ -1,7 +1,7 @@
-(function(doc) {
+(function() {
   var unknown = "an unknown webpage";
 
-  var meta = doc.querySelector("script['data-original-url']");
+  var meta = document.querySelector("script[data-original-url]");
   if(!meta) {
     console.error("could not find the element that houses the original URL for this remix");
     meta = {
@@ -38,4 +38,4 @@
   ].join("; "));
 
   doc.body.appendChild(notice);
-}(window.document));
+}());
