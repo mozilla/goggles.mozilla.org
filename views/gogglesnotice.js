@@ -1,11 +1,21 @@
 (function(doc) {
+  var unknown = "an unknown webpage";
+
   var meta = doc.querySelector("script['data-original-url']");
   if(!meta) {
-    return console.error("could not find the element that houses the original URL for this remix").
+    console.error("could not find the element that houses the original URL for this remix");
+    meta = {
+      getAttribute: function() {
+        return unknown;
+      }
+    }
   }
+
   var url = meta.getAttribute("data-original-url");
   var link = document.createElement("a");
-  link.href = url;
+  if (url !== unknown) {
+    link.href = url;
+  }
   link.textContent = url;
 
   var notice = document.createElement("div");
