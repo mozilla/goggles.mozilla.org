@@ -17,6 +17,7 @@
     link.href = url;
   }
   link.textContent = url;
+  link.style.color = "rgb(23, 151, 221)";
 
   var notice = document.createElement("div");
   notice.textContent = "This is a Mozilla X-Ray Goggles remix of ";

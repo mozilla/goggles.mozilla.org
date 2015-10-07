@@ -275,7 +275,11 @@
     var publish = document.querySelector("button.publish");
     publish.addEventListener("click", function(evt) {
       var authToken = localStorage[gogglesAuthLabel];
-      if (!!authToken) { publishAPI.publish(authToken); }
+      if (!!authToken) {
+        publish.setAttribute("disabled","disabled");
+        publish.textContent = "Publishing...";
+        publishAPI.publish(authToken);
+      }
       else { console.warn("Goggles cannot publish, because it has not logged in yet."); }
     });
   }
