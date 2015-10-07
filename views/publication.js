@@ -233,7 +233,7 @@
 
       var payload = constructMultipartPayload([{
         "name": "path",
-        "content": "/remix.html"
+        "content": gogglesFile
       },{
         "name": "project_id",
         "content": project_id
