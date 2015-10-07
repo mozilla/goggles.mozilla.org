@@ -1,6 +1,9 @@
 (function(doc) {
-  var meta = doc.querySelector("meta[name='data-remix-host']");
-  var url = meta.getAttribute("content");
+  var meta = doc.querySelector("script['data-original-url']");
+  if(!meta) {
+    return console.error("could not find the element that houses the original URL for this remix").
+  }
+  var url = meta.getAttribute("data-original-url");
   var link = document.createElement("a");
   link.href = url;
   link.textContent = url;

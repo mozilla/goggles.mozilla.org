@@ -226,10 +226,12 @@
       catch (e) { return console.error("Error parsing stored data", stored, e); }
 
       var html = data.html;
+
       // Rewrite the title to "...'s remix of ..."
       html = html.replace(/<title([^>]*)>/, "<title$1>" + userdata.username + "'s remix of ");
+
       // Inject the goggles notification, script controlled
-      html = html.replace("</body", "<script src='{{ hostname }}/gogglesnotice.js'></script></body");
+      html = html.replace("</body", "<script data-original-url='" + data.url + "' src='{{ hostname }}/gogglesnotice.js'></script></body");
 
       var payload = constructMultipartPayload([{
         "name": "path",
