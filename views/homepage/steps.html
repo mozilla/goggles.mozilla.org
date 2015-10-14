@@ -3,26 +3,47 @@
       <div class="content-wrapper">
 
         <div class="step">
-          <img class="example" src="img/goggles-step-1.png">
+          <figure class="example">
+            <img src="img/goggles-step-1.png">
+          </figure>
           <div class="description">
             <h2>Install Goggles</h2>
             <p>
               Make sure your bookmark bar is in view. Click and drag this
               button to your bookmark bar to install X-Ray Goggles.
             </p>
-            <a class="goggles-bookmark" href="javascript:"><span class="icon"></span>Drag and drop me in your bookmark bar</a>
+            <a class="goggles-bookmark" href="javascript:"><span class="dragme fa fa-arrows"></span>Drag and drop me in your bookmark bar</a>
+
+            <!-- autogenerate the goggles bookmarklet code, immediately -->
+            <script>
+              var gogglesBaseURI = window.location.protocol + "//" + window.location.host;
+              var bookmarklet = (function() {
+                var script=document.createElement('script');
+                script.src=gogglesBaseURI+'/webxray.js';
+                script.className='webxray';
+                script.setAttribute('data-lang','en-US');
+                script.setAttribute('data-baseuri',gogglesBaseURI);
+                document.body.appendChild(script);
+              }).toString();
+              bookmarklet = bookmarklet.replace(/gogglesBaseURI/g, "'" + gogglesBaseURI + "'");
+              var lines = bookmarklet.split("\n").map(function(s) { return s.trim(); });
+              document.querySelector("a.goggles-bookmark").href = "javascript:(" + lines.join('') + "())";
+            </script>
+
           </div>
         </div>
 
         <div class="step">
-          <img class="example" src="img/goggles-step-2.png">
+          <figure class="example">
+            <img src="img/goggles-step-2.png">
+          </figure>
           <div class="description">
             <h2>Try a Sample Activity</h2>
             <p>
               Once you've installed X-Ray Goggles in your bookmark bar, you
-              can begine remixing. Start with our step-by-step tutorial.
+              can begin remixing. Start with our step-by-step tutorial.
             </p>
-            <button class="remix-button">Sample activity page →</button>
+            <button class="remix-button">Sample activity page <span class="follow fa fa-long-arrow-right "></span></button>
           </div>
         </div>
 

@@ -15,6 +15,7 @@
     <div id="navbar-right" class="container-flex">
       <div id="navbar-login" {% if username %}class="signed-in"{% endif %}>
         <div id="navbar-login-inner">
+
         {% if username %}
           <ul id="navbar-logged-in">
             <li>
@@ -44,13 +45,38 @@
               </ul>
             </li>
           </ul>
+
         {% else %}
+          
           <div id="navbar-anonymous">
-            <a href="#" title="Log in to Goggles" id="login-link" data-loginUrl="{{ loginURL }}" class="navbar-login">Sign in</a>
+            <a title="Log in to Goggles" id="login-link" target="_blank" class="navbar-login">Sign in</a>
             or
-            <a href="#" title="Create an account" id="signup-link" class="navbar-login">Create an Account</a>
+            <a title="Create an account" id="signup-link" class="navbar-login">Create an Account</a>
           </div>
+
+
+          <script>
+            var signin = document.querySelector("#login-link");
+            signin.href = "{{ idwmoURL }}/login/oauth/authorize?" + [
+              "client_id={{ clientId }}",
+              "response_type=token",
+              "scopes=user email",
+              "action=signin",
+              "state=signin"
+            ].join("&");
+
+            var signup = document.querySelector("#signup-link");
+            signup.href = "{{ idwmoURL }}/login/oauth/authorize?" + [
+              "client_id={{ clientId }}",
+              "response_type=token",
+              "scopes=user email",
+              "action=signup",
+              "state=signup"
+            ].join("&");
+          </script>
+
         {% endif %}
+
         </div>
       </div>
     </div>
