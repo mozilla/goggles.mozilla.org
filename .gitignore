@@ -3,6 +3,3 @@ goggles.sqlite
 thimble.sqlite
 .env
 /public/bower/
-locale/
-!locale/en_US/*
-!locale/localeinfo.json
