@@ -393,7 +393,7 @@ footer {
           width: 17rem;
 
           &:hover {
-            background: #5BCAE3; // @blue:S:50%
+            background: saturate(@blue,20%);
           }
 
           &:active {
@@ -412,11 +412,11 @@ footer {
 
           display: block;
           cursor: pointer;
-          background: #F073AB none repeat scroll 0% 0%;
+          background: @pink none repeat scroll 0% 0%;
           padding: 20px 0px 14px 2rem;
           border: 0px none;
           border-radius: 30px;
-          box-shadow: 0px 2px 0px #E04164;
+          box-shadow: 0px 2px 0px @darkpink;
           font-size: 20px;
           color: #FFF;
           text-align: center;
@@ -424,6 +424,10 @@ footer {
           position: relative;
           font-weight: 400;
           line-height: 1.6rem;
+
+          &:hover {
+            background: saturate(lighten(@pink,10%),20%);
+          }
 
           .dragme {
             position: absolute;
@@ -584,7 +588,7 @@ footer {
         text-decoration: none;
 
         &:hover {
-          background: #5BCAE3; // @blue:S:50%
+          background: saturate(@blue, 20%);
         }
 
         &:active {
