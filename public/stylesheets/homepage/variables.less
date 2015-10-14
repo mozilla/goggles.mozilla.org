@@ -1,0 +1,34 @@
+@darkgreen: #2E9961;  // Header green
+@lightgreen: #47AD66; // Main CTA green
+@purple: #586CB4;     // Header purple
+@fillings: #6A6DB1;   // Main 'purple'
+@lilac: #7884BA;      // Footer lilac
+@skyblue: #00B9E4;    // Button blue
+@darkblue: #005387;   // Button underline
+
+@bookmarkpink: #fc8bb4; // bookmark button pink
+@bookmarkred: #f15069;  // bookmark button red
+
+
+.animation (@name, @duration: 300ms, @ease: ease, @count: 1, @delay: 0) {
+  -webkit-animation:  @name @duration @ease @count @delay ;
+  -moz-animation:     @name @duration @ease @count @delay ;
+  -ms-animation:      @name @duration @ease @count @delay ;
+  animation:          @name @duration @ease @count @delay ;
+}
+
+.transform(@string){
+  -webkit-transform: @string;
+  -moz-transform:    @string;
+  -ms-transform:     @string;
+  -o-transform:      @string;
+  transform:         @string;
+}
+
+.transition (@string) {
+  -webkit-transition: @string;
+  -moz-transition:    @string;
+  -ms-transition:     @string;
+  -o-transition:      @string;
+  transition:         @string;
+}

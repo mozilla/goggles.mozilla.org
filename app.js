@@ -89,6 +89,12 @@ app.get('/healthcheck', function(req, res) {
   });
 });
 
+app.get('/', function(req, res) {
+  res.render("homepage/index.html", {
+    // ...
+  });
+});
+
 // oauth login confirmation page
 app.get("/login-confirmation.html", function(req, res) {
   res.render("login-confirmation.html");
