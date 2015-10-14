@@ -430,6 +430,20 @@ footer {
             left: 1.5rem;
             line-height: 1.4rem;
           }
+
+          .label {
+            position: relative;
+            color: transparent;
+
+            &:after {
+              content: "Drag and drop me in your bookmark bar";
+              position: absolute;
+              top: ~"calc(50% - 0.75rem)";
+              left: -7.3rem;
+              color: white;
+              white-space: nowrap;
+            }
+          }
         }
 
       }

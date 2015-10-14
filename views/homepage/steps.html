@@ -12,7 +12,7 @@
               Make sure your bookmark bar is in view. Click and drag this
               button to your bookmark bar to install X-Ray Goggles.
             </p>
-            <a class="goggles-bookmark" href="javascript:"><span class="dragme fa fa-arrows"></span>Drag and drop me in your bookmark bar</a>
+            <a class="goggles-bookmark" href="javascript:"><span class="dragme fa fa-arrows"></span><span class="label">X-Ray Goggles</span></a>
 
             <!-- autogenerate the goggles bookmarklet code, immediately -->
             <script>
@@ -27,7 +27,8 @@
               }).toString();
               bookmarklet = bookmarklet.replace(/gogglesBaseURI/g, "'" + gogglesBaseURI + "'");
               var lines = bookmarklet.split("\n").map(function(s) { return s.trim(); });
-              document.querySelector("a.goggles-bookmark").href = "javascript:(" + lines.join('') + "())";
+              var a = document.querySelector("a.goggles-bookmark");
+              a.href = "javascript:(" + lines.join('') + "())";
             </script>
 
           </div>
