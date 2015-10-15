@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600,700);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 @import "variables.less";
 
 body, html {
@@ -18,40 +19,12 @@ body, html {
   overflow: hidden;
 }
 
-header {
-    padding: 20px;
-    overflow: auto;
-    background: @purple;
-
-    .branding {
-        float: left;
-        color: white;
-
-        img {
-            position: relative;
-            top: 2px;
-        }
-    }
-
-    .account-actions {
-        float: right;
-        color: rgba(255,255,255,.7);
-        font-size: 15px;
-
-        a {
-            color: white;
-            text-decoration: none;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
-}
 
 /* User bar overrides for homepage */
 .navbar-goggles {
   height: 4.5rem;
+  background: @darkpurple;
+  color: rgba(255,255,255,0.5);
 
   #navbar-login {
     border-left: none;
@@ -114,7 +87,7 @@ header {
 }
 
 footer {
-  background: @lilac;
+  background: @purple;
   margin-top: 75px;
 
   .content-wrapper {
@@ -130,23 +103,25 @@ footer {
   .social-links {
     list-style-type: none;
     margin: 0;
-    padding-top: 5px;
+    padding-top: 17px;
     display: flex;
 
     li {
-      line-height: 20px;
+      line-height: 15px;
       padding: 0;
       margin: 0.5rem 0 1rem 0;
       white-space: nowrap;
       vertical-align: middle;
-
-      flex: 1 0;
+      font-size: 15px;
+  
+      & + li {
+        margin-left: 4.5%;
+      }
     }
 
     li a {
       display: block;
       position: relative;
-      padding-left: 25px;
     }
 
     .icon {
@@ -229,7 +204,7 @@ footer {
 }
 
 .main-cta {
-  background-color: @lilac;
+  background-color: @purple;
   background-image: ~"url(/img/teach-pattern-2.png)";
   background-size: 300px;
   padding: 30px 0;
@@ -275,7 +250,7 @@ footer {
     padding: 11px 21px 10px 45px;
     line-height: 28px;
     display: inline-block;
-    color: @lightgreen;
+    color: @blue;
     border-radius: 3px;
     box-shadow: 0 2px 0 rgba(0,0,0,.15);
     position: relative;
@@ -314,7 +289,7 @@ footer {
 }
 
 .steps {
-  background-color: #f4f4f4;
+  background-color: @lightgrey;
 
   .content-wrapper {
     width: 964px;
@@ -336,25 +311,39 @@ footer {
         padding-bottom: 60px;
       }
 
+      figure {
+        margin: 0;
+        padding: 0;
+      }
+
       .example {
-        flex: 0 1 40%;
+        flex: 0 1 50%;
         position: relative;
         height: 370px;
         width: auto;
         top: -30px;
-        margin-right: 9%;
+        margin-right: 6%;
 
-        &:before {
-          content: "";
-          box-shadow: 0 2px 15px rgba(0,0,0,.2);
+        img {
+          position: relative;
+          z-index: 1
+        }
+
+        &:after {
+          content: "shadow";
+          color: transparent;
+          box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 0.2);
           border-radius: 40%;
           position: absolute;
-          bottom: 0;
+          bottom: 8px;
+          left: 15px;
+          right: 15px;
+          height: 0px;
         }
       }
 
       .description {
-        flex: 0 1 40%;
+        flex: 0 1 50%;
         display: flex;
         flex-direction: column;
         color: #777;
@@ -377,7 +366,12 @@ footer {
             padding: 5px;
             font-weight: 300;
             margin: 4rem 0 1rem;
+            line-height: 2rem;
           }
+        }
+
+        p {
+          margin-top: 0;
         }
 
         /**
@@ -386,20 +380,20 @@ footer {
         .remix-button {
           display: block;
           cursor: pointer;
-          background: @skyblue;
+          background: @blue;
           padding: 10px 0 8px 0;
           border: none;
           border-radius: 3px;
           box-shadow: 0 2px 0 @darkblue;
-          font-size: 18px;
+          font-size: 1.25rem;
+          font-family: "Fira Sans";
           color: white;
           text-align: center;
           text-decoration: none;
-
-          width: 15rem;
+          width: 17rem;
 
           &:hover {
-            background: #5BCAE3; // @skyblue:S:50%
+            background: saturate(lighten(@blue,10%),10%);
           }
 
           &:active {
@@ -415,29 +409,44 @@ footer {
          * VERY SIMILAR TO THE ABOVE BUTTON DEFINITION...
          */
         .goggles-bookmark {
+
           display: block;
           cursor: pointer;
-          background: @bookmarkpink;
-          padding: 10px 0 8px 0;
-          border: none;
-          border-radius: 3px;
-          box-shadow: 0 2px 0 red;
-          font-size: 18px;
-          color: white;
+          background: @pink none repeat scroll 0% 0%;
+          padding: 20px 0px 14px 2rem;
+          border: 0px none;
+          border-radius: 30px;
+          box-shadow: 0px 2px 0px @darkpink;
+          font-size: 20px;
+          color: #FFF;
           text-align: center;
           text-decoration: none;
-
           position: relative;
-          padding-left: 2rem;
           font-weight: 400;
+          line-height: 1.6rem;
 
-          .icon {
-            width: 26px;
-            height: 26px;
-            background: url(/img/drag-icon.png);
+          &:hover {
+            background: saturate(lighten(@pink,10%),20%);
+          }
+
+          .dragme {
             position: absolute;
-            z-index: 2;
-            left: 1rem;
+            left: 1.5rem;
+            line-height: 1.4rem;
+          }
+
+          .label {
+            position: relative;
+            color: transparent;
+
+            &:after {
+              content: "Drag and drop me in your bookmark bar";
+              position: absolute;
+              top: ~"calc(50% - 0.75rem)";
+              left: -7.3rem;
+              color: white;
+              white-space: nowrap;
+            }
           }
         }
 
@@ -454,7 +463,7 @@ footer {
 
   .remixable-header {
     text-align: center;
-    margin: 37px 0 27px 0;
+    margin: 80px 0 27px 0;
     padding: 0;
     font-weight: 400;
     color: #666;
@@ -569,7 +578,7 @@ footer {
       .remix-button {
         display: block;
         cursor: pointer;
-        background: @skyblue;
+        background: @blue;
         padding: 10px 0 8px 0;
         border-radius: 3px;
         box-shadow: 0 2px 0 @darkblue;
@@ -579,7 +588,7 @@ footer {
         text-decoration: none;
 
         &:hover {
-          background: #5BCAE3; // @skyblue:S:50%
+          background: saturate(lighten(@blue,10%),10%);
         }
 
         &:active {
@@ -615,7 +624,7 @@ footer {
     a {
       font-size: 15px;
       font-family: "Fira Medium";
-      color: @lightgreen;
+      color: @purple;
       text-decoration: none;
 
       &:hover {
