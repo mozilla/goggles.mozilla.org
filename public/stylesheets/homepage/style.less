@@ -29,6 +29,7 @@ body, html {
   height: 4.5rem;
   background: @darkpurple;
   color: rgba(255,255,255,0.5);
+  font-family: 'Fira Sans', sans-serif;
 
   #navbar-login {
     border-left: none;
@@ -36,10 +37,6 @@ body, html {
     &.signed-in {
       border-right: none;
     }
-  }
-
-  .navbar-login {
-    font-weight: 700;
   }
 
   #navbar-left {
@@ -51,6 +48,11 @@ body, html {
   }
 
   .navbar-logo-container {
+
+    .status.placeholder a {
+      font-weight: 300;
+    }
+
     &:hover {
       .transform(none);
     }
