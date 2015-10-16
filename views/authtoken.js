@@ -8,6 +8,9 @@
   } else { localStorage.removeItem("goggles-auth-token"); }
 
   if (window.location.toString().indexOf("logout=true") !== -1) {
-    document.querySelector(".loginstatus").textContent = "out";
+    var loginStatus = document.querySelector(".loginstatus")
+    if (loginStatus) {
+      loginStatus.textContent = "out";
+    }
   }
 }());
