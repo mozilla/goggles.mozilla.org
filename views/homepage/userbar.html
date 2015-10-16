@@ -13,31 +13,38 @@
     </div>
 
     <div id="navbar-right" class="container-flex">
-      <div id="navbar-login" {% if username %}class="signed-in"{% endif %}>
+      <div id="navbar-login">
         <div id="navbar-login-inner">
 
-        {% if username %}
+        <script type="text/html" class="loggedin">
           <ul id="navbar-logged-in">
             <li>
-              <img class="avatar" src="{{avatar}}">
-              <span>Hi, {{username}}</span>
+              <img class="avatar" src="%avatar%">
+              <span>Hi, <span class="username"></span></span>
               <img class="icon-arrow-down" src="/img/icon/dropdown-arrow.svg">
 
-              <ul class="dropdown">
+              <ul class="hidden dropdown">
+
+                <!--
                 <li>
                   <a id="new-project-link" class="dropdown-link">
                     <img src="/img/icon/new-project.svg" class="dropdown-icon">
                     New Project
                   </a>
                 </li>
+                -->
+
+                <!--
                 <li>
-                  <a href="/projects/{{ queryString }}" class="dropdown-link" target="_self">
+                  <a href="/projects/%queryString%" class="dropdown-link" target="_self">
                     <img src="/img/icon/your-projects.svg" class="dropdown-icon">
                     Your Projects
                   </a>
                 </li>
+                -->
+
                 <li>
-                  <a href="{{ logoutURL }}" id="logout-link" class="dropdown-link" target="_self">
+                  <a href="" id="logout-link" class="dropdown-link logout region" target="_blank">
                     <img src="/img/icon/sign-out.svg" class="dropdown-icon">
                     Sign Out
                   </a>
@@ -45,40 +52,20 @@
               </ul>
             </li>
           </ul>
+        </script>
 
-        {% else %}
-          
+        <script type="text/html" class="loggedout">
           <div id="navbar-anonymous">
-            <a title="Log in to Goggles" id="login-link" target="_blank" class="navbar-login">Sign in</a>
+            <a title="Log in to Goggles with your Webmaker account" target="_blank" class="navbar-login login-link">Sign in</a>
             or
-            <a title="Create an account" id="signup-link" target="_blank" class="navbar-login">Create an Account</a>
+            <a title="Create a new Webmaker account" target="_blank" class="navbar-login signup-link">Create an Account</a>
           </div>
+        </script>
 
+        <script type="text/html" class="publish"></script>
 
-          <script>
-            var signin = document.querySelector("#login-link");
-            signin.href = "{{ idwmoURL }}/login/oauth/authorize?" + [
-              "client_id={{ clientId }}",
-              "response_type=token",
-              "scopes=user email",
-              "action=signin",
-              "state=signin"
-            ].join("&");
+        <span class="status placeholder"></div>
 
-            var signup = document.querySelector("#signup-link");
-            signup.href = "{{ idwmoURL }}/login/oauth/authorize?" + [
-              "client_id={{ clientId }}",
-              "response_type=token",
-              "scopes=user email",
-              "action=signup",
-              "state=signup"
-            ].join("&");
-          </script>
-
-        {% endif %}
-
-        </div>
-      </div>
-    </div>
+    <script src="publication.js"></script>
   </nav>
 {% endblock %}

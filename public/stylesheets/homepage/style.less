@@ -2,6 +2,10 @@
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 @import "variables.less";
 
+.hidden {
+  display: none!important;
+}
+
 body, html {
   font-family: "Fira Sans";
   padding: 0;
@@ -86,6 +90,22 @@ body, html {
   }
 }
 
+#navbar-logged-in {
+  li {
+    img, span {
+      position: relative;
+      vertical-align: middle;
+      top: 0;
+    }
+    span span {
+      top: -2px;
+    }
+    ul.dropdown {
+      display: block;
+    }
+  }
+}
+
 footer {
   background: @purple;
   margin-top: 75px;
@@ -113,7 +133,7 @@ footer {
       white-space: nowrap;
       vertical-align: middle;
       font-size: 15px;
-  
+
       & + li {
         margin-left: 4.5%;
       }
@@ -385,7 +405,7 @@ footer {
           border: none;
           border-radius: 3px;
           box-shadow: 0 2px 0 @darkblue;
-          font-size: 1.25rem;
+          font-size: 18px;
           font-family: "Fira Sans";
           color: white;
           text-align: center;
@@ -413,17 +433,19 @@ footer {
           display: block;
           cursor: pointer;
           background: @pink none repeat scroll 0% 0%;
-          padding: 20px 0px 14px 2rem;
+          padding: 20px 0px 14px 3rem;
           border: 0px none;
           border-radius: 30px;
           box-shadow: 0px 2px 0px @darkpink;
-          font-size: 20px;
+          font-size: 18px;
           color: #FFF;
           text-align: center;
           text-decoration: none;
           position: relative;
           font-weight: 400;
-          line-height: 1.6rem;
+          line-height: 1.4rem;
+
+          width: 22rem;
 
           &:hover {
             background: saturate(lighten(@pink,10%),20%);
@@ -431,8 +453,8 @@ footer {
 
           .dragme {
             position: absolute;
-            left: 1.5rem;
-            line-height: 1.4rem;
+            left: 1.25rem;
+            line-height: 1.2rem;
           }
 
           .label {
