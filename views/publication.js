@@ -145,7 +145,7 @@
     signupOption.addEventListener("click", triggerLogin(!!link, true));
 
     if (!bypass) {
-      window.open(logoutUrl(gogglesClientIdLib, null, "_blank");
+      window.open(logoutUrl(gogglesClientIdLib), null, "_blank");
     }
 
   }
