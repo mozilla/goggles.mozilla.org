@@ -3,6 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>Mozilla X-Ray Goggles</title>
+    {% if forceSSL %}
+    <script>
+      if (window.location.protocol = "http:") {
+        var loc = window.location.toString();
+        window.location = loc.replace("http://", "https://");
+      }
+    </script>
+    {% endif %}
     <link rel="stylesheet" href="stylesheets/homepage/userbar.css">
     <link rel="stylesheet" href="stylesheets/homepage/style.css">
     <link rel="icon" href="/img/goggles-logo.png">

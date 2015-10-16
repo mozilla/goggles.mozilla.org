@@ -35,10 +35,7 @@ nunjucksEnv.addFilter( "instantiate", function( input ) {
     return tmpl.render( this.getVariables() );
 });
 
-//if (!!env.get("FORCE_SSL") ) {
-//  app.use(helmet.hsts());
-//  app.enable("trust proxy");
-//}
+var forceSSL = !!env.get("FORCE_SSL");
 
 
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
@@ -94,7 +91,8 @@ app.get('/healthcheck', function(req, res) {
 app.get('/', function(req, res) {
   res.render("homepage/index.html", {
     idwmoURL: env.get("ID_WMO_URL"),
-    clientId: env.get("ID_WMO_CLIENT_ID")
+    clientId: env.get("ID_WMO_CLIENT_ID"),
+    forceSSL: forceSSL
   });
 });
 
