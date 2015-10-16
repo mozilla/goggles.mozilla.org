@@ -11,6 +11,15 @@
   var gogglesDataLabel = "goggles-publish-data";
   var gogglesAuthLabel = "goggles-auth-token";
 
+  var logoutUrl = idwmo + "/logout?client_id=" + gogglesClientId;
+  var loginUrl = idwmo + "/login/oauth/authorize?" + [
+                    "client_id=" + gogglesClientId,
+                    "response_type=token",
+                    "scopes=user email",
+                    "state=goggles"
+                  ].join("&");
+  var signupUrl = loginUrl + "&action=signup";
+
   var checked = false;
   var userdata = false;
   var boundary = 'G0ggl3s';
@@ -44,14 +53,33 @@
     var container = document.querySelector("span.status.placeholder");
     container.innerHTML = loggedInTemplate;
     container.querySelector("img").src = userdata.avatar;
+
     var usernameFields = Array.prototype.slice.call(container.querySelectorAll(".username"));
     usernameFields.forEach(function(field) {
       field.textContent = userdata.username;
     });
-    container.querySelector(".logout.region").addEventListener("click", function(evt) {
-      logout();
-    });
+
+    // webxray library and landing page
+    var logoutregion = container.querySelector(".logout.region");
+    if(logoutregion) {
+      var link = (logoutregion.nodeName === "A");
+      if (link) {
+        logoutregion.href = logoutUrl;
+      }
+      logoutregion.addEventListener("click", function(evt) {
+        logout(link, link ? logoutregion : false, evt);
+      });
+    }
     listenForPublish();
+
+    // landing page only
+    var dropdown = container.querySelector(".dropdown");
+    var icon = container.querySelector("#navbar-logged-in");
+    if (dropdown && icon) {
+      icon.addEventListener("click", function() {
+        dropdown.classList.toggle("hidden");
+      });
+    }
   }
 
   /**
@@ -71,36 +99,43 @@
    * [triggerLogin description]
    * @return {[type]} [description]
    */
-  function triggerLogin() {
-    checked = false;
-    window.open(
-      idwmo + "/login/oauth/authorize?" + [
-        "client_id=" + gogglesClientId,
-        "response_type=token",
-        "scopes=user email",
-        "state=goggles"
-      ].join("&"),
-      null,
-      "_blank"
-    );
+  function triggerLogin(link, signup) {
+    return function() {
+      checked = false;
+      if (!link) window.open(signup ? signupUrl : loginUrl, null, "_blank");
+    };
   }
 
   /**
    * [logout description]
    * @return {[type]} [description]
    */
-  function logout(bypass) {
+  function logout(bypass, link, evt) {
     checked = false;
     userdata = false;
     localStorage.removeItem(gogglesAuthLabel);
 
     var container = document.querySelector("span.status.placeholder");
     container.innerHTML = loggedOutTemplate;
-    container.querySelector("button.login").addEventListener("click", triggerLogin);
+    var loginOption = container.querySelector("button.login, a.login-link");
+
+    var link = (loginOption.nodeName === "A");
+    if (link) {
+      loginOption.href = loginUrl;
+    }
+    loginOption.addEventListener("click", triggerLogin(!!link));
+
+    var signupOption = container.querySelector("button.signup, a.signup-link");
+    link = (signupOption.nodeName === "A");
+    if (link) {
+      signupOption.href = signupUrl;
+    }
+    signupOption.addEventListener("click", triggerLogin(!!link, true));
 
     if (!bypass) {
-      window.open(idwmo + "/logout?client_id=" + gogglesClientId, null, "_blank");
+      window.open(logoutUrl, null, "_blank");
     }
+
   }
 
   /**
@@ -143,14 +178,18 @@
       checkUser.open("GET", idwmo + "/user", true);
       checkUser.setRequestHeader("authorization", "token " + authToken);
       checkUser.onload = function(evt) {
-        userdata = {};
+        userdata = false;
         try {
           userdata = JSON.parse(checkUser.response);
-          showLoggedInHTML();
-          setTimeout(function getUserId() { publishAPI.login(authToken); },1);
         } catch (e) {
           logout(true);
           console.error("Error parsing XHR responsein publishAPI.checkUser", checkUser.response, e);
+        }
+        if (userdata) {
+          showLoggedInHTML();
+          setTimeout(function getUserId() { publishAPI.login(authToken); },1);
+        } else {
+          userdata = {};
         }
       };
       checkUser.send(null);
@@ -278,6 +317,8 @@
    */
   function listenForPublish() {
     var publish = document.querySelector("button.publish");
+    if(!publish) return;
+
     publish.addEventListener("click", function(evt) {
       var authToken = localStorage[gogglesAuthLabel];
       if (!!authToken) {
@@ -301,10 +342,13 @@
    * @param  {[type]} ) {               window.parent.postMessage("close", "*");  } [description]
    * @return {[type]}   [description]
    */
-  document.getElementById("close").addEventListener("click", function() {
-    window.parent.postMessage("close", "*");
-    localStorage[gogglesDataLabel] = false;
-  });
+  var closer = document.getElementById("close")
+  if (closer) {
+    closer.addEventListener("click", function() {
+      window.parent.postMessage("close", "*");
+      localStorage[gogglesDataLabel] = false;
+    });
+  }
 
   /**
    * [description]
