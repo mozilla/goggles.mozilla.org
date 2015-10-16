@@ -101,6 +101,10 @@ app.get("/login-confirmation.html", function(req, res) {
   res.render("login-confirmation.html");
 });
 
+app.get("/authtoken.js", function(req, res) {
+  res.render("authtoken.js");
+});
+
 // intercept webxray's publication dialog - HTML part
 app.get("/uproot-dialog.html", function(req, res) {
   res.render("uproot-dialog.html", {
