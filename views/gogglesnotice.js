@@ -20,7 +20,7 @@
   link.style.color = "rgb(23, 151, 221)";
 
   var notice = document.createElement("div");
-  notice.textContent = "This is a Mozilla X-Ray Goggles remix of ";
+  notice.innerHTML = "This is a <a href='{{hostname}}'>Mozilla X-Ray Goggles</a> remix of ";
   notice.appendChild(link);
 
   notice.setAttribute("style", [
