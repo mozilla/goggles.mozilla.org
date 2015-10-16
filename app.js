@@ -113,7 +113,8 @@ app.get("/publication.js", function(req, res) {
   res.set( "Content-Type", "application/javascript; charset=utf-8" );
   res.render("publication.js", {
     idwmoURL: env.get("ID_WMO_URL"),
-    clientId: env.get("ID_WMO_CLIENT_ID_LIB"),
+    clientId: env.get("ID_WMO_CLIENT_ID"),
+    clientIdLib: env.get("ID_WMO_CLIENT_ID_LIB"),
     publishwmoURL: env.get("PUBLISH_WMO_URL")
   });
 });

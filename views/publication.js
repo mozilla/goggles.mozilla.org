@@ -6,19 +6,28 @@
   var idwmo = "{{ idwmoURL }}";
   var publishwmo = "{{ publishwmoURL }}";
 
-  var gogglesFile = "/index.html";
-  var gogglesClientId = "{{ clientId }}";
-  var gogglesDataLabel = "goggles-publish-data";
-  var gogglesAuthLabel = "goggles-auth-token";
+  var gogglesFile        = "/index.html";
+  var gogglesClientId    = "{{ clientId }}";
+  var gogglesClientIdLib = "{{ clientIdLib }}";
+  var gogglesDataLabel   = "goggles-publish-data";
+  var gogglesAuthLabel   = "goggles-auth-token";
 
-  var logoutUrl = idwmo + "/logout?client_id=" + gogglesClientId;
-  var loginUrl = idwmo + "/login/oauth/authorize?" + [
+  function logoutUrl(id) {
+    return idwmo + "/logout?client_id=" + id;
+  }
+
+  function loginUrl(id) {
+    return idwmo + "/login/oauth/authorize?" + [
                     "client_id=" + gogglesClientId,
                     "response_type=token",
                     "scopes=user email",
                     "state=goggles"
                   ].join("&");
-  var signupUrl = loginUrl + "&action=signup";
+  }
+
+  function signupUrl(id) {
+    return loginUrl(id) + "&action=signup";
+  }
 
   var checked = false;
   var userdata = false;
@@ -64,7 +73,7 @@
     if(logoutregion) {
       var link = (logoutregion.nodeName === "A");
       if (link) {
-        logoutregion.href = logoutUrl;
+        logoutregion.href = logoutUrl(gogglesClientId);
       }
       logoutregion.addEventListener("click", function(evt) {
         logout(link, link ? logoutregion : false, evt);
@@ -102,7 +111,10 @@
   function triggerLogin(link, signup) {
     return function() {
       checked = false;
-      if (!link) window.open(signup ? signupUrl : loginUrl, null, "_blank");
+      if (!link) {
+        var id = gogglesClientIdLib;
+        window.open(signup ? signupUrl(id) : loginUrl(id), null, "_blank");
+      }
     };
   }
 
@@ -121,19 +133,19 @@
 
     var link = (loginOption.nodeName === "A");
     if (link) {
-      loginOption.href = loginUrl;
+      loginOption.href = loginUrl(gogglesClientId);
     }
     loginOption.addEventListener("click", triggerLogin(!!link));
 
     var signupOption = container.querySelector("button.signup, a.signup-link");
     link = (signupOption.nodeName === "A");
     if (link) {
-      signupOption.href = signupUrl;
+      signupOption.href = signupUrl(gogglesClientId);
     }
     signupOption.addEventListener("click", triggerLogin(!!link, true));
 
     if (!bypass) {
-      window.open(logoutUrl, null, "_blank");
+      window.open(logoutUrl(gogglesClientIdLib, null, "_blank");
     }
 
   }
