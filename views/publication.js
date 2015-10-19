@@ -19,7 +19,7 @@
 
   function loginUrl(id) {
     return idwmo + "/login/oauth/authorize?" + [
-                    "client_id=" + gogglesClientId,
+                    "client_id=" + id,
                     "response_type=token",
                     "scopes=user email",
                     "state=goggles"
