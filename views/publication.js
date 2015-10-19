@@ -370,13 +370,15 @@
    * @return {[type]}        [description]
    */
   window.addEventListener("message", function(event) {
-    var data = JSON.parse(event.data);
-    if(data.html && data.originalURL && data.hackpubURL) {
-      localStorage[gogglesDataLabel] = JSON.stringify({
-        html: data.html,
-        url: data.originalURL
-      });
-    }
+    try {
+      var data = JSON.parse(event.data);
+      if(data.html && data.originalURL && data.hackpubURL) {
+        localStorage[gogglesDataLabel] = JSON.stringify({
+          html: data.html,
+          url: data.originalURL
+        });
+      }
+    } catch (e) { console.warn("unknown post message", e, event); };
   });
 
   // Make sure to show the correct HTML based on whether we know
