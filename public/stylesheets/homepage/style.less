@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600,700);
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 @import "variables.less";
+@import "factories.less";
 
 .hidden {
   display: none!important;
@@ -12,19 +13,6 @@ body, html {
   margin: 0;
 }
 
-// For capturing mouse events over the iframe when menus appear overtop.
-.click-underlay {
-  width: 100%;
-  min-height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 150;
-  overflow: hidden;
-}
-
-
-/* User bar overrides for homepage */
 .navbar-goggles {
   height: 4.5rem;
   background: @darkpurple;
@@ -184,7 +172,6 @@ footer {
     }
   }
 
-
   .project-info {
     padding: 18px 20px;
     width: 610px;
@@ -261,48 +248,6 @@ footer {
           color: rgba(255,255,255,1);
         }
       }
-    }
-  }
-
-  .button {
-    background-color: white;
-    padding: 11px 21px 10px 45px;
-    line-height: 28px;
-    display: inline-block;
-    color: @blue;
-    border-radius: 3px;
-    box-shadow: 0 2px 0 rgba(0,0,0,.15);
-    position: relative;
-    text-decoration: none;
-    font-size: 18px;
-    background-position:  13px center;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    box-sizing: border-box;
-    outline: solid 3px transparent;
-
-    &:active {
-      position: relative;
-      top: 2px;
-      opacity: 1;
-      box-shadow: none;
-    }
-  }
-
-  // 404
-  .not-found-message {
-    text-align: center;
-    padding: 25px 0 35px 0;
-
-    h1 {
-      font-family: "Fira Medium";
-      font-size: 40px;
-      margin-bottom: 5px;
-    }
-
-    p {
-      font-size: 30px;
-      line-height: 120%;
     }
   }
 }
@@ -393,68 +338,30 @@ footer {
           margin-top: 0;
         }
 
-        /**
-         * THIS HAS A LOT OF OVERLAP, AND SHOULD BE DRY-REFACTORED
-         */
         .remix-button {
-          display: block;
-          cursor: pointer;
-          background: @blue;
-          padding: 10px 0 8px 0;
-          border: none;
-          border-radius: 3px;
-          box-shadow: 0 2px 0 @darkblue;
-          font-size: 18px;
-          font-family: "Fira Sans";
-          color: white;
-          text-align: center;
-          text-decoration: none;
-          width: 17rem;
-
-          &:hover {
-            background: saturate(lighten(@blue,10%),10%);
-          }
-
-          &:active {
-            position: relative;
-            top: 2px;
-            box-shadow: none;
-            background: @darkblue;
-          }
+          .createButton("Fira Sans", 18px, white, @blue, @darkblue);
         }
 
-
-        /**
-         * VERY SIMILAR TO THE ABOVE BUTTON DEFINITION...
-         */
         .goggles-bookmark {
+          .createButton("Fira Sans", 18px, white, @pink, @darkpink);
 
-          display: block;
-          cursor: pointer;
-          background: @pink none repeat scroll 0% 0%;
           padding: 20px 0px 14px 3rem;
-          border: 0px none;
           border-radius: 30px;
-          box-shadow: 0px 2px 0px @darkpink;
-          font-size: 18px;
-          color: #FFF;
-          text-align: center;
-          text-decoration: none;
-          position: relative;
           font-weight: 400;
           line-height: 1.4rem;
-
           width: 22rem;
-
-          &:hover {
-            background: saturate(lighten(@pink,10%),20%);
-          }
+          position: relative;
 
           .dragme {
             position: absolute;
             left: 1.25rem;
             line-height: 1.2rem;
           }
+
+          /*
+            Hide the true label, which is used by the browser as bookmarklet title,
+            and instead show our "desired" button label as a CSS:after content string:
+          */
 
           .label {
             position: relative;
@@ -519,12 +426,9 @@ footer {
     }
 
     .project {
-      -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
       flex: 1 1 auto;
-      -webkit-align-self: stretch;
-      -ms-flex-item-align: stretch;
       align-self: stretch;
+
       margin-right: 75px;
 
       .title {
@@ -597,202 +501,8 @@ footer {
       }
 
       .remix-button {
-        display: block;
-        cursor: pointer;
-        background: @blue;
-        padding: 10px 0 8px 0;
-        border-radius: 3px;
-        box-shadow: 0 2px 0 @darkblue;
-        font-size: 18px;
-        color: white;
-        text-align: center;
-        text-decoration: none;
-
-        &:hover {
-          background: saturate(lighten(@blue,10%),10%);
-        }
-
-        &:active {
-          position: relative;
-          top: 2px;
-          box-shadow: none;
-          background: @darkblue;
-        }
+        .createButton("Fira Sans", 18px, white, @blue, @darkblue);
       }
     }
-  }
-
-  .teach {
-    h3 {
-      font-family: "Fira Medium";
-      padding: 0;
-      margin: 15px 0 12px 0;
-      font-size: 15px;
-      color: #777;
-    }
-
-    ul {
-      margin: 0 0 12px 0;
-      padding: 0 0 0 18px;
-
-      li {
-        font-size: 15px;
-        color: #999;
-        line-height: 19px;
-      }
-    }
-
-    a {
-      font-size: 15px;
-      font-family: "Fira Medium";
-      color: @purple;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-}
-
-.button:hover {
-  .line {
-    .animation(line, 3s, linear, infinite, 0s);
-  }
-  .line-two {
-    .animation(line, 3s, linear, infinite, 1s);
-  }
-  .line-three {
-    .animation(line, 3s, linear, infinite, 2s);
-  }
-  .pencil {
-    .animation(pencil, 1s, linear, infinite, 0s);
-  }
-}
-
-.pencil-animation {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 14px;
-  top: 15px;
-
-  .pencil {
-    width: 90%;
-    height: 90%;
-    position: absolute;
-    bottom: 10%;
-    left: 0;
-    background: ~"url(/img/pencil-icon.svg)";
-    background-size: 100%;
-  }
-
-  .line-wrapper {
-    width: 90%;
-    height: 90%;
-    position: absolute;
-    overflow: hidden;
-  }
-
-  .line {
-    height: 100%;
-    width: 96%;
-    position: absolute;
-    transform-origin: left;
-    -webkit-transform-origin: left;
-    .transform(scaleX(0));
-
-    &:after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 13%;
-      background: #47ad66;
-      bottom: 0px;
-    }
-  }
-}
-
-@keyframes pencil {
-  0% {
-    .transform(translateX(0));
-  }
-  13.5%{
-    .transform(translateX(90%));
-  }
-  40% {
-    .transform(translateX(90%));
-  }
-  60% {
-    .transform(translateX(50%) translateY(-30%));
-  }
-  80% {
-    .transform(translateX(0));
-  }
-}
-
-@-webkit-keyframes pencil {
-  0% {
-    .transform(translateX(0));
-  }
-  13.5%{
-    .transform(translateX(90%));
-  }
-  40% {
-    .transform(translateX(90%));
-  }
-  60% {
-    .transform(translateX(50%) translateY(-30%));
-  }
-  80% {
-    .transform(translateX(0));
-  }
-}
-
-@keyframes line {
-  5.5% {
-    .transform(scaleX(1));
-  }
-  20% {
-    .transform(scaleX(1));
-  }
-  33% {
-    .transform(scaleX(1) translateY(-43.5%));
-  }
-  53% {
-    .transform(scaleX(1) translateY(-43.5%));
-  }
-  66% {
-    .transform(scaleX(1) translateY(-87%));
-  }
-  87% {
-    .transform(scaleX(1) translateY(-87%));
-  }
-  100% {
-    .transform(scaleX(1) translateY(-150%));
-  }
-}
-
-@-webkit-keyframes line {
-  5.5% {
-    .transform(scaleX(1));
-  }
-  20% {
-    .transform(scaleX(1));
-  }
-  33% {
-    .transform(scaleX(1) translateY(-43.5%));
-  }
-  53% {
-    .transform(scaleX(1) translateY(-43.5%));
-  }
-  66% {
-    .transform(scaleX(1) translateY(-87%));
-  }
-  87% {
-    .transform(scaleX(1) translateY(-87%));
-  }
-  100% {
-    .transform(scaleX(1) translateY(-150%));
   }
 }

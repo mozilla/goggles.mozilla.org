@@ -1,32 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
   <head>
-
     <meta charset="utf-8">
     <title>{{ gettext("Publish Your Remix") }}</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600,700">
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Raleway:400,300,200,700'>
-    <style>
-      .dialog {
-        background: white;
-        width: 900px;
-        margin: auto;
-        text-align: center;
-        font-family: "Raleway", sans-serif;
-        font-weight: 300;
-
-        h1 {
-          font-weight: 200;
-        }
-      }
-      img.logo {
-        width: 100px;
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/uproot-dialog.css">
   </head>
   <body>
 
     <div class="dialog">
+      <div class="close">
+        <span class="fa fa-close"></span>
+      </div>
       <div class="body">
         <img class="logo" src="/img/goggles-logo.png">
         <span class="status placeholder"></span>
@@ -34,18 +18,21 @@
     </div>
 
     <script type="text/html" class="loggedout">
-      <h1>Sign In or Sign Up for an account</h1>
+      <h1>Sign In or Sign Up for an Account</h1>
       <p>Once you have an account you can save your remix, share it with your friends, or remix it again.</p>
-      <div>
-        <button class="sign in">Sign in</button>
-        <button class="sign up">Sign up</button>
+      <div class="options">
+        <a class="login-link button" target="_blank">Sign in</a>
+        <a class="signup-link button" target="_blank">Sign up</a>
       </div>
     </script>
 
     <script type="text/html" class="loggedin">
-      <h1>Hi <span class="username"></span>!</h1>
-      <p>(not <span class="username"></span>?, <span class='logout region'>Sign out</span>)</p>
-      <button class="publish">Publish this remix</button>
+      <h1><img class="avatar"> Hi <span class="username"></span>!</h1>
+      <p>(Not <span class="username"></span>? <a class='logout region' href="" target="_blank">Sign out</a>.)</p>
+      <p>Publish this remix to save it and share the link with friends.</p>
+      <div class="options">
+        <button class="publish button">Publish this remix</button>
+      </div>
     </script>
 
     <script type="text/html" class="publish">
@@ -54,7 +41,9 @@
         Your remix was published at<br>
         <a class='publication' href=''></a>
       </p>
-      <a class="button">Check it out!</a>
+      <div class="options">
+        <a class="review button">Check it out!</a>
+      </div>
     </script>
 
     <script src="publication.js"></script>

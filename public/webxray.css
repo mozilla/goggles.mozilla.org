@@ -486,5 +486,5 @@ div.webxray-dialog-inner {
 }
 
 .webxray-publish-dialog {
-  height: calc(100vh - 2rem) !important;
+  height: 100vh!important;
 }

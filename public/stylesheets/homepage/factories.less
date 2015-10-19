@@ -1,0 +1,30 @@
+.createButton(@font, @size, @color, @bgcolor, @bordercolor) {
+  display: block;
+  cursor: pointer;
+  background: @bgcolor;
+  padding: 10px 0 8px 0;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 0 @bordercolor;
+  font-size: @size;
+  font-family: @font;
+  color: @color;
+  text-align: center;
+  text-decoration: none;
+  width: calc(@size / 18 * 17)rem;
+
+  &:hover {
+    background: saturate(lighten(@bgcolor,5%),20%);
+  }
+
+  &:active {
+    position: relative;
+    top: 2px;
+    box-shadow: none;
+    background: @bordercolor;
+  }
+}
+
+.defaultButton() {
+  .createButton("Fira Sans", 18px, white, @blue, @darkblue);
+}
