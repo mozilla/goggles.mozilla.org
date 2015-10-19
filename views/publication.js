@@ -12,6 +12,7 @@
   var gogglesDataLabel   = "goggles-publish-data";
   var gogglesAuthLabel   = "goggles-auth-token";
 
+
   function logoutUrl(id) {
     return idwmo + "/logout?client_id=" + id;
   }
@@ -354,7 +355,7 @@
    * @param  {[type]} ) {               window.parent.postMessage("close", "*");  } [description]
    * @return {[type]}   [description]
    */
-  var closer = document.getElementById("close")
+  var closer = document.querySelector(".close")
   if (closer) {
     closer.addEventListener("click", function() {
       window.parent.postMessage("close", "*");

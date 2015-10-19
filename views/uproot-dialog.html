@@ -1,119 +1,49 @@
 <!DOCTYPE html>
 <html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
   <head>
-
     <meta charset="utf-8">
     <title>{{ gettext("Publish Your Remix") }}</title>
-
-    <link rel="stylesheet" href="/bower/makerstrap/dist/makerstrap.min.css" />
-    <link rel="stylesheet" href="/bower/webmaker-login-ux/dist/css/webmakerLogin.css">
-    <link rel="stylesheet" href="../stylesheets/style.css">
-    <link rel="stylesheet" href="../stylesheets/dialog.css">
-
-    <style>
-
-        h1 {
-          margin: 0.5em 0;
-        }
-
-        .dialog {
-          position: relative;
-        }
-
-        .dialog .body {
-          padding: 10%;
-          background-color: #fff;
-          text-align: center;
-        }
-
-        .dialog .body h1 {
-          margin-bottom: 3em;
-        }
-
-        .include-frame {
-          border: none;
-        }
-
-        .publish-enable-overlay {
-          display: none;
-        }
-
-        .webmaker-nav-container {
-          width: auto;
-          background-color: transparent;
-          box-shadow: none;
-          border: none;
-        }
-
-        .user-nav-container {
-          padding-top: 2rem;
-        }
-
-        #logo {
-          display: none;
-        }
-
-        .published-url {
-          word-break: break-all;
-          font-size: 200%;
-        }
-
-        #close {
-          position: absolute;
-          top: 1em;
-          right: 1em;
-          z-index: 10;
-        }
-
-        .status.placeholder {
-          font-size: 16px;
-        }
-
-        .logout.region {
-          cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/uproot-dialog.css">
   </head>
   <body>
 
     <div class="dialog">
-      <span class="button close-button fr" id="close">{{ gettext("Close") }}</span>
-
-      <link rel="stylesheet" href="stylesheets/userbar-overrides.css">
-
-      <header id="webmaker-nav">
-        <nav class="webmaker-nav-container">
-        </nav>
-      </header>
-
-      <div class="subheader">
-        <div class="pane">
-          <h2 class="subtitle">{{ gettext("Publish Your Remix") }}</h2>
-        </div>
+      <div class="close">
+        <span class="fa fa-close"></span>
       </div>
-
       <div class="body">
+        <img class="logo" src="/img/goggles-logo.png">
         <span class="status placeholder"></span>
       </div>
     </div>
 
     <script type="text/html" class="loggedout">
-      <button style="width: 40%; height: 20%;" class="login">log in using id.wmo</button>
+      <h1>Sign In or Sign Up for an Account</h1>
+      <p>Once you have an account you can save your remix, share it with your friends, or remix it again.</p>
+      <div class="options">
+        <a class="login-link button" target="_blank">Sign in</a>
+        <a class="signup-link button" target="_blank">Sign up</a>
+      </div>
     </script>
 
     <script type="text/html" class="loggedin">
-      <p>
-        <img src="">
-        Hi <span class="username"></span>!
-        (not <span class="username"></span>?, <span class='logout region'>click here to log out</span>)
-      </p>
-      <button style="width: 40%; height: 20%;" class="publish">Publish this remix!</button>
+      <h1><img class="avatar"> Hi <span class="username"></span>!</h1>
+      <p>(Not <span class="username"></span>? <a class='logout region' href="" target="_blank">Sign out</a>.)</p>
+      <p>Publish this remix to save it and share the link with friends.</p>
+      <div class="options">
+        <button class="publish button">Publish this remix</button>
+      </div>
     </script>
 
     <script type="text/html" class="publish">
+      <h1>Published!</h1>
       <p>
-        Your remix was published as <a class='publication' href='' target='_blank'></a>
+        Your remix was published at<br>
+        <a class='publication' href=''></a>
       </p>
+      <div class="options">
+        <a class="review button">Check it out!</a>
+      </div>
     </script>
 
     <script src="publication.js"></script>

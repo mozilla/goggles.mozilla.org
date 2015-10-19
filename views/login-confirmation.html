@@ -4,6 +4,10 @@
 
     <meta charset="utf-8">
     <title>{{ gettext("Publish Your Remix") }}</title>
+    <script src="authtoken.js"></script>
+    <script>window.close();</script>
+
+    <!-- everything after this script exists solely in case this call isn't allowed: -->
 
     <link rel="stylesheet" href="/bower/makerstrap/dist/makerstrap.min.css" />
     <link rel="stylesheet" href="/bower/webmaker-login-ux/dist/css/webmakerLogin.css">
@@ -93,8 +97,5 @@
       </div>
     </div>
 
-    <script id="require-js" data-csrf="{{ csrf }}"></script>
-
-    <script src="authtoken.js"></script>
   </body>
 </html>
