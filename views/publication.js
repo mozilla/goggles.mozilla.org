@@ -370,15 +370,23 @@
    * @return {[type]}        [description]
    */
   window.addEventListener("message", function(event) {
-    try {
-      var data = JSON.parse(event.data);
-      if(data.html && data.originalURL && data.hackpubURL) {
-        localStorage[gogglesDataLabel] = JSON.stringify({
-          html: data.html,
-          url: data.originalURL
-        });
+    var data = false;
+    try { data = JSON.parse(event.data); } catch (e) {}
+
+    // publishable data
+    if(data.html && data.originalURL && data.hackpubURL) {
+      localStorage[gogglesDataLabel] = JSON.stringify({
+        html: data.html,
+        url: data.originalURL
+      });
+    }
+
+    // goggles close: checkUser
+    if (data === "close") {
+      if (!checkForUser()) {
+        logout(true);
       }
-    } catch (e) { console.warn("unknown post message", e, event); };
+    }
   });
 
   // Make sure to show the correct HTML based on whether we know
