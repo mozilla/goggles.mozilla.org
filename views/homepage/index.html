@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <title>Mozilla X-Ray Goggles</title>
     {% if forceSSL %}
+
     <script>
       if (window.location.protocol = "http:") {
+        console.log(window.location);
         var loc = window.location.toString();
         window.location = loc.replace("http://", "https://");
       }
     </script>
+
     {% endif %}
     <script src="authtoken.js"></script>
     <link rel="stylesheet" href="stylesheets/homepage/userbar.css">
