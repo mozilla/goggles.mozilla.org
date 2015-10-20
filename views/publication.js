@@ -43,7 +43,6 @@
    * @return {[type]} [description]
    */
   function checkForUser() {
-    console.log("checking for user");
     if (!checked) {
       checked = true;
       var authToken = localStorage[gogglesAuthLabel];
@@ -349,7 +348,7 @@
    * @param  {[type]} ) {               if (!checked) {      checked [description]
    * @return {[type]}   [description]
    */
-  document.addEventListener("focus", checkForUser);
+  window.addEventListener("focus", checkForUser);
 
   /**
    * [description]
