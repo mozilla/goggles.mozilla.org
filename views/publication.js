@@ -39,6 +39,18 @@
   var publishedTemplate = document.querySelector("script[type='text/html'].publish").textContent;
 
   /**
+   * [openInNew description]
+   * @param  {[type]} url [description]
+   * @return {[type]}     [description]
+   */
+  function openInNew(url) {
+    var a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.click();
+  }
+
+  /**
    * [checkForUser description]
    * @return {[type]} [description]
    */
@@ -51,7 +63,6 @@
         return true;
       }
     }
-
     return false;
   }
 
@@ -107,10 +118,7 @@
     var button = container.querySelector("button.review.button");
     if (button) {
       button.addEventListener("click", function() {
-        var a = document.createElement("a");
-        a.href = url;
-        a.target = "_blank";
-        a.click();
+        openInNew(url);
       });
     }
   }
@@ -124,7 +132,7 @@
       checked = false;
       if (!link) {
         var id = gogglesClientIdLib;
-        window.open(signup ? signupUrl(id) : loginUrl(id), null, "_blank");
+        openInNew(signup ? signupUrl(id) : loginUrl(id));
       }
     };
   }
@@ -156,7 +164,7 @@
     signupOption.addEventListener("click", triggerLogin(!!link, true));
 
     if (!bypass) {
-      window.open(logoutUrl(gogglesClientIdLib), null, "_blank");
+      openInNew(logoutUrl(gogglesClientIdLib));
     }
 
   }
