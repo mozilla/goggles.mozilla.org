@@ -43,6 +43,7 @@
    * @return {[type]} [description]
    */
   function checkForUser() {
+    console.log("checking for user");
     if (!checked) {
       checked = true;
       var authToken = localStorage[gogglesAuthLabel];
