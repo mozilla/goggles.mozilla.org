@@ -103,6 +103,16 @@
     var a = container.querySelector("a.publication");
     a.href = url;
     a.textContent = url;
+
+    var button = container.querySelector("button.review.button");
+    if (button) {
+      button.addEventListener("click", function() {
+        var a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.click();
+      });
+    }
   }
 
   /**
