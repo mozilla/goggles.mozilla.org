@@ -348,7 +348,7 @@
    * @param  {[type]} ) {               if (!checked) {      checked [description]
    * @return {[type]}   [description]
    */
-  document.addEventListener("visibilitychange", checkForUser);
+  window.addEventListener("focus", checkForUser);
 
   /**
    * [description]
