@@ -47,7 +47,11 @@
     var a = document.createElement("a");
     a.href = url;
     a.target = "_blank";
+    a.setAttribute("style", "position:absolute; display:block; width:0; height:0; color: transparent; background: transparent");
+    // Firefox requires an element is in the DOM before it allows a click.
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
   }
 
   /**
