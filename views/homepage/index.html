@@ -3,16 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Mozilla X-Ray Goggles</title>
-    {% if forceSSL %}
-    <script>
-      if (window.location.protocol = "http:") {
-        var loc = window.location.toString();
-        var https = loc.replace("http://", "https://");
-        console.log("switching from http: to https:");
-        window.location = https;
-      }
-    </script>
-    {% endif %}
     <script src="authtoken.js"></script>
     <link rel="stylesheet" href="stylesheets/homepage/userbar.css">
     <link rel="stylesheet" href="stylesheets/homepage/style.css">
