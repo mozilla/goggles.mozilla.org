@@ -1,4 +1,5 @@
 var express    = require("express"),
+    forceSSL   = require("express-force-ssl"),
     goggles    = require("./lib/goggles"),
     habitat    = require("habitat"),
     helmet     = require("helmet"),
@@ -36,6 +37,7 @@ nunjucksEnv.addFilter( "instantiate", function( input ) {
 });
 
 if (!!env.get("FORCE_SSL") ) {
+  app.use(forceSSL);
   app.use(helmet.hsts());
   app.enable("trust proxy");
 }
