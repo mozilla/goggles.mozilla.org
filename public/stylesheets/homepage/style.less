@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600,700);
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+@import "../vendor/prefixer.less";
 @import "variables.less";
 @import "factories.less";
 
@@ -217,8 +218,8 @@ footer {
   height: 19.5rem;
 
   display: flex;
-  align-items: center;
-  justify-content: center;
+  .align-items(center);
+  .justify-content(center);
 
   .content-wrapper {
     width: 964px;
@@ -281,7 +282,7 @@ footer {
       }
 
       .example {
-        flex: 0 1 50%;
+        .flex(0 1 50%);
         position: relative;
         height: 370px;
         width: auto;
@@ -307,9 +308,9 @@ footer {
       }
 
       .description {
-        flex: 0 1 50%;
         display: flex;
-        flex-direction: column;
+        .flex(0 1 50%);
+        .flex-direction(column);
         color: #777;
         font-weight: 300;
 
@@ -413,11 +414,11 @@ footer {
 
   .remixable-projects {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-content: flex-start;
-    align-items: flex-start;
+    .flex-direction(row);
+    .flex-wrap(nowrap);
+    .justify-content(center);
+    .align-content(flex-start);
+    .align-items(flex-start);
 
     &:first-of-type {
       padding-bottom: 45px;
@@ -426,8 +427,8 @@ footer {
     }
 
     .project {
-      flex: 1 1 auto;
-      align-self: stretch;
+      .flex(1 1 auto);
+      .align-self(stretch);
 
       margin-right: 75px;
 
