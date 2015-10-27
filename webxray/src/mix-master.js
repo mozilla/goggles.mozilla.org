@@ -232,8 +232,11 @@
                         canceled: data.canceled,
                         onDone: function() {
                           newContent.reallyRemoveClass(uprootableClass);
+                          window.postMessage("goggles-edit-finished", "*");
                         }
                       });
+                    } else {
+                      window.postMessage("goggles-edit-start", "*");
                     }
                   } else {
                     // TODO: Re-focus previously focused elements?

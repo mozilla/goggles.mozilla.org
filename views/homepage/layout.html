@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
+  <head>
+    <meta charset="utf-8">
+    <title>Mozilla X-Ray Goggles</title>
+    <script src="authtoken.js"></script>
+    <link rel="stylesheet" href="stylesheets/homepage/userbar.css">
+    <link rel="stylesheet" href="stylesheets/homepage/style.css">
+    <link rel="icon" href="/img/goggles-logo.png">
+  </head>
+  <body>
+    {% include 'homepage/userbar.html' %}
+    {% block content %}{% endblock %}
+    {% include 'homepage/footer.html' %}
+  </body>
+</html>

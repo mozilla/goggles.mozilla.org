@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ gettext("Publish Your Remix") }}</title>
+    <link rel="stylesheet" href="/stylesheets/uproot-dialog.css">
+  </head>
+  <body>
+
+    <div class="dialog">
+      <div class="close">
+        <span class="fa fa-close"></span>
+      </div>
+      <div class="body">
+        <img class="logo" src="/img/goggles-logo.png">
+        <span class="status placeholder"></span>
+      </div>
+    </div>
+
+    <script type="text/html" class="loggedout">
+      <h1>Sign In or Create an Account</h1>
+      <p>Once you have an account, you can publish your remix and share it with friends.</p>
+      <div class="options">
+        <button class="login button" target="_blank">Sign in</button>
+        <button class="signup button" target="_blank">Create an account</button>
+      </div>
+    </script>
+
+    <script type="text/html" class="loggedin">
+      <h1><img class="avatar"> Hi <span class="username"></span>!</h1>
+      <p>(Not <span class="username"></span>? <button class='logout region'>Sign out</button>.)</p>
+      <p>Publish this remix to save it and share the link with friends.</p>
+      <div class="options">
+        <button class="publish button">Publish this remix</button>
+      </div>
+    </script>
+
+    <script type="text/html" class="publish">
+      <h1>Published!</h1>
+      <p>
+        Your remix was published at<br>
+        <a class="publication" href="" target="_blank"></a>
+      </p>
+      <div class="options">
+        <button class="review button">Check it out!</button>
+      </div>
+    </script>
+
+    <script src="publication.js"></script>
+  </body>
+</html>

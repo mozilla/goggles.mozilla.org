@@ -1,0 +1,121 @@
+.remix-projects {
+  .content-wrapper {
+    width: 964px;
+    margin: 0 auto;
+  }
+
+  .remixable-header {
+    text-align: center;
+    margin: 80px 0 27px 0;
+    padding: 0;
+    font-weight: 400;
+    color: #666;
+
+    h2 {
+      font-size: 2.75rem;
+      font-weight: 400;
+      margin-bottom: 0;
+
+    }
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+  }
+
+  .remixable-projects {
+    display: flex;
+    .flex-direction(row);
+    .flex-wrap(nowrap);
+    .justify-content(center);
+    .align-content(flex-start);
+    .align-items(flex-start);
+
+    &:first-of-type {
+      padding-bottom: 45px;
+      margin-bottom: 40px;
+      border-bottom: solid 2px #EEE;
+    }
+
+    .project {
+      .flex(1 1 auto);
+      .align-self(stretch);
+
+      margin-right: 75px;
+
+      .title {
+        margin: 0 0 12px 0;
+        font-size: 22px;
+        color: #545454;
+        text-align: center;
+        white-space: nowrap;
+
+        font-weight: 400;
+        font-size: 1.7rem;
+        color: #666;
+      }
+
+      &:last-child {
+        margin: 0;
+      }
+
+      .thumbnail {
+        width: 271px;
+        height: 278px;
+        position: relative;
+        margin: 0 0 20px 0 ;
+        .transition(all .1s ease-out);
+
+        &:hover {
+          opacity: .90;
+          .transform(translateY(-3px));
+        }
+
+        .image {
+          width: 271px;
+          display: block;
+          height: 278px;
+          z-index: 2;
+          position: relative;
+          border-radius: 3px;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 10px;
+          width: ~"calc(100% - 20px)";
+          height: 40px;
+          box-shadow: 0 2px 15px rgba(0,0,0,.2);
+          border-radius: 40%;
+          z-index: 1;
+        }
+      }
+
+      .description {
+        color: #999;
+        font-size: 15px;
+        line-height: 19px;
+        margin: 0 0 15px 0;
+      }
+
+      &.hack-the-news .image {
+        background: ~"url(/img/goggles-remix-1.png)"  #8B0208;
+      }
+
+      &.hack-my-media .image {
+        background: ~"url(/img/goggles-remix-2.png)" #FED831;
+      }
+
+      &.hack-science-for-girls .image {
+        background: ~"url(/img/goggles-remix-3.png)" #EFEFEF;
+      }
+
+      .remix-button {
+        .createButton("Fira Sans", 18px, white, @blue, @darkblue);
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "verbose": true,
+  "ignore": [
+    "public/*.js",
+    "views/**/*.*"
+  ],
+  "execMap": {
+    "js": "node"
+  }
+}
