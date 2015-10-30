@@ -1,0 +1,201 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Mono:400);
+
+.instruction-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 21474836465; //  highest z-index
+
+  .dialog {
+    height: 430px;
+    width: 590px;
+    top: 20%;
+  }
+
+  color: #777;
+
+  h2 {
+    color: #666;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  p {
+    font-weight: 300;
+  }
+
+  a, a:visited, a:hover, a:active {
+    color: @blue;
+    text-decoration: none;
+  }
+
+  button {
+    display: block;
+    margin: auto;
+    background: inherit;
+    border: none;
+  }
+
+  .start {
+    .createButton("Fira Sans", 18px, white, @blue, @darkblue);
+    width: 14rem;
+  }
+
+  .browse {
+    margin-top: 1rem;
+    color: @blue;
+    font-size: 105%;
+    cursor: pointer;
+  }
+}
+
+.instructions {
+  @mwidth: 300px;
+  @mpad: 2rem;
+
+  padding: @mpad;
+
+  .content-wrapper {
+    width: 964px;
+    margin: 0 auto;
+    position: relative;
+
+    text-align: center;
+    color: #777;
+
+    h1 {
+      font-weight: 300;
+      font-size: 2.75rem;
+      line-height: 2.75rem;
+      margin: 0 0 15px 0;
+    }
+
+    p {
+
+    }
+
+    a, a:hover, a:active, a:visited {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .remix-me {
+      @imwidth: 400px;
+      text-align: center;
+      position: relative;
+      width: @imwidth;
+      margin: auto;
+      padding: 0;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      img {
+        margin: 0;
+        padding: 0;
+        max-width: @imwidth;
+        display: block;
+      }
+    }
+
+    div.remix-me {
+      width: 100%;
+    }
+
+  }
+
+  .dialoger {
+    position: relative;
+    z-index: 2147483620; //  lower than overlay
+
+    .step {
+      width: @mwidth;
+      margin: auto;
+      background: rgb(0, 157, 219) none repeat scroll 0% 0%;
+      color: white;
+      font-weight: 300;
+      padding: 2rem;
+      text-align: left;
+      border-radius: 5px;
+      position: fixed;
+
+      display: none;
+
+      button {
+        border: medium none;
+        background: inherit;
+        color: inherit;
+        text-decoration: underline;
+        position: absolute;
+        cursor: pointer;
+
+        &.back {
+          left: @mpad;
+        }
+
+        &.skip {
+          right: @mpad;
+        }
+      }
+
+      code {
+        background: rgba(255, 255, 255, 0.4) none repeat scroll 0% 0%;
+        font-weight: 300;
+        font-family: "Fira Mono",monospace;
+        padding: 0px 2px;
+      }
+
+      &:nth-child(1) {
+        top: 1rem;
+        left: 7rem;
+      }
+
+      &:nth-child(2) {
+        top: 325px;
+        left: 7rem;
+      }
+
+      &:nth-child(3) {
+        bottom: 200px;
+        left: 7rem;
+      }
+
+      &:nth-child(4) {
+        top: 40px;
+        left: 5rem;
+      }
+
+      &:nth-child(5) {
+        bottom: 200px;
+        left: 7rem;
+      }
+
+      &:nth-child(6) {
+        bottom: 200px;
+        right: 7rem;
+      }
+
+      &:last-child {
+        display: block;
+      }
+
+      img {
+        max-width: @mwidth;
+        box-shadow: 0px 8px 6px -6px #666;
+      }
+    }
+  }
+}
+
+.webxray-dialog-overlay {
+  z-index: 2147483600!important; //  lower than dialog + overlay
+}

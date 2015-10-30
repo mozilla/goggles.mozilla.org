@@ -1,0 +1,81 @@
+.navbar-goggles {
+  height: 4.5rem;
+  background: @darkpurple;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Fira Sans', sans-serif;
+
+  #navbar-login {
+    border-left: none;
+
+    &.signed-in {
+      border-right: none;
+    }
+  }
+
+  #navbar-left {
+    margin-left: 12%;
+  }
+
+  #navbar-right {
+    margin-right: 12%;
+  }
+
+  .navbar-logo-container {
+
+    .status.placeholder a {
+      font-weight: 300;
+    }
+
+    &:hover {
+      .transform(none);
+    }
+
+    &:active {
+      .transform(none);
+    }
+
+    a.logo {
+      text-decoration: none;
+      color: rgba(255,255,255,0.3);
+
+      font-size: 1.4rem;
+      font-weight: 700;
+
+      .goggles-logo {
+        height: 3rem;
+        width: auto;
+        line-height: 3rem;
+        vertical-align: middle;
+      }
+
+      .logo-text {
+        color: #FFF;
+        margin-left: 1rem;
+      }
+
+      .logo-by {
+        font-weight: 300;
+      }
+
+      .mozilla-word-mark {
+
+      }
+
+    }
+  }
+}
+
+#navbar-logged-in {
+  color: @lightgrey;
+
+  li {
+    img, span {
+      position: relative;
+      vertical-align: middle;
+      top: 0;
+    }
+    ul.dropdown {
+      display: block;
+    }
+  }
+}

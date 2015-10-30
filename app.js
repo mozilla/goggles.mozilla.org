@@ -99,6 +99,13 @@ app.get('/', function(req, res) {
   });
 });
 
+app.get('/ftu', function(req, res) {
+  res.render("homepage/ftu.html", {
+    idwmoURL: env.get("ID_WMO_URL"),
+    clientId: env.get("ID_WMO_CLIENT_ID")
+  });
+});
+
 // oauth login confirmation page
 app.get("/login-confirmation.html", function(req, res) {
   res.render("login-confirmation.html");

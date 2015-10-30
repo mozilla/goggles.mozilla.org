@@ -1,0 +1,115 @@
+footer {
+  background: @purple;
+  margin-top: 75px;
+
+  .content-wrapper {
+    padding: 40px 0 40px 0;
+    width: 964px;
+    margin: 0 auto;
+    position: relative;
+    color: white;
+    overflow: auto;
+    font-size: 1rem;
+  }
+
+  .social-links {
+    list-style-type: none;
+    margin: 0;
+    padding-top: 17px;
+    display: flex;
+
+    li {
+      line-height: 15px;
+      padding: 0;
+      margin: 0.5rem 0 1rem 0;
+      white-space: nowrap;
+      vertical-align: middle;
+      font-size: 15px;
+
+      & + li {
+        margin-left: 4.5%;
+      }
+    }
+
+    li a {
+      display: block;
+      position: relative;
+    }
+
+    .icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      padding-right: 5px;
+      background-repeat: no-repeat;
+    }
+
+    .help .icon {
+      background-image: ~"url(/img/footer-icon-help.svg)";
+    }
+
+    .twitter .icon {
+      background-image: ~"url(/img/footer-icon-twitter.svg)";
+    }
+
+    .github .icon {
+      background-image: ~"url(/img/footer-icon-github.svg)";
+    }
+
+    .terms .icon {
+      background-image: ~"url(/img/footer-icon-terms.svg)";
+    }
+
+    .privacy .icon {
+      background-image: ~"url(/img/footer-icon-privacy.svg)";
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      opacity: .7;
+      .transition(opacity .1s linear);
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .project-info {
+    padding: 18px 20px;
+    width: 610px;
+    display: flex;
+    margin: auto;
+    position: relative;
+    border-radius: 4px;
+    line-height: 22px;
+
+    .mozilla-logo {
+      position: absolute;
+      bottom: 24px;
+      left: 20px;
+      img {
+        display: block;
+        width: 100px;
+      }
+    }
+
+    .goggles-context {
+      margin: 0 0 0 122px;
+      padding: 0 0 0 20px;
+      color: rgba(255,255,255,.5);
+      border-left: solid 2px rgba(255,255,255,0.3);
+
+      a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
