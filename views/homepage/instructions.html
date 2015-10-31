@@ -15,9 +15,9 @@
         </div>
 
 <figure class="remix-me">
-  <img src="/img/ftu/top-fox.png">
-  <img src="/img/ftu/middle-bird.png">
-  <img src="/img/ftu/bottom-dinosaur.png">
+  <img src="/img/animals/top/fox.png">
+  <img src="/img/animals/middle/bird.png">
+  <img src="/img/animals/bottom/dinosaur.png">
 </figure>
 
         <div class="hidden steps">
@@ -56,15 +56,41 @@
           },
           hookNavigation: function(el) {
             var back = el.querySelector('.back');
-            if (back) { back.addEventListener("click", this.back.bind(this)); }
+            if (back) {
+              var handler = function() {
+                this.back();
+              }.bind(this);
+              back.addEventListener("click", handler);
+              el._backHandler = handler;
+            }
             var skip = el.querySelector('.skip');
-            if (skip) { skip.addEventListener("click", this.next.bind(this)); }
+            if (skip) {
+              var handler = function() {
+                this.next();
+              }.bind(this);
+              if (el.classList.contains("skip-2")) {
+                handler = function() {
+                  this.next();
+                  this.next();
+                }.bind(this);
+              }
+              skip.addEventListener("click", handler);
+              el._skipHandler = handler;
+            }
+            var end = el.querySelector('.end');
+            if (end) {
+              end.addEventListener("click", this.stop.bind(this));
+            }
+
+            var arrow = document.createElement("span");
+            arrow.setAttribute("class","arrow");
+            el.appendChild(arrow);
           },
           unhookNavigation: function(el) {
             var back = el.querySelector('.back');
-            if (back) { back.removeEventListener("click", this.back.bind(this)); }
+            if (back) { back.removeEventListener("click", el._backHandler); }
             var skip = el.querySelector('.skip');
-            if (skip) { skip.removeEventListener("click", this.next.bind(this)); }
+            if (skip) { skip.removeEventListener("click", el._skipHandler); }
           },
           init: function() {
             this._wmh = this.messageHandler.bind(this);

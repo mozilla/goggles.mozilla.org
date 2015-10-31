@@ -120,15 +120,19 @@
     .step {
       width: @mwidth;
       margin: auto;
-      background: rgb(0, 157, 219) none repeat scroll 0% 0%;
+      background: @blue;
       color: white;
       font-weight: 300;
-      padding: 2rem;
+      padding: 10px 2rem 25px;
       text-align: left;
       border-radius: 5px;
       position: fixed;
 
       display: none;
+
+      .nav {
+        padding-bottom: 25px;
+      }
 
       button {
         border: medium none;
@@ -137,6 +141,9 @@
         text-decoration: underline;
         position: absolute;
         cursor: pointer;
+        font-size: 15px;
+        padding: 0;
+        margin: 0;
 
         &.back {
           left: @mpad;
@@ -154,34 +161,98 @@
         padding: 0px 2px;
       }
 
+      @blank: 15px solid transparent;
+      @colored: 15px solid @blue;
+      @midway: ~"calc(50% - 7.5px)";
+
+      .arrow {
+        position: absolute;
+        width: 0px;
+        height: 0px;
+      }
+
       &:nth-child(1) {
-        top: 1rem;
+        top: 20px;
         left: 7rem;
+        bottom: auto;
+        right: auto;
+        .arrow {
+          border-left: @blank;
+          border-right: @blank;
+          border-bottom: @colored;
+          top: -15px;
+          left: @midway;
+        }
       }
 
       &:nth-child(2) {
         top: 325px;
         left: 7rem;
+        bottom: auto;
+        right: auto;
+        .arrow {
+          border-top: @blank;
+          border-bottom: @blank;
+          border-left: @colored;
+          top: @midway;
+          right: -15px;
+        }
       }
 
       &:nth-child(3) {
-        bottom: 200px;
+        top: auto;
         left: 7rem;
+        bottom: 200px;
+        right: auto;
+        .arrow {
+          border-left: @blank;
+          border-right: @blank;
+          border-top: @colored;
+          bottom: -15px;
+          left: @midway;
+        }
       }
 
       &:nth-child(4) {
-        top: 40px;
+        top: 26px;
         left: 5rem;
+        bottom: auto;
+        right: auto;
+        .arrow {
+          border-top: @blank;
+          border-bottom: @blank;
+          border-left: @colored;
+          top: @midway;
+          right: -15px;
+        }
       }
 
       &:nth-child(5) {
-        bottom: 200px;
+        top: auto;
         left: 7rem;
+        bottom: 200px;
+        right: auto;
+        .arrow {
+          border-left: @blank;
+          border-right: @blank;
+          border-top: @colored;
+          bottom: -15px;
+          left: @midway;
+        }
       }
 
       &:nth-child(6) {
-        bottom: 200px;
+        top: auto;
+        left: auto;
+        bottom: 230px;
         right: 7rem;
+        .arrow {
+          border-top: @blank;
+          border-bottom: @blank;
+          border-left: @colored;
+          top: @midway;
+          right: -15px;
+        }
       }
 
       &:last-child {
