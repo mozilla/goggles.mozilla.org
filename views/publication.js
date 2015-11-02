@@ -413,5 +413,7 @@
 
   // Make sure to show the correct HTML based on whether we know
   // there is a logged in user or not, then wait for user interaction.
-  if (!checkForUser()) { logout(true); }
+  logout(true);
+  checkForUser();
+
 }());
