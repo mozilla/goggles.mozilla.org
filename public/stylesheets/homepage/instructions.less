@@ -97,11 +97,16 @@
         bottom: 0;
       }
 
-      img {
+      img[src*='/img/animals'] {
+        display: block;
         margin: 0;
         padding: 0;
-        max-width: @imwidth;
-        display: block;
+        width: @imwidth;
+        height: 140px;
+      }
+
+      img[src*='/img/animals/top'] {
+        height: 200px;
       }
     }
 
