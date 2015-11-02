@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Fira+Mono:400);
+@mwidth: 335px;
+@mpad: 2rem;
 
 .instruction-overlay {
   position: fixed;
@@ -52,9 +54,6 @@
 }
 
 .instructions {
-  @mwidth: 335px;
-  @mpad: 2rem;
-
   padding: @mpad;
 
   .content-wrapper {
@@ -111,164 +110,173 @@
     }
 
   }
+}
 
-  .dialoger {
-    position: relative;
-    z-index: 2147483620; //  lower than overlay
+.dialoger {
+  position: relative;
+  z-index: 2147483620; //  lower than overlay
 
-    .step {
-      width: @mwidth;
-      margin: auto;
-      background: @blue;
+  .step {
+
+    .nav {
+      padding-bottom: 25px;
+    }
+
+    a, a:hover, a:active, a:visited {
       color: white;
+      text-decoration: underline;
+    }
+
+    button {
+      border: medium none;
+      background: inherit;
+      color: inherit;
+      text-decoration: underline;
+      position: absolute;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: inherit;
       font-weight: 300;
-      padding: 10px 2rem 25px;
-      text-align: left;
-      border-radius: 5px;
-      position: fixed;
-      width: @mwidth;
 
-      display: none;
+      padding: 0;
+      margin: 0;
 
-      .nav {
-        padding-bottom: 25px;
+      &.back {
+        left: @mpad;
       }
 
-      button {
-        border: medium none;
-        background: inherit;
-        color: inherit;
-        text-decoration: underline;
-        position: absolute;
-        cursor: pointer;
-        font-size: 16px;
-        font-family: inherit;
-        font-weight: 300;
-
-        padding: 0;
-        margin: 0;
-
-        &.back {
-          left: @mpad;
-        }
-
-        &.skip {
-          right: @mpad;
-        }
+      &.skip {
+        right: @mpad;
       }
+    }
 
-      code {
-        background: rgba(255, 255, 255, 0.4) none repeat scroll 0% 0%;
-        font-weight: 300;
-        font-family: "Fira Mono",monospace;
-        padding: 0px 2px;
-      }
+    code {
+      background: rgba(255, 255, 255, 0.4) none repeat scroll 0% 0%;
+      font-weight: 300;
+      font-family: "Fira Mono",monospace;
+      padding: 0px 2px;
+    }
 
-      @blank: 15px solid transparent;
-      @colored: 15px solid @blue;
-      @midway: ~"calc(50% - 7.5px)";
+    .arrow {
+      position: absolute;
+      width: 0px;
+      height: 0px;
+    }
 
+    width: @mwidth;
+    margin: auto;
+    background: @blue;
+    color: white;
+    font-weight: 300;
+    padding: 10px 2rem 25px;
+    text-align: left;
+    border-radius: 5px;
+    width: @mwidth;
+
+    position: fixed;
+    display: none;
+
+    @blank: 15px solid transparent;
+    @colored: 15px solid @blue;
+    @midway: ~"calc(50% - 7.5px)";
+
+    &:nth-child(1) {
+      top: 20px;
+      left: 7rem;
+      bottom: auto;
+      right: auto;
       .arrow {
-        position: absolute;
-        width: 0px;
-        height: 0px;
+        border-left: @blank;
+        border-right: @blank;
+        border-bottom: @colored;
+        top: -15px;
+        left: @midway;
       }
+    }
 
-      &:nth-child(1) {
-        top: 20px;
-        left: 7rem;
-        bottom: auto;
-        right: auto;
-        .arrow {
-          border-left: @blank;
-          border-right: @blank;
-          border-bottom: @colored;
-          top: -15px;
-          left: @midway;
-        }
+    &:nth-child(2) {
+      position: absolute;
+      top: 325px;
+      left: 7rem;
+      bottom: auto;
+      right: auto;
+      .arrow {
+        border-top: @blank;
+        border-bottom: @blank;
+        border-left: @colored;
+        top: @midway;
+        right: -15px;
       }
+    }
 
-      &:nth-child(2) {
-        top: 325px;
-        left: 7rem;
-        bottom: auto;
-        right: auto;
-        .arrow {
-          border-top: @blank;
-          border-bottom: @blank;
-          border-left: @colored;
-          top: @midway;
-          right: -15px;
-        }
+    &:nth-child(3) {
+      top: auto;
+      left: 7rem;
+      bottom: 200px;
+      right: auto;
+      .arrow {
+        border-left: @blank;
+        border-right: @blank;
+        border-top: @colored;
+        bottom: -15px;
+        left: @midway;
       }
+    }
 
-      &:nth-child(3) {
-        top: auto;
-        left: 7rem;
-        bottom: 200px;
-        right: auto;
-        .arrow {
-          border-left: @blank;
-          border-right: @blank;
-          border-top: @colored;
-          bottom: -15px;
-          left: @midway;
-        }
+    &:nth-child(4) {
+      position: absolute;
+      top: -46px;
+      left: 4rem;
+      bottom: auto;
+      right: auto;
+      .arrow {
+        border-top: @blank;
+        border-bottom: @blank;
+        border-left: @colored;
+        top: @midway;
+        right: -15px;
       }
+    }
 
-      &:nth-child(4) {
-        top: 26px;
-        left: 5rem;
-        bottom: auto;
-        right: auto;
-        .arrow {
-          border-top: @blank;
-          border-bottom: @blank;
-          border-left: @colored;
-          top: @midway;
-          right: -15px;
-        }
+    &:nth-child(5) {
+      top: auto;
+      left: 7rem;
+      bottom: 200px;
+      right: auto;
+      .arrow {
+        border-left: @blank;
+        border-right: @blank;
+        border-top: @colored;
+        bottom: -15px;
+        left: @midway;
       }
+    }
 
-      &:nth-child(5) {
-        top: auto;
-        left: 7rem;
-        bottom: 200px;
-        right: auto;
-        .arrow {
-          border-left: @blank;
-          border-right: @blank;
-          border-top: @colored;
-          bottom: -15px;
-          left: @midway;
-        }
+    &:nth-child(6) {
+      top: auto;
+      left: auto;
+      bottom: 230px;
+      right: 7rem;
+      .arrow {
+        border-top: @blank;
+        border-bottom: @blank;
+        border-left: @colored;
+        top: @midway;
+        right: -15px;
       }
+    }
 
-      &:nth-child(6) {
-        top: auto;
-        left: auto;
-        bottom: 230px;
-        right: 7rem;
-        .arrow {
-          border-top: @blank;
-          border-bottom: @blank;
-          border-left: @colored;
-          top: @midway;
-          right: -15px;
-        }
-      }
+    &:last-child {
+      display: block;
+    }
 
-      &:last-child {
-        display: block;
-      }
-
-      img {
-        max-width: @mwidth;
-        box-shadow: 0px 8px 6px -6px #666;
-      }
+    img {
+      max-width: @mwidth;
+      box-shadow: 0px 8px 6px -6px #666;
     }
   }
 }
+
 
 .webxray-dialog-overlay {
   z-index: 2147483600!important; //  lower than dialog + overlay
