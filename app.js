@@ -59,7 +59,8 @@ app.use(require("xfo-whitelist")([
   "/easy-remix-dialog/index.html",
   "/easy-remix-dialog/blank.html",
   "/preferences.html",
-  "/uproot-dialog.html"
+  "/uproot-dialog.html",
+  "/help.html"
 ]));
 
 app.locals({
@@ -118,6 +119,13 @@ app.get("/authtoken.js", function(req, res) {
 // intercept webxray's publication dialog - HTML part
 app.get("/uproot-dialog.html", function(req, res) {
   res.render("uproot-dialog.html", {
+    hostname: env.get("APP_HOSTNAME")
+  });
+});
+
+// intercept webxray's help dialog - HTML part
+app.get("/help.html", function(req, res) {
+  res.render("help.html", {
     hostname: env.get("APP_HOSTNAME")
   });
 });

@@ -304,8 +304,13 @@
         keyboardHelp: [],
         commandBindings: {},
         showKeyboardHelp: function() {
-          var help = jQuery.createKeyboardHelpReference(self.keyboardHelp);
-          jQuery.transparentMessage(help);
+
+          jQuery.simpleModalDialog({
+            input: input,
+            url: jQuery.webxraySettings.url("helpURL"),
+            classes: "webxray-publish-dialog"
+          });
+
         },
         addSimpleKeyBindings: function(bindings) {
           bindings.forEach(function(binding) {

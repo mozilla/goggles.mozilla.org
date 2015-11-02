@@ -1,0 +1,28 @@
+@import "uproot-dialog.less";
+
+.dialog {
+  top: ~"calc(50% - 260px)";
+  .options {
+    padding: 0;
+    a.button {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      margin: 0;
+      padding: 0;
+      a, a:visited, a:active, a:hover {
+        color: @blue;
+        text-decoration: none;
+      }
+      & + li {
+        margin-top: 1rem;
+      }
+    }
+  }
+}

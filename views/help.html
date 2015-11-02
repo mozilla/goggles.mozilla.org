@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{ localeInfo.lang }}" dir="{{ localeInfo.direction }}">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ gettext("X-Ray Goggles Help") }}</title>
+    <link rel="stylesheet" href="/stylesheets/help.css">
+  </head>
+  <body>
+
+    <div class="dialog">
+      <div class="close">
+        <span class="fa fa-close"></span>
+      </div>
+      <div class="body">
+        <img class="logo" src="/img/goggles-logo.png">
+
+        <h1>X-Ray Goggles Help</h1>
+
+        <p>Having trouble? No problem! We have several ways for you to get help.</p>
+
+        <div class="options">
+          <a target="_blank" class="button" href="{{ hostname }}/ftu">Try our tutorial</a>
+          <a target="_blank" class="button" href="https://support.mozilla.org/en-US/products/webmaker/x-ray-goggles">Read our FAQs</a>
+          <a target="_blank" class="button" href="https://github.com/mozilla/goggles.webmaker.org/issues">Report a bug</a>
+        </div>
+
+        <p>If you're still having trouble, please connect with us on:</p>
+
+        <ul>
+          <li><a target="_blank" href="http://discourse.webmaker.org/">Our Discourse forum</a></li>
+          <li><a target="_blank" href="https://twitter.com/mozteach">Twitter @mozteach</a></li>
+          <li><a target="_blank" href="mailto:teachtheweb@mozillafoundation.org">teachtheweb@mozillafoundation.org</a></li>
+          <li><a target="_blank" href="irc://irc.mozilla.org/teach">#teach IRC channel</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      document.querySelector(".close").addEventListener("click", function(evt) {
+        window.parent.postMessage("close", "*");
+      });
+    </script>
+  </body>
+</html>

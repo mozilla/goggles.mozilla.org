@@ -23,6 +23,7 @@
     preferencesURL: "preferences.html",
     easyRemixDialogURL: "{{hostname}}/" + xray.lang + "/easy-remix-dialog/index.html",
     uprootDialogURL: "{{hostname}}/" + xray.lang + "/uproot-dialog.html",
+    helpDialogURL: "{{hostname}}/" + xray.lang + "/help.html",
     hackpubInjectionURL: "published-hack/injector.js",
     pluginURLs: [],
     hackpubURL: "{{hackpubURL}}",
