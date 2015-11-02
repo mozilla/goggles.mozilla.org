@@ -29,6 +29,13 @@
               var lines = bookmarklet.split("\n").map(function(s) { return s.trim(); });
               var a = document.querySelector("a.goggles-bookmark");
               a.href = "javascript:(" + lines.join('') + "())";
+              // make sure we can't accidentally click the link and activate the goggles
+              a.addEventListener("click", function(evt) {
+                evt.stopPropagation();
+                evt.preventDefault;
+                return false;
+              });
+              a.onclick = function() { return false; };
             </script>
 
           </div>
