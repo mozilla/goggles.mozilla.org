@@ -17,11 +17,11 @@
     link.href = url;
   }
   link.textContent = url;
-  link.style.color = "#1BA9E0";
+  link.style.color = "#1BA9E0!important";
   link.style.textDecoration = "none";
 
   var notice = document.createElement("div");
-  notice.innerHTML = "This is a <a href='{{hostname}}'>Mozilla X-Ray Goggles</a> remix of ";
+  notice.innerHTML = "This is a <a style='color:#1BA9E0!important;text-decoration:none;' href='{{hostname}}'>Mozilla X-Ray Goggles</a> remix of ";
   notice.appendChild(link);
 
   notice.setAttribute("style", [
@@ -37,10 +37,6 @@
     "background: #6A6DB1",
     "text-align: center"
   ].join("; "));
-
-  var a = notice.querySelector("a");
-  link.style.color = "rgb(23, 151, 221)";
-  link.style.textDecoration = "none";
 
   document.body.appendChild(notice);
 }());
