@@ -17,8 +17,7 @@
     link.href = url;
   }
   link.textContent = url;
-  link.style.color = "#1BA9E0!important";
-  link.style.textDecoration = "none";
+  link.setAttribute("style", "color:#1BA9E0!important;text-decoration:none;";
 
   var notice = document.createElement("div");
   notice.innerHTML = "This is a <a style='color:#1BA9E0!important;text-decoration:none;' href='{{hostname}}'>Mozilla X-Ray Goggles</a> remix of ";
