@@ -33,8 +33,9 @@
     "height: 2em",
     "line-height: 2em",
     "color: white",
-    "background: #6A6DB1",
-    "text-align: center"
+    "background: rgb(59, 64, 171)",
+    "text-align: center",
+    "box-shadow: 0px 5px 10px rgb(59, 64, 171)"
   ].join("; "));
 
   document.body.appendChild(notice);
