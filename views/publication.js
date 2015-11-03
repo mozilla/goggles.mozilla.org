@@ -144,19 +144,6 @@
   function showLoggedOutHTML() {
     var container = document.querySelector("span.status.placeholder");
     container.innerHTML = loggedOutTemplate;
-    return container;
-  }
-
-  /**
-   * [logout description]
-   * @return {[type]} [description]
-   */
-  function logout(bypass, link, evt) {
-    checked = false;
-    userdata = false;
-    localStorage.removeItem(gogglesAuthLabel);
-
-    var container = showLoggedOutHTML();
     var loginOption = container.querySelector("button.login, a.login-link");
 
     var link = (loginOption.nodeName === "A");
@@ -171,7 +158,17 @@
       signupOption.href = signupUrl(gogglesClientId);
     }
     signupOption.addEventListener("click", triggerLogin(!!link, true));
+  }
 
+  /**
+   * [logout description]
+   * @return {[type]} [description]
+   */
+  function logout(bypass) {
+    checked = false;
+    userdata = false;
+    localStorage.removeItem(gogglesAuthLabel);
+    showLoggedOutHTML();
     if (!bypass) {
       openInNew(logoutUrl(gogglesClientIdLib));
     }
