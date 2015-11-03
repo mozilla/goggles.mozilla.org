@@ -17,10 +17,10 @@
     link.href = url;
   }
   link.textContent = url;
-  link.setAttribute("style", "color:white!important;");
+  link.setAttribute("style", "color:white!important;text-decoration:underline!important;");
 
   var notice = document.createElement("div");
-  notice.innerHTML = "This is a <a style='color:white!important;' href='{{hostname}}'>Mozilla X-Ray Goggles</a> remix of ";
+  notice.innerHTML = "This is a <a style='color:white!important;text-decoration:underline!important;' href='{{hostname}}'>Mozilla X-Ray Goggles</a> remix of ";
   notice.appendChild(link);
 
   notice.setAttribute("style", [
