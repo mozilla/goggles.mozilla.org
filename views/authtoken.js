@@ -7,9 +7,12 @@
     console.log("token found:", loc.toString(), tks);
     if (tks[1]) {
       console.log("token:", tks[1]);
-      localStorage.setItme("goggles-auth-token", tks[1]);
+      localStorage.setItem("goggles-auth-token", tks[1]);
     } // else { localStorage.removeItem("goggles-auth-token"); }
   } // else { localStorage.removeItem("goggles-auth-token"); }
+  
+  
+  console.log("bound:", localStorage.getItem("goggles-auth-token"));
 
   if (loc.toString().indexOf("logout=true") !== -1) {
     console.log("logout requested:", loc.toString());
