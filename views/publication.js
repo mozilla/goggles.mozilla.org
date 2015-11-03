@@ -141,6 +141,12 @@
     };
   }
 
+  function showLoggedOutHTML() {
+    var container = document.querySelector("span.status.placeholder");
+    container.innerHTML = loggedOutTemplate;
+    return container;
+  }
+
   /**
    * [logout description]
    * @return {[type]} [description]
@@ -150,8 +156,7 @@
     userdata = false;
     localStorage.removeItem(gogglesAuthLabel);
 
-    var container = document.querySelector("span.status.placeholder");
-    container.innerHTML = loggedOutTemplate;
+    var container = showLoggedOutHTML();
     var loginOption = container.querySelector("button.login, a.login-link");
 
     var link = (loginOption.nodeName === "A");
@@ -413,7 +418,7 @@
 
   // Make sure to show the correct HTML based on whether we know
   // there is a logged in user or not, then wait for user interaction.
-  logout(true);
+  showLoggedOutHTML();
   checkForUser();
 
 }());
