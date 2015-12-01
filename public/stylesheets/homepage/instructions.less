@@ -65,10 +65,11 @@
     color: #777;
 
     h1 {
-      font-weight: 300;
+      font-weight: 400;
       font-size: 2.75rem;
       line-height: 2.75rem;
       margin: 0 0 15px 0;
+      color: #666;
     }
 
     p {
@@ -123,7 +124,25 @@
 
   .step {
 
+    h2 {
+      margin: 15px 0px 5px;
+    }
+
+    p {
+      margin: 0;
+
+      .aside {
+        font-size: 15px;
+        font-style: italic;
+      }
+    }
+
+    p + p {
+      margin-top: 10px;
+    }
+
     .nav {
+      padding-top: 30px;
       padding-bottom: 25px;
     }
 
@@ -186,20 +205,6 @@
     @midway: ~"calc(50% - 7.5px)";
 
     &:nth-child(1) {
-      top: 20px;
-      left: 7rem;
-      bottom: auto;
-      right: auto;
-      .arrow {
-        border-left: @blank;
-        border-right: @blank;
-        border-bottom: @colored;
-        top: -15px;
-        left: @midway;
-      }
-    }
-
-    &:nth-child(2) {
       position: absolute;
       top: 325px;
       left: 7rem;
@@ -214,7 +219,7 @@
       }
     }
 
-    &:nth-child(3) {
+    &:nth-child(2) {
       top: auto;
       left: 7rem;
       bottom: 200px;
@@ -228,7 +233,7 @@
       }
     }
 
-    &:nth-child(4) {
+    &:nth-child(3) {
       position: absolute;
       top: -46px;
       left: 4rem;
@@ -243,7 +248,7 @@
       }
     }
 
-    &:nth-child(5) {
+    &:nth-child(4) {
       top: auto;
       left: 7rem;
       bottom: 200px;
@@ -257,7 +262,7 @@
       }
     }
 
-    &:nth-child(6) {
+    &:nth-child(5) {
       top: auto;
       left: auto;
       bottom: 230px;
