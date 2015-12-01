@@ -1,0 +1,56 @@
+.sample {
+  background-color: @skyblue;
+
+  .content-wrapper {
+    width: 100%;
+    margin: 0;
+    position: relative;
+
+    img {
+      width: 100%;
+      margin-top: 172px;
+      // we need this, but why...
+      margin-bottom: -5px;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 96px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      color: #777;
+
+      .inlay {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+
+        h2 {
+          font-weight: 400;
+          font-size: 2.5rem;
+          margin: 0;
+        }
+
+        p {
+          color: #888;
+          margin-top: 0;
+          font-size: 1.07rem;
+
+          a, a:hover, a:visited, a:active {
+            color: @blue;
+            text-decoration: none;
+          }
+        }
+
+        .remix-button {
+          .createButton("Fira Sans", 18px, white, @blue, @darkblue);
+          font-weight: 400;
+          width: 16rem;
+          margin: auto;
+        }
+      }
+
+    }
+  }
+}

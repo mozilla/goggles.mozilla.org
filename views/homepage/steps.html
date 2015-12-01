@@ -1,59 +1,39 @@
-{% block maincta %}
+{% block steps %}
     <section class="steps">
       <div class="content-wrapper">
 
         <div class="step">
           <figure class="example">
-            <img src="img/goggles-step-1.png" width="100%">
+            <img src="img/bookmark-mac-firefox@2x.png" width="100%">
           </figure>
           <div class="description">
-            <h2>Install Goggles</h2>
+            <h2>Open Your Bookmark Toolbar</h2>
             <p>
-              Make sure your bookmark bar is in view <a href="https://support.mozilla.org/en-US/kb/install-x-ray-goggles#w_enable-your-bookmarks-toolbar">(learn how)</a>. Click and drag this
-              button to your bookmark bar to install X-Ray Goggles.
+              If you're using Forefox on a Mac, look at your top menu bar,
+              click <em>View</em>, and make sure <em>Bookmark Toolbar</em> is selected.
             </p>
-            <a class="goggles-bookmark" href="javascript:"><span class="dragme fa fa-arrows"></span><span class="label">X-Ray Goggles</span></a>
-
-            <!-- autogenerate the goggles bookmarklet code, immediately -->
-            <script>
-              var gogglesBaseURI = window.location.protocol + "//" + window.location.host;
-              var bookmarklet = (function() {
-                var script=document.createElement('script');
-                script.src=gogglesBaseURI+'/webxray.js';
-                script.className='webxray';
-                script.setAttribute('data-lang','en-US');
-                script.setAttribute('data-baseuri',gogglesBaseURI);
-                document.body.appendChild(script);
-              }).toString();
-              bookmarklet = bookmarklet.replace(/gogglesBaseURI/g, "'" + gogglesBaseURI + "'");
-              var lines = bookmarklet.split("\n").map(function(s) { return s.trim(); });
-              var a = document.querySelector("a.goggles-bookmark");
-              a.href = "javascript:(" + lines.join('') + "())";
-              // make sure we can't accidentally click the link and activate the goggles
-              a.addEventListener("click", function(evt) {
-                evt.stopPropagation();
-                evt.preventDefault;
-                return false;
-              });
-              a.onclick = function() { return false; };
-            </script>
-
           </div>
         </div>
 
         <div class="step">
           <figure class="example">
-            <img src="img/goggles-step-2.png" width="100%">
+            <img src="img/install-mac-firefox@2x.png" width="100%">
           </figure>
           <div class="description">
-            <h2>Try a Sample Activity</h2>
+            <h2>Install Goggles</h2>
             <p>
-              Once you've installed X-Ray Goggles in your bookmark bar, you
-              can begin remixing. Start with our step-by-step tutorial.
+              Click and drag this button to your bookmark toolbar to install X-Ray Goggles.
             </p>
-            <a href="/ftu" class="remix-button">Sample activity page <span class="follow fa fa-long-arrow-right "></span></a>
+            <a class="goggles-bookmark" href="javascript:"><span class="dragme fa fa-arrows"></span><span class="label">X-Ray Goggles</span></a>
+
+            <!-- autogenerate the goggles bookmarklet code, immediately -->
+            <script src='js/bindgogglesbutton.js'></script>
           </div>
         </div>
+
+<!--
+ <a href="/ftu" class="remix-button">Sample activity page <span class="follow fa fa-long-arrow-right "></span></a>
+-->
 
       </div>
     </section>

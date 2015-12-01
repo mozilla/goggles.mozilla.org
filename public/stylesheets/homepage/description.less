@@ -1,0 +1,80 @@
+.description() {
+  display: flex;
+  .flex(0 1 50%);
+  .flex-direction(column);
+  color: #777;
+  font-weight: 300;
+
+  h2 {
+    font-weight: 400;
+    font-size: 1.75rem;
+    margin: 0;
+
+    &:before {
+      content: counter(step, decimal);
+      border: 1px solid #5b73a2;
+      color: #5b73a2;
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      display: block;
+      text-align: center;
+      padding: 5px;
+      font-weight: 300;
+      margin: 4rem 0 1rem;
+      line-height: 2rem;
+    }
+  }
+
+  p {
+    margin-top: 0;
+
+    a, a:hover, a:visited, a:active {
+      color: @blue;
+      text-decoration: none;
+    }
+  }
+
+  .remix-button {
+    .createButton("Fira Sans", 18px, white, @blue, @darkblue);
+
+    font-weight: 400;
+  }
+
+  .goggles-bookmark {
+    .createButton("Fira Sans", 18px, white, @pink, @darkpink);
+
+    padding: 20px 0px 14px 3rem;
+    border-radius: 30px;
+    font-weight: 400;
+    line-height: 1.4rem;
+    width: 22rem;
+    position: relative;
+
+    .dragme {
+      position: absolute;
+      left: 1.25rem;
+      line-height: 1.2rem;
+    }
+
+    /*
+      Hide the true label, which is used by the browser as bookmarklet title,
+      and instead show our "desired" button label as a CSS:after content string:
+    */
+
+    .label {
+      position: relative;
+      color: transparent;
+
+      &:after {
+        content: "Drag and drop me in your bookmark bar";
+        position: absolute;
+        top: ~"calc(50% - 0.75rem)";
+        left: -7.3rem;
+        color: white;
+        white-space: nowrap;
+      }
+    }
+  }
+
+}

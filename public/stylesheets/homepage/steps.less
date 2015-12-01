@@ -1,5 +1,5 @@
 .steps {
-  background-color: @lightgrey;
+  background-color: @white;
 
   .content-wrapper {
     width: 964px;
@@ -15,9 +15,9 @@
       counter-increment: step;
 
       & + .step {
-        margin-top: 30px;
+        margin-top: 45px;
         border-top: 1px solid #CCC;
-        padding-top: 100px;
+        padding-top: 90px;
         padding-bottom: 60px;
       }
 
@@ -29,14 +29,14 @@
       .example {
         .flex(0 1 50%);
         position: relative;
-        height: 370px;
         width: auto;
-        top: -30px;
+        top: -20px;
         margin-right: 6%;
 
         img {
           position: relative;
-          z-index: 1
+          z-index: 1;
+          border-radius: 0 0 5px 5px;
         }
 
         &:after {
