@@ -7,9 +7,15 @@
     </p>
   </div>
   <script>
+  (function() {
+    var overlay = document.getElementById("mobile-overlay");
     var mobileBrowsers ["Android", "iOS"];
     if (mobileBrowsers.indexOf(html.getAttribute("data-os")) !== -1) {
-      document.getElementById("mobile-overlay").setAttribute("class", "active");
+      overlay.setAttribute("class", "active");
     }
+    overlay.addEventListener("click", function() {
+      overlay.parentNode.removeChild(overlay);
+    });
+  }())
   </script>
 {% endblock %}
