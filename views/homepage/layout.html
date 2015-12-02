@@ -9,10 +9,12 @@
     <link rel="icon" href="/img/goggles-logo.png">
     <script src="/bower/ua-parser-js/dist/ua-parser.min.js"></script>
     <script>
+    (function() {
       var ua = UAParser();
       var html = document.querySelector("html");
       html.setAttribute("data-os", ua.os.name.toLowerCase());
       html.setAttribute("data-browser", ua.browser.name.toLowerCase());
+    }());
     </script>
   </head>
   <body>

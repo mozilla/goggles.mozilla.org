@@ -6,13 +6,16 @@
             <img class="toolbar" src="img/bookmark-mac-firefox@2x.png" width="100%">
           </figure>
           <script>
+          (function() {
             var img = document.querySelector("img.toolbar");
+            var html = document.querySelector("html");
             var src = [
               "bookmark",
-              ua.os.name,
-              ua.browser.name
-            ].join('-').toLowerCase() + "@2x.png";
+              html.getAttribute("data-os"),
+              html.getAttribute("data-browser")
+            ].join('-') + "@2x.png";
             img.src = src;
+          }());
           </script>
           <div class="description">
             <h2>Open Your Bookmark Toolbar</h2>
@@ -22,7 +25,9 @@
             </p>
           </div>
           <script>
+          (function() {
             var p = document.querySelector("p.toolbar");
+            var html = document.querySelector("html");
             var instructions = {
               "Mac OS": {
                 "Firefox": "firefox on mac...",
@@ -38,9 +43,9 @@
                 "text": "generic description"
               }
             };
-            var os = instructions[ua.os.name];
+            var os = instructions[html.getAttribute("data-os")];
             if (os) {
-              var text = os[ua.browser.name];
+              var text = os[html.getAttribute("data-browser")];
               if (text) {
                 p.innerHTML = text;
               } else {
@@ -49,6 +54,7 @@
             } else {
               p.innerHTML = instructions.unknown.text;
             }
+          }()); 
           </script>
         </div>
 
