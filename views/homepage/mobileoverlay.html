@@ -1,0 +1,15 @@
+{% block mobileoverlay %}
+  <div id="mobile-overlay" class="inactive">
+    <p class="notice">
+      X-Ray Goggles was designed as a desktop experience, and
+      relies on having a bookmark bar from which to launch a
+      JavaScript library.
+    </p>
+  </div>
+  <script>
+    var mobileBrowsers ["Android", "iOS"];
+    if (mobileBrowsers.indexOf(html.getAttribute("data-os")) !== -1) {
+      document.getElementById("mobile-overlay").setAttribute("class", "active");
+    }
+  </script>
+{% endblock %}

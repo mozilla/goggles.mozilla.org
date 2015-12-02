@@ -1,10 +1,6 @@
 {% block steps %}
     <section class="steps">
       <div class="content-wrapper">
-        <script>
-          var ua = UAParser();
-        </script>
-
         <div class="step">
           <figure class="example">
             <img class="toolbar" src="img/bookmark-mac-firefox@2x.png" width="100%">
@@ -43,7 +39,6 @@
               }
             };
             var os = instructions[ua.os.name];
-            console.log(ua.os.name);
             if (os) {
               var text = os[ua.browser.name];
               if (text) {
