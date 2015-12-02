@@ -1,18 +1,60 @@
 {% block steps %}
     <section class="steps">
       <div class="content-wrapper">
+        <script>
+          var ua = UAParser();
+        </script>
 
         <div class="step">
           <figure class="example">
-            <img src="img/bookmark-mac-firefox@2x.png" width="100%">
+            <img class="toolbar" src="img/bookmark-mac-firefox@2x.png" width="100%">
           </figure>
+          <script>
+            var img = document.querySelector("img.toolbar");
+            var src = [
+              "bookmark",
+              ua.os.name,
+              ua.browser.name
+            ].join('-').toLowerCase() + "@2x.png";
+            img.src = src;
+          </script>
           <div class="description">
             <h2>Open Your Bookmark Toolbar</h2>
-            <p>
+            <p class="toolbar">
               If you're using Firefox on a Mac, look at your top menu bar,
               click <em>View</em>, and make sure <em>Bookmark Toolbar</em> is selected.
             </p>
           </div>
+          <script>
+            var p = document.querySelector("p.toolbar");
+            var instructions = {
+              "OSX": {
+                "Firefox": "firefox on mac...",
+                "Chrome": "chrome on mac...",
+                "Safari": "safari on mac..."
+              },
+              "Windows": {
+                "Firefox": "firefox on windows...",
+                "Chrome": "chrome on windows...",
+                "IE": "ie on windows..."
+              },
+              "unknown": {
+                "text": "generic description"
+              }
+            };
+            var os = instructions[ua.os.name];
+            console.log(ua.os.name);
+            if (os) {
+              var text = os[ua.browser.name];
+              if (text) {
+                p.innerHTML = text;
+              } else {
+                p.innerHTML = instructions.unknown.text;
+              }
+            } else {
+              p.innerHTML = instructions.unknown.text;
+            }
+          </script>
         </div>
 
         <div class="step">

@@ -168,7 +168,6 @@ app.use(express.static(path.join(__dirname, "webxray/static-files")));
 ["src", "test", "js"].forEach(function(dir) {
   app.use("/" + dir, express.static(path.join(__dirname, "webxray/" + dir)));
 });
-app.use("/js/bowser", express.static(path.join(__dirname, "node_modules/bowser")));
 
 // Localized Strings
 app.get("/strings/:lang?", function( req, res, next ) {
