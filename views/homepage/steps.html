@@ -10,7 +10,7 @@
             var img = document.querySelector("img.toolbar");
             var html = document.querySelector("html");
             var src = [
-              "bookmark",
+              "/img/instructions/bookmark1",
               html.getAttribute("data-os"),
               html.getAttribute("data-browser")
             ].join('-') + "@2x.png";
@@ -31,15 +31,15 @@
             var instructions = {
               "mac os": {
                 "firefox": "If you're using Firefox on a Mac, look at your top menu bar, click <em>View</em>, and make sure <em>Bookmark Toolbar</em> is selected.",
-                "chrome": "Instructions for chrome on mac pending...",
-                "safari": "Instructions for safari on mac pending...",
-                "opera": "Instractions for opera on mac pending..."
+                "chrome": "If you're using Chrome on a Mac, look at your top menu bar, click <em>View</em>, and make sure <em>Always View Bookmarks Bar</em> is selected.",
+                "safari": "If you're using Safari on a Mac, look at your top menu bar, click <em>View</em>, and make sure <em>Show Favorites Bar</em> is selected.",
+                "opera": "If you're using Opera on a Mac, look at your top menu bar, click <em>View</em>, and make sure <em>Show Bookmarks Bar</em> is selected."
               },
               "windows": {
-                "firefox": "If you're using Firefox on Windows, look next to your Search bar for the bookmarks clipboard icon, click it, then navigate to <em>Bookmarks Toolbar</em>, and pick the <em>View Bookmarks Toolbar</em> option.",
-                "chrome": "If you're using Chrome on Windows, click the options icon to the right of your URL bar, select <em>Bookmarks</em>, then pick <em>Show bookmarks bar</em> option.",
-                "opera": "Instructions for opera on windows pending...",
-                "ie": "If you're using Internet Explorer on Windows, right-click on the main tabs bar, and enable the <em>Favorites bar</em>."
+                "firefox": "If you're using Firefox on Windows, look next to your Search bar for the bookmarks clipboard icon, click it, then navigate to <em>Bookmarks Toolbar</em>, then make sure <em>View Bookmarks Toolbar</em> is selected.",
+                "chrome": "If you're using Chrome on Windows, click the options icon to the right of your URL bar, select <em>Bookmarks</em>, then make sure <em>Show bookmarks bar</em> is selected.",
+                "opera": "If you're using Opera on Windows, click the opera button, select <em>Bookmarks</em>, then make sure <em>Show bookmarks bar</em> is selected.",
+                "ie": "If you're using Internet Explorer on Windows, right-click on the main tabs bar, then make sure <em>Favorites bar</em> is selected."
               },
               "unknown": {
                 "text": "generic description"
@@ -62,8 +62,20 @@
 
         <div class="step">
           <figure class="example">
-            <img src="img/install-mac-firefox@2x.png" width="100%">
+            <img class="dragging" src="img/install-mac-firefox@2x.png" width="100%">
           </figure>
+          <script>
+          (function() {
+            var img = document.querySelector("img.dragging");
+            var html = document.querySelector("html");
+            var src = [
+              "/img/instructions/bookmark2",
+              html.getAttribute("data-os"),
+              html.getAttribute("data-browser")
+            ].join('-') + "@2x.png";
+            img.src = src;
+          }());
+          </script>
           <div class="description">
             <h2>Install Goggles</h2>
             <p>
@@ -75,10 +87,6 @@
             <script src='js/bindgogglesbutton.js'></script>
           </div>
         </div>
-
-<!--
- <a href="/ftu" class="remix-button">Sample activity page <span class="follow fa fa-long-arrow-right "></span></a>
--->
 
       </div>
     </section>
