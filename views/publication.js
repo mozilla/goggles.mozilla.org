@@ -278,8 +278,8 @@
       newProject.send(JSON.stringify({
         "title": "My Goggles Remix",
         "user_id": userdata.id,
-        "date_created": "" + Date.now(),
-        "date_updated": "" + Date.now(),
+        "date_created": (new Date()).toISOString(),
+        "date_updated": (new Date()).toISOString(),
         "description": "A Mozilla X-Ray Goggles remix of " + window.location.toString(),
         "readonly": true,
         "client": "X-Ray Goggles"
