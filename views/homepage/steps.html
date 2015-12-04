@@ -3,17 +3,18 @@
       <div class="content-wrapper">
         <div class="step">
           <figure class="example">
-            <img class="toolbar" src="img/bookmark-mac-firefox@2x.png" width="100%">
+            <img class="toolbar" src="img/bookmark-windows-firefox@2x.png" width="100%">
           </figure>
           <script>
           (function() {
             var img = document.querySelector("img.toolbar");
             var html = document.querySelector("html");
-            var src = [
-              "/img/instructions/bookmark1",
-              html.getAttribute("data-os"),
-              html.getAttribute("data-browser")
-            ].join('-') + "@2x.png";
+            var os = html.getAttribute("data-os");
+            var browser = html.getAttribute("data-browser");
+            // OS/Browser we have pictures for?
+            if (["mac os", "windows"].indexOf(os) === -1) os = "windows";
+            if (["safari", "ie", "firefox", "chrome", "opera"].indexOf(browser) === -1) browser = "firefox";
+            var src = ["/img/instructions/bookmark1", os, browser].join('-') + "@2x.png";
             img.src = src;
           }());
           </script>
@@ -42,37 +43,40 @@
                 "ie": "If you're using Internet Explorer on Windows, right-click on the main tabs bar, then make sure <em>Favorites bar</em> is selected."
               },
               "unknown": {
-                "text": "generic description"
+                "firefox": "If you're using Firefox, look next to your Search bar for the bookmarks clipboard icon, click it, then navigate to <em>Bookmarks Toolbar</em>, then make sure <em>View Bookmarks Toolbar</em> is selected.",
+                "chrome": "If you're using Chrome, click the options icon to the right of your URL bar, select <em>Bookmarks</em>, then make sure <em>Show bookmarks bar</em> is selected.",
+                "opera": "If you're using Opera, click the opera button, select <em>Bookmarks</em>, then make sure <em>Show bookmarks bar</em> is selected.",
+                "ie": "If you're using Internet Explorer, right-click on the main tabs bar, then make sure <em>Favorites bar</em> is selected.",
+                "safari": "If you're using Safari, look at your top menu bar, click <em>View</em>, and make sure <em>Show Favorites Bar</em> is selected."
               }
             };
-            var os = instructions[html.getAttribute("data-os")];
-            if (os) {
-              var text = os[html.getAttribute("data-browser")];
-              if (text) {
-                p.innerHTML = text;
-              } else {
-                p.innerHTML = instructions.unknown.text;
-              }
-            } else {
-              p.innerHTML = instructions.unknown.text;
-            }
-          }()); 
+
+            var os = html.getAttribute("data-os");
+            var browser = html.getAttribute("data-browser");
+
+            // OS/Browser we have pictures for?
+            if (["mac os", "windows"].indexOf(os) === -1) os = "unknown";
+            if (["safari", "ie", "firefox", "chrome", "opera"].indexOf(browser)===-1) browser = "firefox";
+
+            p.innerHTML = instructions[os][browser];
+          }());
           </script>
         </div>
 
         <div class="step">
           <figure class="example">
-            <img class="dragging" src="img/install-mac-firefox@2x.png" width="100%">
+            <img class="dragging" src="img/install-windows-firefox@2x.png" width="100%">
           </figure>
           <script>
           (function() {
             var img = document.querySelector("img.dragging");
             var html = document.querySelector("html");
-            var src = [
-              "/img/instructions/bookmark2",
-              html.getAttribute("data-os"),
-              html.getAttribute("data-browser")
-            ].join('-') + "@2x.png";
+            var os = html.getAttribute("data-os");
+            var browser = html.getAttribute("data-browser");
+            // OS/Browser we have pictures for?
+            if (["mac os", "windows"].indexOf(os) === -1) os = "windows";
+            if (["safari", "ie", "firefox", "chrome", "opera"].indexOf(browser) === -1) browser = "firefox";
+            var src = ["/img/instructions/bookmark2", os, browser].join('-') + "@2x.png";
             img.src = src;
           }());
           </script>

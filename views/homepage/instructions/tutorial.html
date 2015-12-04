@@ -21,11 +21,12 @@
           (function() {
             var img = document.querySelector("img.demoimg");
             var html = document.querySelector("html");
-            var src = [
-              "/img/instructions/bookmark3",
-              html.getAttribute("data-os"),
-              html.getAttribute("data-browser")
-            ].join('-') + "@2x.png";
+            var os = html.getAttribute("data-os");
+            var browser = html.getAttribute("data-browser");
+            // OS/Browser we have pictures for?
+            if (["mac os", "windows"].indexOf(os) === -1) os = "windows";
+            if (["safari", "ie", "firefox", "chrome", "opera"].indexOf(browser) === -1) browser = "firefox";
+            var src = ["/img/instructions/bookmark3", os, browser].join('-') + "@2x.png";
             img.src = src;
           }());
           </script>
