@@ -33,3 +33,11 @@ ID_WMO_URL: the URL for the id.webmaker.org service, port included.
 ID_WMO_CLIENT_ID: the client identifier assigned to goggles by thje id.webmaker.org instance pointed to.
 PUBLISH_WMO_URL: the URL for the publish.webmaker.org service, port included.
 ```
+
+Deployment
+----------
+
+Deployment uses a Heroku pipeline.
+
+staging: https://goggles-mozilla-org-staging.herokuapp.com
+production: https://goggles-mozilla-org-production.herokuapp.com
