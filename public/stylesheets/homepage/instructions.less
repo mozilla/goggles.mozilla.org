@@ -209,6 +209,7 @@
       left: 7rem;
       bottom: auto;
       right: auto;
+      animation: horizontalwobble 1.5s 3;
       .arrow {
         border-top: @blank;
         border-bottom: @blank;
@@ -223,6 +224,7 @@
       left: 7rem;
       bottom: 200px;
       right: auto;
+      animation: verticalwobble 1.5s 3;
       .arrow {
         border-left: @blank;
         border-right: @blank;
@@ -238,6 +240,7 @@
       left: 4rem;
       bottom: auto;
       right: auto;
+      animation: horizontalwobble 1.5s 3;
       .arrow {
         border-top: @blank;
         border-bottom: @blank;
@@ -252,6 +255,7 @@
       left: 7rem;
       bottom: 200px;
       right: auto;
+      animation: verticalwobble 1.5s 3;
       .arrow {
         border-left: @blank;
         border-right: @blank;
@@ -266,6 +270,7 @@
       left: auto;
       bottom: 230px;
       right: 7rem;
+      animation: horizontalwobble 1.5s 3;
       .arrow {
         border-top: @blank;
         border-bottom: @blank;
@@ -286,6 +291,51 @@
   }
 }
 
+@keyframes horizontalwobble {
+  0% {
+    transform: translateX(0);
+    animation-timing-function: ease-out;
+  }
+  25% {
+    transform: translateX(3px);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translateX(0);
+    animation-timing-function: ease-out;
+  }
+  75% {
+    transform: translateX(-3px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateX(0);
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes verticalwobble {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  25% {
+    transform: translateY(3px);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  75% {
+    transform: translateY(-3px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+}
 
 .webxray-dialog-overlay {
   z-index: 2147483600!important; //  lower than dialog + overlay
