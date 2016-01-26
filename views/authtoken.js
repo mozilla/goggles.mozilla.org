@@ -6,6 +6,7 @@
     tks = tks.split("#token=");
     if (tks[1]) {
       localStorage["goggles-auth-token"] = tks[1];
+      location.hash = '';
     }
   }
 
