@@ -21,6 +21,7 @@
   "help": "This help reference",
   "Here is the URL for your remix that anyone can view.": "Here is the URL for your remix that anyone can view.",
   "Hi": "Hi",
+  "https-warning": "You're about to remix a webpage that is served with the plain HTTP protocol, but the Goggles will save your remix to be served using the HTTPS protocol, which means your remix may look and work very differently. HTTPS, the secure counterpart to HTTP, does not like loading unsecure HTTP resources (like CSS or JavaScript files), so you might want to try loading the HTTPS:// version of the URL you're trying to remix, first.",
   "id": "id",
   "Instantly publish your remix to a URL that anyone can view.": "Instantly publish your remix to a URL that anyone can view.",
   "key-names:DELETE": "backspace",

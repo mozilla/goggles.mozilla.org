@@ -488,3 +488,21 @@ div.webxray-dialog-inner {
 .webxray-publish-dialog {
   height: 100vh!important;
 }
+
+.webxray-https-warning {
+  position: fixed;
+  z-index: 2147483645;
+  top: calc(50% - 150px);
+  left: 10%;
+  right: 10%;
+  height: 300px;
+  background: rgba(218, 158, 158, 0.9);
+  padding: 1em;
+  color: white;
+  font-family: Verdana;
+  font-size: 200%;
+  box-sizing: border-box;
+  text-align: justify;
+  border: 5px solid red;
+  border-radius: 10px;
+}
