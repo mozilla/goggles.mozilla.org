@@ -7,11 +7,11 @@ var app = express();
 
 app.disable("x-powered-by");
 
-// contains webxray.js, which prompts users to rebookmark from goggles.mozilla.org
+// static dir contains webxray.js, which prompts users to rebookmark from goggles.mozilla.org
 app.use(express.static(path.join(__dirname, "public")));
 
-// redirect us to the new goggles website
-app.get('/', function(req, res) {
+// and anything else redirects the user to the new goggles website
+app.use(function(req, res) {
   res.redirect('https://goggles.mozilla.org');
 });
 
