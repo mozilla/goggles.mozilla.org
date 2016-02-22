@@ -49,19 +49,24 @@
   heading.textContent ="The X-Ray Goggles bookmark has moved!";
   notice.appendChild(heading);
 
-  var text = document.createElement("p");
-  setStyle(text, {
+  var parastyle = {
     margin: "10px",
     padding: "0.25em 0.5em",
     color: "white"
-  });
-  text.innerHTML = "<p>X-Ray Goggles has a new home at <a href='https://goggles.mozilla.org'>https://goggles.mozilla.org</a>!<p>Head on over and follow the instructions to get the new bookmarklet. While you're there, have a look at the new sample activity. How many animals can you make?";
+  };
+
+  var text = document.createElement("p");
+  setStyle(text, parastyle);
+  text.innerHTML = "X-Ray Goggles has a new home at <a href='https://goggles.mozilla.org'>https://goggles.mozilla.org</a>!";
   notice.appendChild(text);
 
+  var text2 = document.createElement("p");
+  setStyle(text2, parastyle);
+  text2.textContent = "Head on over and follow the instructions to get the new bookmarklet. While you're there, have a look at the new sample activity. How many animals can you make?";
+  notice.appendChild(text2);
+
   var a = text.querySelector("a");
-  setStyle(a, {
-    color: "#DDD"
-  });
+  setStyle(a, { color: "#DDD" });
   a.target = "_blank"; 
 
   overlay.onclick = function() { document.body.removeChild(overlay); };
