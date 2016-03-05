@@ -119,7 +119,7 @@ document.querySelector(".instruction-overlay").addEventListener("click", functio
 });
 */
 
-var closers = document.querySelectorAll("div.close, button.browse");
+var closers = document.querySelectorAll("span.dismiss-link, div.close, button.browse");
 Array.prototype.forEach.call(closers, function(e) {
   e.addEventListener("click", function(evt) {
     removeOverlay();
