@@ -100,7 +100,7 @@ app.get('/', function(req, res) {
   });
 });
 
-pp.get('/index.html', function(req, res) {
+app.get('/index.html', function(req, res) {
   res.render("/");
 });
 
