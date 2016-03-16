@@ -100,6 +100,10 @@ app.get('/', function(req, res) {
   });
 });
 
+app.get('/index.html', function(req, res) {
+  res.redirect("/");
+});
+
 app.get('/ftu', function(req, res) {
   res.render("homepage/ftu.html", {
     idwmoURL: env.get("ID_WMO_URL"),
