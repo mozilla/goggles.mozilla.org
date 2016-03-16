@@ -94,14 +94,14 @@ app.get('/healthcheck', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.redirect("/");
-});
-
-pp.get('/index.html', function(req, res) {
   res.render("homepage/index.html", {
     idwmoURL: env.get("ID_WMO_URL"),
     clientId: env.get("ID_WMO_CLIENT_ID")
   });
+});
+
+pp.get('/index.html', function(req, res) {
+  res.render("/");
 });
 
 app.get('/ftu', function(req, res) {
