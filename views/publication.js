@@ -112,17 +112,23 @@
    * @param  {[type]} url [description]
    * @return {[type]}     [description]
    */
-  function showPublishResult(url) {
+  function showPublishResult(originalURL, publishedURL) {
     var container = document.querySelector("span.status.placeholder");
     container.innerHTML = publishedTemplate;
+
+    // Give the user a link that is protocol-appropriate to the site the user's remixing
+    if (originalURL.indexOf("http://") !== -1) {
+      publishedURL = publishedURL.replace("https://", "http://");
+    }
+
     var a = container.querySelector("a.publication");
-    a.href = url;
-    a.textContent = url;
+    a.href = publishedURL;
+    a.textContent = publishedURL;
 
     var button = container.querySelector("button.review.button");
     if (button) {
       button.addEventListener("click", function() {
-        openInNew(url);
+        openInNew(publishedURL);
       });
     }
   }
@@ -292,10 +298,6 @@
       saveFile.setRequestHeader("Authorization", "token " + authToken);
       saveFile.setRequestHeader("Content-Type", "multipart/form-data; boundary=" + boundary);
 
-      saveFile.onload = function(evt) {
-        publishAPI.publishProject(authToken, project_id);
-      };
-
       var stored = localStorage[gogglesDataLabel];
       if (!stored) {
         return console.error("No publishable data was found in localStorage");
@@ -304,6 +306,10 @@
       var data = false;
       try { data = JSON.parse(stored); }
       catch (e) { return console.error("Error parsing stored data", stored, e); }
+
+      saveFile.onload = function(evt) {
+        publishAPI.publishProject(data.url, authToken, project_id);
+      };
 
       var html = data.html;
 
@@ -329,16 +335,16 @@
       saveFile.send(payload);
     },
 
-    publishProject: function(authToken, project_id) {
+    publishProject: function(originalURL, authToken, project_id) {
       var publish = new XMLHttpRequest();
       publish.open("PUT", publishwmo + "/projects/"+ project_id +"/publish", true);
       publish.setRequestHeader("Authorization", "token " + authToken);
       publish.onload = function(evt) {
         try {
           var result = JSON.parse(publish.response);
-          var url = result["publish_url"];
+          var publishedURL = result["publish_url"];
           publishAPI.publishing = false;
-          showPublishResult(url);
+          showPublishResult(originalURL, publishedURL);
         } catch(e) {
           console.error("Error parsing XHR response in publishAPI.publishProject", publish.response, e);
         }
