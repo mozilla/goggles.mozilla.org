@@ -35,7 +35,10 @@
     link.setAttribute("style", "color:white!important;text-decoration:underline!important;");
     notice.appendChild(span);
     notice.appendChild(link);
-  } else {
+  }
+
+  // or, if we're on https and the source was http, talk about the craziness that is mixed content.
+  else if (url.indexOf("http://") !== -1) {
     var span = document.createElement("span");
     span.innerHTML = " - If this looks broken click ";
     notice.appendChild(span);
