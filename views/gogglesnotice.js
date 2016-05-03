@@ -37,6 +37,30 @@
     notice.appendChild(link);
   }
 
+  // or, if we're on https and the source was http, talk about the craziness that is mixed content.
+  else if (url.indexOf("http://") !== -1) {
+    var span = document.createElement("span");
+    span.innerHTML = " - If this looks broken click ";
+    notice.appendChild(span);
+    link = document.createElement("a");
+    link.href = window.location.toString().replace("https://","http://");
+    link.textContent = "here";
+    link.setAttribute("style", "color:white!important;text-decoration:underline!important;");
+    notice.appendChild(link);
+    span = document.createElement("span");
+    span.innerHTML = " to go back to the HTTP version, but also click ";
+    notice.appendChild(span);
+    link = document.createElement("a");
+    link.href = "https://support.mozilla.org/en-US/kb/why-do-i-see-message-asking-if-i-want-see-page-hos";
+    link.setAttribute("target", "_blank");
+    link.textContent = "here";
+    link.setAttribute("style", "color:white!important;text-decoration:underline!important;");
+    notice.appendChild(link);
+    span = document.createElement("span");
+    span.innerHTML = " to read more about why this happens.";
+    notice.appendChild(span);
+  }
+
   var closer = document.createElement("div");
   closer.setAttribute("style", [
     "position: absolute",
