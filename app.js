@@ -1,4 +1,10 @@
 var express    = require("express"),
+
+    favicon    = require("serve-favicon"),
+    static     = require("serve-static"),
+    compress   = require("compression"),
+    bodyparser = require("body-parser"),
+
     forceSSL   = require("express-force-ssl"),
     goggles    = require("./lib/goggles"),
     habitat    = require("habitat"),
@@ -42,10 +48,10 @@ if (!!env.get("FORCE_SSL") ) {
   app.enable("trust proxy");
 }
 
-app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
-app.use(express.compress());
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
+app.use(compress());
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded());
 
 // Setup locales with i18n
 app.use( i18n.middleware({
@@ -63,13 +69,12 @@ app.use(require("xfo-whitelist")([
   "/help.html"
 ]));
 
-app.locals({
-  GA_ACCOUNT: env.get("GA_ACCOUNT"),
-  GA_DOMAIN: env.get("GA_DOMAIN"),
-  hostname: env.get("APP_HOSTNAME"),
-  languages: i18n.getSupportLanguages(),
-  bower_path: "public/bower"
-});
+app.locals.GA_ACCOUNT = env.get("GA_ACCOUNT");
+app.locals.GA_DOMAIN = env.get("GA_DOMAIN");
+app.locals.hostname = env.get("APP_HOSTNAME");
+app.locals.languages = i18n.getSupportLanguages();
+app.locals.bower_path = "public/bower";
+
 
 // universal error handling
 app.use(function(err, req, res, next) {
@@ -166,11 +171,11 @@ app.use(lessMiddleWare({
 }));
 
 // serve static content, resolved in this order:
-app.use(express.static(tmpDir));
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "webxray/static-files")));
+app.use(static(tmpDir));
+app.use(static(path.join(__dirname, "public")));
+app.use(static(path.join(__dirname, "webxray/static-files")));
 ["src", "test", "js"].forEach(function(dir) {
-  app.use("/" + dir, express.static(path.join(__dirname, "webxray/" + dir)));
+  app.use("/" + dir, static(path.join(__dirname, "webxray/" + dir)));
 });
 
 // Localized Strings
