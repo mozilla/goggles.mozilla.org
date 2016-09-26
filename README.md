@@ -39,5 +39,5 @@ Deployment
 
 Deployment uses a Heroku pipeline.
 
-- staging: https://goggles-mozilla-org-staging.herokuapp.com
-- production: https://goggles-mozilla-org-production.herokuapp.com
+- staging: https://goggles-mozilla-org-staging.herokuapp.com (https://goggles.mofostaging.net)
+- production: https://goggles-mozilla-org-production.herokuapp.com (https://goggles.mozilla.org)
