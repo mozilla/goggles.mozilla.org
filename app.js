@@ -43,6 +43,12 @@ nunjucksEnv.addFilter( "instantiate", function( input ) {
 });
 
 if (!!env.get("FORCE_SSL") ) {
+  app.set("forceSSLOptions", {
+    enable301Redirects: true,
+    trustXFPHeader: true,
+    httpsPort: 443,
+    sslRequiredMessage: "SSL Required."
+  });
   app.use(forceSSL);
   app.use(helmet.hsts());
   app.enable("trust proxy");
