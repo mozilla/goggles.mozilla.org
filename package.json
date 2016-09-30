@@ -38,5 +38,8 @@
     "postinstall": "bower install",
     "download-locales": "webmaker-download-locales goggles",
     "start": "node app"
+  },
+  "engines": {
+    "node": "4.6.0"
   }
 }
