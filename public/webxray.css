@@ -185,8 +185,11 @@ div.webxray-dialog-inner {
 div.webxray-dialog-content, .webxray-dialog-inner iframe {
     display: block;
     width: 100%;
-    height: 100%;
     border: inherit;
+}
+
+div.webxray-dialog-content {
+    height: 100%;
 }
 
 /* Transparent messages */
