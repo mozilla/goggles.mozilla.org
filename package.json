@@ -43,6 +43,6 @@
     "start": "node app"
   },
   "engines": {
-    "node": "4.6.0"
+    "node": "4.8.4"
   }
 }
