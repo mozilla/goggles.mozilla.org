@@ -15,7 +15,6 @@
     "habitat": "0.4.1",
     "helmet": "0.1.2",
     "hood": "0.2.1",
-    "htmlsanitizer": "0.0.2",
     "less-middleware": "0.1.12",
     "mox-server": "git://github.com/Pomax/mox-server.git",
     "node-statsd": "0.0.7",
