@@ -14,7 +14,7 @@
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-49796218-41', 'auto');
       ga('send', 'pageview');
-    </script>    
+    </script>
     <script src="/bower/ua-parser-js/dist/ua-parser.min.js"></script>
     <script>
     (function() {
@@ -26,6 +26,7 @@
     </script>
   </head>
   <body>
+    {% include 'homepage/deprecation-notice.html' %}
     {% include 'homepage/mobileoverlay.html' %}
     {% include 'homepage/userbar.html' %}
     {% block content %}{% endblock %}
