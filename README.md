@@ -1,6 +1,15 @@
 Mozilla X-Ray goggles
 =====================
 
+Important Update
+----------------
+
+This project is no longer maintained and has been archived. See [this blog post](https://foundation.mozilla.org/blog/putting-away-our-x-ray-goggles/) for more information.
+
+
+About
+-----
+
 This is a client-side (with small server component) application that hosts the Mozilla X-Ray Goggles library. It is dependent on having an [id.wmo] and [publish.wmo] end point to talk to for its user authentication and data publication functionality, respectively. The end point URLs can be set in the `.env` file used.
 
 Getting up and running
